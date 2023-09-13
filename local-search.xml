@@ -4,65 +4,27 @@
   
   
   <entry>
-    <title>asdf</title>
-    <link href="/2023/09/13/asdf/"/>
-    <url>/2023/09/13/asdf/</url>
+    <title>00：个人网站部署</title>
+    <link href="/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/"/>
+    <url>/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/</url>
     
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>123</title>
-    <link href="/2023/09/13/123/"/>
-    <url>/2023/09/13/123/</url>
-    
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<span id="more"></span><p>花了两三天时间搭出来个人网站，部署在了 github 上，这里记录一下部署的过程。</p><h2 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h2><p>网站的建立主要是为了搭一个在公司和家里都能访问的博客环境，对工作和学习做一些记录，所以直接放弃传统的带前端后端的动态页面，时间成本太高，整一个可以一键上传 markdown 的静态页面就挺ok。前端框架采用 hexo，UI选择 fluid，代码放在 github 上，并使用 github action 进行持续集成，部署到 github pages 后，后续写作只需要一次 git push 就可以自动将文章更新到目标网站上。</p><h2 id="框架搭建"><a href="#框架搭建" class="headerlink" title="框架搭建"></a>框架搭建</h2><p><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><h2 id="UI设置"><a href="#UI设置" class="headerlink" title="UI设置"></a>UI设置</h2><p><a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></p><h2 id="快速部署-持续集成"><a href="#快速部署-持续集成" class="headerlink" title="快速部署&#x2F;持续集成"></a>快速部署&#x2F;持续集成</h2><p>快速部署 <a href="https://hexo.io/zh-cn/docs/one-command-deployment">https://hexo.io/zh-cn/docs/one-command-deployment</a><br>持续集成参考 <a href="https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html">https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html</a></p><p>一键部署适用于希望源代码保存在本地而不用上传的情况，相当于本地构建再将构建好的网页直接推给gh page<br>需要在 _config.yml 中配置 gh page 的仓库地址和分支，推送后，hexo 会将 public 目录中的文件推送至 _config.yml 中指定的分支中，并且完全覆盖该分支下的已有内容。<br>这就导致了一个问题，由于是只传 public 目录，域名映射需要的CNAME文件只能放到 public 下，这样每次 hexo clean 后会清空 public，还得再编辑一次CNAME<br>但是好处在于刨除了云端构建的不稳定性，每次可以本地看看网站效果，再直接放到 gh page 中</p><p>持续集成问题在于github的CI较慢，还有迭代期间的404<br>源代码放到 user.github.io 仓库中后（仓库名只能设为这个，否则生成网页会变成 user.github.io 的子页），CNAME 放在 source 中，然后在 .github&#x2F;workflws 中定义 gh actions 的详细配置<br>采用的hexo官方文档中的配置，最后一步使用 peaceiris&#x2F;actions-gh-pages@v3 咱也不太懂，参考知乎上的其他配置，大概相当于安装 hexo 完了在将 main 分支的源码 deploy 到 gh-pages 分支上，之后在gh pages 时选择这个分支即可<br>主要问题在于每次 push 都要重新 build，导致在 push 后十分钟左右网站404<br>可能需要看看别人的追加更新是咋弄的，目前对 gh actions 还不太熟</p><p>属于我的第0篇博客，如果可以在网站上正常显示，证明基本功能已经可以保障了</p><p>TODO：</p>]]></content>
     
     
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>0</title>
-    <link href="/2023/09/13/000/"/>
-    <url>/2023/09/13/000/</url>
-    
-    <content type="html"><![CDATA[]]></content>
+    <categories>
+      
+      <category>work</category>
+      
+    </categories>
     
     
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>test</title>
-    <link href="/2023/09/13/test/"/>
-    <url>/2023/09/13/test/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2023/09/13/Hello-World/"/>
-    <url>/2023/09/13/Hello-World/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>流程记录</tag>
+      
+    </tags>
     
   </entry>
   
