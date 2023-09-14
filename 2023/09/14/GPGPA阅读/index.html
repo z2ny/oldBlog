@@ -1,0 +1,810 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zhang Yix">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="General-Purpose Graphics Processor ArchitecturesAbstract &amp;&amp; Preface与CPU相比，GPU可以更加聚焦与计算，因此性能和效率更高。——通用可编程GPU 章节介绍：GPU基本结构与历史 —— GPU编程模型 —— GPU计算核心的体系结构 —— 计算核心与内存系统的交叉研究 Chapter 1: Intro1.1 计算加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPGPA阅读">
+<meta property="og:url" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Zlog  -  Think Twice, Code Once.">
+<meta property="og:description" content="General-Purpose Graphics Processor ArchitecturesAbstract &amp;&amp; Preface与CPU相比，GPU可以更加聚焦与计算，因此性能和效率更高。——通用可编程GPU 章节介绍：GPU基本结构与历史 —— GPU编程模型 —— GPU计算核心的体系结构 —— 计算核心与内存系统的交叉研究 Chapter 1: Intro1.1 计算加">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image.png">
+<meta property="og:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-1.png">
+<meta property="og:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-2.png">
+<meta property="og:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-3.png">
+<meta property="og:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-4.png">
+<meta property="og:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-5.png">
+<meta property="article:published_time" content="2023-09-14T19:46:53.000Z">
+<meta property="article:modified_time" content="2023-09-14T12:57:24.946Z">
+<meta property="article:author" content="Zhang Yix">
+<meta property="article:tag" content="论文笔记">
+<meta property="article:tag" content="GPGPA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>GPGPA阅读 - Zlog  -  Think Twice, Code Once.</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zhyx&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/index.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="GPGPA阅读"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-14 19:46" pubdate>
+          2023年9月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">GPGPA阅读</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月14日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="General-Purpose-Graphics-Processor-Architectures"><a href="#General-Purpose-Graphics-Processor-Architectures" class="headerlink" title="General-Purpose Graphics Processor Architectures"></a>General-Purpose Graphics Processor Architectures</h1><h2 id="Abstract-Preface"><a href="#Abstract-Preface" class="headerlink" title="Abstract &amp;&amp; Preface"></a>Abstract &amp;&amp; Preface</h2><p>与CPU相比，GPU可以更加聚焦与计算，因此性能和效率更高。——通用可编程GPU</p>
+<p>章节介绍：GPU基本结构与历史 —— GPU编程模型 —— GPU计算核心的体系结构 —— 计算核心与内存系统的交叉研究</p>
+<h2 id="Chapter-1-Intro"><a href="#Chapter-1-Intro" class="headerlink" title="Chapter 1: Intro"></a>Chapter 1: Intro</h2><h3 id="1-1-计算加速器的前景"><a href="#1-1-计算加速器的前景" class="headerlink" title="1.1 计算加速器的前景"></a>1.1 计算加速器的前景</h3><p>过去，计算系统的性能提升大部分依赖于工艺的进步，使得晶体管尺寸缩小，从而提升集成度，使得运行速度更快。</p>
+<p>Dennard Scaling：从05年开始晶体管缩放规则失效。因此为了提高性能，需要找到更高效的硬件架构。</p>
+<p>hardware specialization：定制化硬件，可以使能效比大幅提高，两大方向：</p>
+<ul>
+<li>硬件向量化，消除指令处理的开销</li>
+<li>优化计算过程，减少数据运输开销</li>
+</ul>
+<p>计算架构的关键：专业化硬件带来的收益与支持广泛程序所需的灵活性之间的平衡。相比于专用加速器（例如google的TPU），仍然需要GPU这种较为通用的计算硬件。</p>
+<p>Turing-complete：图灵完备，只要给足够的时间与内存，GPU可以完成一切运算。</p>
+<h3 id="1-2-GPU硬件基础"><a href="#1-2-GPU硬件基础" class="headerlink" title="1.2 GPU硬件基础"></a>1.2 GPU硬件基础</h3><p>GPU不会完全取代CPU：GPU不是独立的计算设备，通常来说，CPU负责在GPU上启动计算并负责GPU上的数据传输。当前访问I&#x2F;O设备或提供OS服务的软件主要还是运行在CPU上（这些软件缺乏大规模并行性），因此，需要首先考虑GPU与CPU的交互。</p>
+<ul>
+<li>独立GPU：两个U各有各的mem，同时核心通过PCIE总线进行数据传输。注意对于独显来说，两个U的mem的DRAM技术通常是不一样的，CPU的DRAM通常针对低延迟访问进行优化（DDR），而GPU的DRAM通常针对高吞吐进行优化（GDDR）。</li>
+<li>集成GPU：两个U共享一个cache，cache与一个内存进行数据交互。由于共享内存所以只能采取单一技术，集成式GPU通常搭载在低功耗设备上，因此DRAM通常针对低功耗进行优化（LPDDR）。</li>
+</ul>
+<p>一个GPU计算应用会从CPU上开始，通常，该应用程序的CPU部分负责分配和初始化一些数据结构。在旧的N卡和A卡上，CPU需要为CPU和GPU内存中的数据结构分配空间，并协调数据从CPUmem到GPUmem的移动。在新的N卡（Pascal，10系）上的软硬件支持数据从Cmem到Gmem的自动传输，这项技术通过利用虚拟内存支持来实现，NV称之为unified memory。对于集显来说不存在数据mem传输的问题，但是由于两个U共享cache并且有些cache可能是私有的，因此也需要关注缓存一致性问题 (cache-coherence) 。</p>
+<p>启动GPU运算一般需要驱动程序完成，在GPU启动运算前，CPU通过驱动程序指定GPU运行哪些代码，这些代码称为内核（kernel），同时，CPU还需要指定线程数、每个线程的数据位置等等。配置完毕后，CPU向GPU发出信号，GPU开始运算。</p>
+<p>现代GPU由许多核心（SIMT Core）组成，NV称之为流式多处理器(Streaming Multiprocessor, SM)，AMD称之为计算单元(compute unit)，每个核心都执行一个与此时运行的内核相关的单指令多线程程序，一个核心可以运行上千个线程，这些线程通过暂存区mem进行通信，并使用快速屏障技术（fast barrier operations）进行同步。每个核心同时还有一级指令和一级缓存，这些缓存可以充当带宽过滤器，减少向低级别内存的流量，当拥有大量线程时，可以隐藏由于有时某线程的缓存未命中而访问内存带来的的性能下滑。</p>
+<p>高计算吞吐需要高内存带宽的支持，这又对内存系统的并行性提出要求。这种并行性又多通道内存实现，每个通道与内存分区中的最后一级缓存（LLC）相连，GPU核心通过片上互连网络与内存分区相连。也有一些替代的方案，例如Intel的Xeon Phi，就是将LLC直接交由GPU核心分配</p>
+<p>对于高并发任务来说，GPU相对超标量无序CPU拥有更高的单位面积性能，因为GPU可以将其芯片面积的大部分专用于算术逻辑单元，并相应的减小控制逻辑的面积。</p>
+<p>09年出来一个性能随线程变化的分析模型。模型显示：</p>
+<ol>
+<li>当少量线程共享大缓存时（如多核CPU），性能会随着线程数量的增加而提高。</li>
+<li>当线程数增加到缓存无法容纳整个工作集时，性能反而会随着线程数量增加而下降。</li>
+<li>但是随着线程数量的进一步增加，性能会随着多线程隐藏片外延迟的能力而提高。<br>   GPU就是通过采用多线程来容忍频繁的缓存未命中，提高运算性能。</li>
+</ol>
+<p>内存访问不仅降低性能，同时也会提高能耗。新的GPGPU架构的重点是改善内存访问。</p>
+<h3 id="1-3-GPU简史"><a href="#1-3-GPU简史" class="headerlink" title="1.3 GPU简史"></a>1.3 GPU简史</h3><h3 id="1-4-书籍大纲"><a href="#1-4-书籍大纲" class="headerlink" title="1.4 书籍大纲"></a>1.4 书籍大纲</h3><ul>
+<li>第二章：编程模型、代码开发过程、编译流程</li>
+<li>第三章：单个GPU核心（SM）的体系结构</li>
+<li>第四章：内存系统</li>
+<li>第五章：其他研究</li>
+</ul>
+<h2 id="Chapter-2：编程模型"><a href="#Chapter-2：编程模型" class="headerlink" title="Chapter 2：编程模型"></a>Chapter 2：编程模型</h2><p>现代GPU广泛采用SIMD硬件来利用数据级并行，但GPU的计算API（如NV的cuda和AMD的opencl）并不向程序员暴露SIMD的硬件，而是采取类似MIMD的编程模型，允许程序员在GPU上启动大量标量线程。其中的每一个标量线程都有自己独特的执行路径，并都可以访问内存。运行时，GPU上的的SIMD硬件利用线程的规律性和空间局部性，同步启动这些标量线程组，称为SIMT（单指令多线程）</p>
+<ul>
+<li>SIMD：例如两个向量，对两个向量的每一个分量进行相同的op操作，输出为一个向量（在一个线程里，受ALU宽度限制）</li>
+<li>SIMT：与SIMD在一个线程公用一个ALU不同，SIMT有多个线程，每个线程各有各的ALU和自己的数据，但执行的指令相同（但是由于数据不同，执行指令时的控制分支可能会不一样）</li>
+</ul>
+<h3 id="2-1-运行模型"><a href="#2-1-运行模型" class="headerlink" title="2.1 运行模型"></a>2.1 运行模型</h3><p>为GPU优化的代码很可能在CPU架构上表现不佳。假定一个 单精度标量A * 向量X + 向量Y 的函数实现：</p>
+<p>CPU实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">void</span> <span class="hljs-title function_">saxpy_serial</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">float</span> a, <span class="hljs-type">float</span> *x, <span class="hljs-type">float</span> *y)</span><br>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)<br>        y[i] = a * x[i] + y[i];<br>&#125;<br>main()<br>&#123;<br>    <span class="hljs-type">float</span> *x, *y;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-comment">// 省略*x、*y的赋值操作</span><br>    saxpy_serial(n, <span class="hljs-number">2.0</span>, x, y);<br>    <span class="hljs-comment">// 省略内存释放操作</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>GPU-CUDA实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs C">__global__ <span class="hljs-type">void</span> <span class="hljs-title function_">saxpy</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">float</span> a, <span class="hljs-type">float</span> *x, <span class="hljs-type">float</span> *y)</span> <span class="hljs-comment">// __global__代表函数在GPU上运行</span><br>&#123;<br>   <span class="hljs-comment">// 每个线程都有各自的blockIdx.x、blockDim.x、threadIdx.x</span><br>   <span class="hljs-type">int</span> i = blockIdx.x * blockDim.x + threadIdx.x;<br>   <span class="hljs-comment">// threadIdx.x代表线程在线程块中的x坐标</span><br>   <span class="hljs-comment">// blockIdx.x代表线程所属的线程块在grid中的x坐标</span><br>   <span class="hljs-comment">// blockDim.x一个线程块在x维度的最大线程数</span><br>   <span class="hljs-comment">// 一般来说线程在线程块中有xyz三个坐标，线程块在网格中也有xyz三个坐标，这里省略y，z</span><br>   <span class="hljs-keyword">if</span> (i &lt; n)<br>      y[i] = a * x[i] + y[i];<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>   <span class="hljs-comment">// 一般h_表示cpu的内存指针，d_表示gpu的内存指针</span><br>   <span class="hljs-type">float</span> *h_x, *h_y;<br>   <span class="hljs-type">int</span> n;<br>   <span class="hljs-comment">// 省略*h_x、*h_y的赋值操作</span><br>   <span class="hljs-type">float</span> *d_x, *d_y;<br>   <span class="hljs-type">int</span> nblocks = (n + <span class="hljs-number">255</span>) / <span class="hljs-number">256</span>;<br>   <span class="hljs-comment">// 调用GPU驱动程序并要求分配gpu内存，并将这一片内存的地址赋给&amp;d_x</span><br>   cudaMalloc(&amp;d_x, n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>));<br>   cudaMalloc(&amp;d_y, n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>));<br>   <span class="hljs-comment">// 将h_x指向的内容赋值给d_x指向的区域</span><br>   cudaMemcpy(d_x, h_x, n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>), cudaMemcpyHostToDevice);<br>   cudaMemcpy(d_y, h_y, n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>), cudaMemcpyHostToDevice);<br>   <span class="hljs-comment">// 交由GPU，并启动nblocks个线程块（Thread Block，或CTA），每个线程块256个线程，所有的线程块组成一个grid，即本次内核的计算单元</span><br>   saxpy&lt;&lt;&lt;nblocks, <span class="hljs-number">256</span>&gt;&gt;&gt;(n, <span class="hljs-number">2.0</span>, d_x, d_y);<br>   <span class="hljs-comment">// 为了提高效率，每个线程块中，每32个线程以锁步形式组成一组warp，warp往上再组成线程块</span><br>   <span class="hljs-comment">// 一个warp包含多少线程是硬件概念，而一个线程块可以有多少线程则是软件概念（当然得是warp的整数倍）</span><br>   <span class="hljs-comment">// 将计算结果返回给CPU内存</span><br>   cudaMemcpy(h_x, d_x, n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>), cudaMemcpyDeviceToHost);<br>   <span class="hljs-comment">// 省略内存释放操作</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>硬件：一个GPU有多个SM，每个SM包含多个SP（Stream Processor）</p>
+<p>软件：一个GPU内核对应一个grid，一个grid包含多个CTA。CTA中有多个warp，每个warp包含固定数量的线程数（与SM中SP数量相同）。</p>
+<p>GPU在运算时，可能是一个grid独占GPU，也可以多个grid并行跑GPU；SM对应的工作单元是CTA，其中的基本执行单元是warp（即每个SP对应一个warp中的线程），在某个warp受阻时SM可以切换同一个CTA中的其他warp，但只有该CTA执行完，才切换其他CTA</p>
+<p>CTA中的线程之间可以通过暂存器内存互相通信（NV称之为共享内存），同步也轻松，同时每个SM中也有一个共享内存，可以分配给在该SM上运行的所有CTA</p>
+<p>不同CTA中的线程也可以通过所有线程都能访问的全局地址空间通信，但代价较高</p>
+<h3 id="2-2-指令模型"><a href="#2-2-指令模型" class="headerlink" title="2.2 指令模型"></a>2.2 指令模型</h3><p>NV的并行线程执行ISA：Parallel Thread eXecution，简称PTX （虚拟指令，类似汇编指令）</p>
+<p>GPU运行PTX代码前，需要编译（汇编）成实际的机器指令，NV称此为SASS（Streaming ASSembler），该过程有NV的工具包完成，并没有开放，这使得NV可以在硬件级别提供向后兼容性，每一代都可以重新设计ISA架构</p>
+<h2 id="Chapter-3：SIMT核心：指令和寄存器数据流"><a href="#Chapter-3：SIMT核心：指令和寄存器数据流" class="headerlink" title="Chapter 3：SIMT核心：指令和寄存器数据流"></a>Chapter 3：SIMT核心：指令和寄存器数据流</h2><p>对传统图形渲染来说，GPU通常需要访问详细的纹理图，这样的数据集因为太大不可能完全缓存在芯片上，因此有必要采用能够维持大片外带宽的GPU架构。所以如今的GPU都往高并发线程发展（大概意思是线程越多越能够隐藏访存损失）。并且，尽管每个线程的片上缓存很小，但因为局部性原理，仍然可以有效减少大量的片外存储访问。</p>
+<p>SM的微体系结构，流水线分为SIMT前端和SIMD后端，共3个循环：</p>
+<ol>
+<li>取值（fetch）循环：fetch、I-Cache、Decode和I-Buffer模块</li>
+<li>发指（issue）循环：I-Buffer、Scoreboard、issue和SIMT stack模块</li>
+<li>寄存器访问调度循环：Operand Collector、ALU和Memory模块</li>
+</ol>
+<p><img src="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<h3 id="3-1-单循环近似"><a href="#3-1-单循环近似" class="headerlink" title="3.1 单循环近似"></a>3.1 单循环近似</h3><p>线程的调度单位是warp（AMD称之为wavefronts）。每一个周期，SM选择一个warp进行调度。</p>
+<p>单循环中，warp的程序计数器（PC）用于访问指令存储器时查找为warp执行的下一条指令。获得指令后，对指令解码，并找到源操作数寄存器。与此同时，SIMT的执行掩码值也被确定。</p>
+<p>在执行掩码与源寄存器可用后，执行以SIMD的方式进行。如果设置了SIMT执行掩码，则每个线程都在与通路关联的功能单元上执行。与现代CPU一样，功能单元通常异构，即不同的单元支持不同的指令运行。</p>
+<p>每个功能单元在名义上包含的通路数与warp的线程数相同，但也有一些GPU使用不同的实现，使其中的warp在多个时钟周期内执行。</p>
+<h4 id="3-1-1-SIMT执行掩码"><a href="#3-1-1-SIMT执行掩码" class="headerlink" title="3.1.1 SIMT执行掩码"></a>3.1.1 SIMT执行掩码</h4><p>现代GPU的关键特性是SIMT执行模型，为程序员提供了单个线程完全独立执行的抽象，这是通过传统谓词（prediction）与SIMT谓词掩码堆栈结合实现的。</p>
+<p>SIMT堆栈有助于处理线程可以独立执行时出现的两个关键问题：</p>
+<ol>
+<li>嵌套控制流</li>
+<li>完全跳过计算</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-1.png" srcset="/img/loading.gif" lazyload alt=" "></th>
+<th align="center"><img src="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-2.png" srcset="/img/loading.gif" lazyload alt=" "></th>
+<th align="center"><img src="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-3.png" srcset="/img/loading.gif" lazyload alt=" "></th>
+</tr>
+</thead>
+</table>
+<p>假设每个warp有四个线程，所有线程都执行了A基本块，之后遵循不同的控制流，有3个线程进入B，1个线程进入F。如此流动，最后所有线程统一到达G。</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-4.png" srcset="/img/loading.gif" lazyload alt=" "></th>
+<th align="center"><img src="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/image-5.png" srcset="/img/loading.gif" lazyload alt=" "></th>
+</tr>
+</thead>
+</table>
+<p>堆栈包括三项：重新收敛程序计数器(Reconvergence program counter, RPC)、要执行的下一条指令的地址(Next PC)和活跃掩码(active mask)。warp每次都执行栈顶指针指向的条目的nextPC指向的代码块</p>
+<ol>
+<li>开始时堆栈中只有一个条目“-，A，1111”。代表所有线程都将进入A。</li>
+<li>所有4个线程在走完A之后进行分支，此时需要有3处修改：<ul>
+<li>将原先条目的nextPC值修改成分支后的重新汇聚点，对于这次分支B和F，将在G重新汇聚，因此将第一条的nextPC由A修改为G</li>
+<li>这次分支有3个进入B，1个进入F，因此在堆栈中压入关于B和F的两个条目</li>
+</ul>
+</li>
+<li>线程执行栈顶条目“G，B，1110”，掩码是1110代表这行条目对前三个线程active，走完B后进行分支，同理修改原来条目的nextPC，改成最近的重新收敛点E，同时添加两个分支条目。<ul>
+<li>一般改成最近的重新收敛点，是为了从该位置将之前发散的线程以锁步的方式继续执行，便于同步</li>
+<li>通常来说，在分支过后，最好是先将最多活跃线程的条目先入栈，少活跃线程的条目后入栈，例如d部分，而c部分的例子相反</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-1-2-SIMT死锁与无堆栈SIMT结构"><a href="#3-1-2-SIMT死锁与无堆栈SIMT结构" class="headerlink" title="3.1.2 SIMT死锁与无堆栈SIMT结构"></a>3.1.2 SIMT死锁与无堆栈SIMT结构</h4><p>SIMT基于堆栈的实现可能导致死锁：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 将mutex置0代表资源空闲</span><br>*mutex = <span class="hljs-number">0</span>;<br><span class="hljs-comment">// atomicCAS读取mutex，若为0，则置1（即若空闲，则访问），返回mutex原始值</span><br><span class="hljs-comment">// 一个warp中的所有线程都执行，因此只有一个线程看到mutex=0，其他都看到=1</span><br><span class="hljs-keyword">while</span>(!atomicCAS(mutex,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>));<br><span class="hljs-comment">// 释放mutex</span><br>atomicExch(mutex,<span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+
+<p>简而言之，对于一个互斥资源，当一个warp的所有线程同时执行互斥锁式访问时，只有一个线程拿到资源，其他线程陷入原地等待。但是，拿到资源的线程在执行完毕后，达到了上文中的重新收敛点，会等待其他所有线程一起到这个点，才能继续执行第三句释放锁。</p>
+<p>无堆栈分支的重新收敛机制：warp收敛屏障</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/work/" class="category-chain-item">work</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="print-no-link">#论文笔记</a>
+      
+        <a href="/tags/GPGPA/" class="print-no-link">#GPGPA</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GPGPA阅读</div>
+      <div>http://example.com/2023/09/14/GPGPA阅读/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zhang Yix</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年9月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="DianNao系列论文阅读">
+                        <span class="hidden-mobile">DianNao系列论文阅读</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/page.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
