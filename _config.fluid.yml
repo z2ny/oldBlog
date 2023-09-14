@@ -100,7 +100,7 @@ fun_features:
     # 在指定页面开启，不填则在所有页面开启
     # Enable in specified page, all pages by default
     # Options: home | post | tag | category | about | links | page | 404
-    scope: [home]
+    scope: []
 
   # 为文章内容中的标题添加锚图标
   # Add an anchor icon to the title on the post page
@@ -631,11 +631,11 @@ post:
 
     # 目录会选择这些节点作为标题
     # TOC will select these nodes as headings
-    headingSelector: "h1,h2,h3,h4,h5,h6"
+    headingSelector: "h1,h2,h3"
 
     # 层级的折叠深度，0 是全部折叠，大于 0 后如果存在下级标题则默认展开
     # Collapse depth. If 0, all headings collapsed. If greater than 0, it will be expanded by default if there are sub headings
-    collapseDepth: 0
+    collapseDepth: 2
 
   # 版权声明，会显示在每篇文章的结尾
   # Copyright, will be displayed at the end of each post
