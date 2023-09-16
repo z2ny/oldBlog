@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>网络状态检查</title>
+    <link href="/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/"/>
+    <url>/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/</url>
+    
+    <content type="html"><![CDATA[<p>最近fps老是延迟+掉包，百思不得其解，于是开始研究网络状态检测的工具，做个记录</p><span id="more"></span><h2 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h2><ul><li>数据传输流程：<br>本地主机 — 本地路由（如果有） — 默认网关 — 外部网络中转 — 目标主机</li></ul><p>很显然突然的延迟和掉包几乎不可能是外部网络中转和目标主机的问题，加上目前是直连宽带，问题只可能出在主机&lt;—&gt;默认网关上面</p><h2 id="问题排查："><a href="#问题排查：" class="headerlink" title="问题排查："></a>问题排查：</h2><h3 id="1-查看自身网络配置："><a href="#1-查看自身网络配置：" class="headerlink" title="1. 查看自身网络配置："></a>1. 查看自身网络配置：</h3><p>   <img src="/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/0.png"></p><p>本地主机有两条连接，网关分别为192.168.14.1和172.168.15.1</p><h3 id="2-运行任一出现掉包的应用"><a href="#2-运行任一出现掉包的应用" class="headerlink" title="2. 运行任一出现掉包的应用"></a>2. 运行任一出现掉包的应用</h3><h3 id="3-任务管理器中的资源监视器，找到进程PID以及通信的外部IP"><a href="#3-任务管理器中的资源监视器，找到进程PID以及通信的外部IP" class="headerlink" title="3. 任务管理器中的资源监视器，找到进程PID以及通信的外部IP"></a>3. 任务管理器中的资源监视器，找到进程PID以及通信的外部IP</h3><p>   <img src="/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/1.png"></p><p>我也不知道这么多IP哪一个是导致掉包和延迟的。。先找收发高的吧 180.102.211.22 121.229.89.178</p><h3 id="4-netstat查看该进程的网络相关信息"><a href="#4-netstat查看该进程的网络相关信息" class="headerlink" title="4. netstat查看该进程的网络相关信息"></a>4. netstat查看该进程的网络相关信息</h3><p>   <img src="/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/2.png"></p><p>很显然主机是用的192.1168.14.1上的某个端口向外部通信，并且问题很大可能出现在与121.229与180.102的通信上</p><h3 id="5-tracert查看路由（pathping也行）"><a href="#5-tracert查看路由（pathping也行）" class="headerlink" title="5. tracert查看路由（pathping也行）"></a>5. tracert查看路由（pathping也行）</h3><table><thead><tr><th align="center"><img src="/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/4.png"></th><th align="center"><img src="/2023/09/16/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5/5.png"></th></tr></thead></table><p>两次在走过网关之后，都又经过了一个本地IP 100.69.0.1 ，估计是所有房间的局域网统一之后的路由，经过这个才到外部网络</p><h3 id="6-分别-ping-t-了一下网关和100-69两个ip，发现到网关的延迟和掉包都很低，主要问题出在网关到-100-69-0-1-的这一段"><a href="#6-分别-ping-t-了一下网关和100-69两个ip，发现到网关的延迟和掉包都很低，主要问题出在网关到-100-69-0-1-的这一段" class="headerlink" title="6. 分别 ping -t 了一下网关和100.69两个ip，发现到网关的延迟和掉包都很低，主要问题出在网关到 100.69.0.1 的这一段"></a>6. 分别 ping -t 了一下网关和100.69两个ip，发现到网关的延迟和掉包都很低，主要问题出在网关到 100.69.0.1 的这一段</h3><h3 id="7-改天换个房间，看看其他房间到100-69的延迟情况"><a href="#7-改天换个房间，看看其他房间到100-69的延迟情况" class="headerlink" title="7. 改天换个房间，看看其他房间到100.69的延迟情况"></a>7. 改天换个房间，看看其他房间到100.69的延迟情况</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>work</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>工具笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Dive into Deeplearning</title>
     <link href="/2023/09/14/Dive-into-Deeplearning/"/>
     <url>/2023/09/14/Dive-into-Deeplearning/</url>
@@ -89,7 +116,7 @@
     <link href="/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/"/>
     <url>/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/</url>
     
-    <content type="html"><![CDATA[<p>花了两三天时间搭了一个用于笔记的个人博客，部署在了 github 上，这里记录一下部署的过程。</p><span id="more"></span><h2 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h2><p>网站的建立主要是为了搭一个在公司和家里都能访问的博客环境，对工作和学习做一些记录，所以直接放弃传统的带前端后端的动态页面，时间成本太高，整一个可以一键上传 markdown 的静态页面就挺ok。前端框架采用 hexo，UI选择 fluid，代码放在 github 上，并使用 github action 进行持续集成，部署到 github pages 后，后续写作只需要一次 git push 就可以自动将文章更新到目标网站上。</p><h2 id="框架搭建"><a href="#框架搭建" class="headerlink" title="框架搭建"></a>框架搭建</h2><p><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><h2 id="UI设置"><a href="#UI设置" class="headerlink" title="UI设置"></a>UI设置</h2><p><a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="快速部署"><a href="#快速部署" class="headerlink" title="快速部署"></a>快速部署</h3><p><a href="https://hexo.io/zh-cn/docs/one-command-deployment">https://hexo.io/zh-cn/docs/one-command-deployment</a></p><p>适用于希望源代码保存在本地而不用上传的情况，相当于本地构建完再将构建好的网页直接推给gh page</p><p>需要在 _config.yml 中配置 gh page 的仓库地址和分支，推送后，hexo 会将 public 目录中的文件推送至_config.yml 中指定的分支中，并且完全覆盖该分支下的已有内容。</p><p>这就导致了一个问题，由于是只传 public 目录，域名映射需要的CNAME文件只能放到 public 下，这样每次 hexo clean 后会清空 public，还得再编辑一次CNAME，但是好处在于刨除了云端构建的不稳定性，每次可以本地看看网站效果，再直接放到 gh page 中</p><h3 id="gh-actions-持续集成"><a href="#gh-actions-持续集成" class="headerlink" title="gh actions 持续集成"></a>gh actions 持续集成</h3><p><a href="https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html">https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html</a></p><p>源代码放到 user.github.io 仓库中后（仓库名只能设为这个，否则生成网页会变成 user.github.io 的子页），CNAME 放在 source 中，然后在 .github&#x2F;workflws 中定义 gh actions 的详细配置</p><p>采用的hexo官方文档中的配置，最后一步使用 peaceiris&#x2F;actions-gh-pages@v3 咱也不太懂，参考知乎上的其他配置，大概相当于安装 hexo 完了在将 main 分支的源码 deploy 到 gh-pages 分支上，之后在设置时选择这个分支即可</p><p>主要问题在于每次 push 都要重新 build，推测后期内容增多后网站更新会十分不及时，可能需要看看别人的追加更新是咋弄的</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>属于我的第0篇博客，大概，能在网站上正常显示，证明基本功能已经ok</p><h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2>]]></content>
+    <content type="html"><![CDATA[<p>花了两三天时间搭了一个用于笔记的个人博客，部署在了 github 上，这里记录一下部署的过程。</p><span id="more"></span><h2 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h2><p>网站的建立主要是为了搭一个在公司和家里都能访问的博客环境，对工作和学习做一些记录，所以直接放弃传统的带前端后端的动态页面，时间成本太高，整一个可以一键上传 markdown 的静态页面就挺ok。前端框架采用 hexo，UI选择 fluid，代码放在 github 上，并使用 github action 进行持续集成，部署到 github pages 后，后续写作只需要一次 git push 就可以自动将文章更新到目标网站上。</p><h2 id="框架搭建"><a href="#框架搭建" class="headerlink" title="框架搭建"></a>框架搭建</h2><p><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><h2 id="UI设置"><a href="#UI设置" class="headerlink" title="UI设置"></a>UI设置</h2><p><a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="快速部署"><a href="#快速部署" class="headerlink" title="快速部署"></a>快速部署</h3><p><a href="https://hexo.io/zh-cn/docs/one-command-deployment">https://hexo.io/zh-cn/docs/one-command-deployment</a></p><p>适用于希望源代码保存在本地而不用上传的情况，相当于本地构建完再将构建好的网页直接推给gh page</p><p>需要在 _config.yml 中配置 gh page 的仓库地址和分支，推送后，hexo 会将 public 目录中的文件推送至_config.yml 中指定的分支中，并且完全覆盖该分支下的已有内容。</p><p>这就导致了一个问题，由于是只传 public 目录，域名映射需要的CNAME文件只能放到 public 下，这样每次 hexo clean 后会清空 public，还得再编辑一次CNAME，但是好处在于刨除了云端构建的不稳定性，每次可以本地看看网站效果，再直接放到 gh page 中</p><h3 id="gh-actions-持续集成"><a href="#gh-actions-持续集成" class="headerlink" title="gh actions 持续集成"></a>gh actions 持续集成</h3><p><a href="https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html">https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html</a></p><p>源代码放到 user.github.io 仓库中后（仓库名只能设为这个，否则生成网页会变成 user.github.io 的子页），CNAME 放在 source 中，然后在 .github&#x2F;workflws 中定义 gh actions 的详细配置</p><p>采用的hexo官方文档中的配置，最后一步使用 peaceiris&#x2F;actions-gh-pages@v3 咱也不太懂，参考知乎上的其他配置，大概相当于安装 hexo 完了在将 main 分支的源码 deploy 到 gh-pages 分支上，之后在设置时选择这个分支即可</p><p>主要问题在于每次 push 都要重新 build，推测后期内容增多后网站更新会十分不及时，可能需要看看别人的追加更新是咋弄的</p><h3 id="CDN加速、"><a href="#CDN加速、" class="headerlink" title="CDN加速、"></a>CDN加速、</h3><p>更换 Cloudflare 的 DNS，注意 SSL&#x2F;TLS 加密模式设为严格</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>属于我的第0篇博客，大概，能在网站上正常显示，证明基本功能已经ok</p><h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2>]]></content>
     
     
     <categories>
