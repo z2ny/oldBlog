@@ -6,6 +6,7 @@ categories:
 tags:
 - GPGPA
 - 论文笔记
+- TBC
 ---
 
 # General-Purpose Graphics Processor Architectures

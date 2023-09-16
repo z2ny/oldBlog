@@ -6,6 +6,7 @@ categories:
 tags:
 - DianNao
 - 论文笔记
+- TBC
 ---
 
 ## DianNao: A Small-Footprint High-Throughput Accelerator for Ubiquitous Machine-Learning
