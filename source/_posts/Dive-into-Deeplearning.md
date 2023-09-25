@@ -4,7 +4,7 @@ date: 2023-09-14 23:09:48
 categories:
 - work
 tags:
-- 深度学习
+- DL
 - 课程笔记
 ---
 
