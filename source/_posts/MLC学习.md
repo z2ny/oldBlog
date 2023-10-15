@@ -436,3 +436,30 @@ class MyModule:
 此外，注意`with R.dataflow():` 是一个帮助我们标注程序计算图范围的方式，后面的构建运行就不多说了
 
 ## 4. 自动程序优化
+
+这一章主要讲随机调度变换，当我们无法决定原张量函数优化的每一个细节时，可以使用机器的一些**随机变换**做法
+```python
+def stochastic_schedule_mm(sch: tvm.tir.Schedule):
+    block_C = sch.get_block("C", "main")
+    i, j, k = sch.get_loops(block=block_C)
+    # 注意 j_factors 没有使用固定的[none,4]，而是采用随机值
+    j_factors = sch.sample_perfect_tile(loop=j, n=2)
+    j_0, j_1 = sch.split(loop=j, factors=j_factors)
+    sch.reorder(i, j_0, k, j_1)
+    sch.decompose_reduction(block_C, k)
+    return sch
+```
+
+上述代码中，用到了 sch.sample_perfect_tile 来随机拆分循环。它会将输入的循环的长度进行随机分割，例如原始j =128 时，就可以分割为 [8,16]、[32,4]、[2,64] 等等，可以发现，每次运行时该函数的采样都不一样
+
+此外还讲了一些随机搜索的东西，大概类似超参数的网格搜索之类的，在TVM里叫`meta_schedule`，主要还做了以下事情：
+1. 跨多个进程的并行基准测试
+2. 使用代价模型`cost model`进行代价评估，这样可以避免每组都进行基准测试
+3. 根据历史轨迹来进行遗传搜索，而不是每次都随机采样
+
+关键思想就是使用随机变换来指定好的程序的搜索空间，使用 `tune_tir` API 帮助在搜索空间内搜索并找到最优的调度变换
+
+## 5. 与机器学习框架的整合
+
+如何将机器学习模型从现有框架引入MLC
+
