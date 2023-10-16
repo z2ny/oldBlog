@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>AI编译器相关学习</title>
+    <link href="/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<p>参考：<br><a href="https://github.com/BBuf/tvm_mlir_learn">https://github.com/BBuf/tvm_mlir_learn</a><br><a href="https://space.bilibili.com/517221395/channel/collectiondetail?sid=857162">https://space.bilibili.com/517221395/channel/collectiondetail?sid=857162</a></p><span id="more"></span><h2 id="1-编译器相关">1. 编译器相关</h2><p>编译器（Compiler）和解释器（Interpreter）：</p><ul><li>编译器：将源代码整体编译为可执行文件（机器码），（可能经过预编译、编译、汇编、链接等环节，统一视作编译器的流程）最后由机器执行，会产生可以重复使用的中间文件和可执行文件</li><li>解释器：将源代码逐行解释成字节码并直接交由机器执行，不产生其他文件</li></ul><p>编译器编译方式：JIT和AOT</p><ul><li>AOT：AheadOfTime即静态编译，源代码先统一编译成机器码，再执行</li><li>JIT：JustInTime即动态编译，相比于传统AOT，JIT可以在程序运行过程中变运行边编译，具体流程可以参考java。</li></ul><blockquote><p>java</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>work</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>AI</tag>
+      
+      <tag>LLVM</tag>
+      
+      <tag>MLIR</tag>
+      
+      <tag>TVM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>德州扑克学习</title>
     <link href="/2023/09/25/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B%E5%AD%A6%E4%B9%A0/"/>
     <url>/2023/09/25/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B%E5%AD%A6%E4%B9%A0/</url>
@@ -47,11 +78,11 @@
     
     <tags>
       
+      <tag>TVM</tag>
+      
       <tag>课程笔记</tag>
       
       <tag>MLC</tag>
-      
-      <tag>TVM</tag>
       
     </tags>
     
