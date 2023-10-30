@@ -10,9 +10,12 @@ tags:
 ---
 
 陈天奇的MLC课程，参考
-https://github.com/BBuf/tvm_mlir_learn
-https://mlc.ai/zh/index.html
-https://space.bilibili.com/1663273796/channel/collectiondetail?sid=499979
+
+[TVM学习仓库](https://github.com/BBuf/tvm_mlir_learn)
+
+[MLC官方课程文档](https://mlc.ai/zh/index.html)
+
+[MLC课程视频](https://space.bilibili.com/1663273796/channel/collectiondetail?sid=499979)
 <!-- more -->
 
 ## 1.概述
