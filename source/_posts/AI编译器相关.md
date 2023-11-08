@@ -1,5 +1,5 @@
 ---
-title: AI编译器相关学习
+title: AI编译器相关
 date: 2023-10-16 15:40:54
 categories:
   - work
