@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2023/11/13/AI%E7%BC%96%E8%AF%91%E5%99%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-01/image.png">
 <meta property="og:image" content="http://example.com/2023/11/13/AI%E7%BC%96%E8%AF%91%E5%99%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-01/image-1.png">
 <meta property="article:published_time" content="2023-11-13T14:52:54.000Z">
-<meta property="article:modified_time" content="2023-11-17T04:23:59.861Z">
+<meta property="article:modified_time" content="2023-11-17T08:21:21.308Z">
 <meta property="article:author" content="Zhang Yix">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="TVM">
@@ -216,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          3k 字
         
       </span>
     
@@ -227,7 +227,7 @@
         
         
         
-          23 分钟
+          25 分钟
         
       </span>
     
@@ -277,7 +277,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年11月17日 凌晨
+                    本文最后更新于：2023年11月17日 早上
                   
                 
               </p>
@@ -324,6 +324,10 @@
 <p>在没有显示声明内存范围时，将自动将计算阶段标记为thread-local。共享任务必须计算组内所有工作线程的依赖关系，还必须正确插入内存同步屏障，以保证数据对消费者可见。</p>
 <h3 id="4-3-张量化">4.3 张量化</h3>
 <p>DL工作负载具有较高的计算强度，通常可以分解成张量算子，如矩阵乘法或一维卷积。这种自然分解引发了添加张量计算基元（原语）的趋势。调度原语的增加为基于调度的编译增加了挑战性，使用他们可以提高性能，但是编译框架必须无缝集成所有使用的调度原语。指令往往是可变长的，每个都具有不同的数据布局，此外由于新的硬件在源源不断的出现，我们需要一个可扩展的调度原语方案。</p>
+<p>我们通过张量内在声明的机制使目标硬件的内在特性与调度分离，使TVM可以轻松支持新的硬件架构。这样就可以使用相同的张量表达式语言来声明每个新硬件的底层行为。此外，还引入了一种调度原语，用相应的内部函数来替换计算单元。编译器将计算模式与硬件的匹配降低到了相应的硬件内部。</p>
+<h3 id="4-4-显式内存延迟隐藏">4.4 显式内存延迟隐藏</h3>
+<p>延迟隐藏是指将内存操作与计算重叠以最大限度地利用内存和计算资源的过程。它需要不同的策略，具体取决于目标硬件后端。在 CPU 上，内存延迟隐藏是通过同步多线程 或 硬件预取 来隐式实现的。</p>
+<p>GPU 依赖于许多线程的快速上下文切换。相比之下，诸如 TPU 之类的专用 DL 加速器通常倾向于使用解耦访问执行 (DAE) 架构记性更加精简的控制，并将细粒度同步的问题转移给软件。</p>
 <h2 id="5-Automating-Optimization">5. Automating Optimization</h2>
 <p>鉴于丰富的调度原语集合，剩下的问题是为 DL 模型的每一层找到最佳的算子实现。在这里，TVM 为与每一层关联的特定输入形状和布局创建了一个专门的算子。这种专门的优化提供了显著的性能优势 (与针对较小的形状和布局多样性的手工代码相比)，但它也提出了自动化的挑战。系统需要选择调度优化：例如修改循环顺序或优化内存层次结构，以及特定于调度的参数，例如切片大小和循环展开因子。这样的组合选择为每个硬件后端创建了算子实现的大的搜索空间。为了应对这一挑战，构建了一个具有两个主要组件的自动调度优化器：一个新配置的调度搜索器 以及 一个预测给定配置性能的机器学习成本模型。</p>
 <p><img src="image-1.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
