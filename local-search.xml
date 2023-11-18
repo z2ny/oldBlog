@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>源码项目编译安装</title>
+    <link href="/2023/11/16/%E6%BA%90%E7%A0%81%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
+    <url>/2023/11/16/%E6%BA%90%E7%A0%81%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</url>
+    
+    <content type="html"><![CDATA[<p>一个项目的源码到手后，要想学习或使用，必须先编译安装。记录一下通用源码项目的编译安装流程</p><span id="more"></span><h2 id="GCC">GCC</h2><p>对于小项目来说，文件数量较少，使用GCC直接进行编译即可</p><ol><li>g++:将源文件编译成.out可执行文件</li><li>g++ -c:将源文件编译成中间文件 而不进行链接，即编译成.o文件</li><li>g++ -o:将源文件或者.o文件进行编译+链接或链接，生成.out文件</li><li>对于包含多个源文件的项目，可以将源文件分别gcc -c，再将产生的文件链接到一起，如<code>g++ -o myprogram file1.o file2.o</code></li></ol><h2 id="make-makefile">make &amp; makefile</h2><p>然而随着计算机的发展，一个软件工程包含的源文件越来越多，手动逐个编译完全不可行，于是有个make和makefile。</p><p>Make 是一个批处理工具，它根据 Makefile 文件中的规则来构建项目。Make 可以确定哪些文件需要重新编译，哪些文件已经是最新的，从而只编译需要编译的文件。</p><p>Makefile：Makefile 是 Make 的配置文件，它包含了一系列的规则，用于指定如何构建项目。Make 通过读取 Makefile 文件来构建项目。</p><p>在这一阶段，工程师可以手写项目的makefile文件，再使用make指令统一构建整个项目</p><h2 id="Cmake-CMakeLists">Cmake &amp; CMakeLists</h2><p>makefile在一些简单的工程下，完全可以人工手写，但是问题又来了，工程非常大的时候，连 makefile 的手写也非常麻烦，这时就需要一个工具可以自动生成 makefile ，这个工具就是cmake。</p><p>CMakeLists 是 Cmake 的配置文件。还是需要手写。</p><p>Cmake 会根据 CMakeLists 自动生成项目的 makefile 文件，然后再使用 make 构建项目。</p><p>Cmake 有不同的生成器，可以生成不同平台下的 makefile 文件，比如 Unix Makefile、Visual Studio、Ninja、Nmake等等，可以生成不同平台下的makefile，生成后再进行make就可以将项目构建在不同的平台下。</p><p>ninja是一种注重速度的生成器，使用ninja生成会产生一个build.ninja文件，然后使用ninja而非make进行构建</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>work</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>常识</tag>
+      
+      <tag>编译</tag>
+      
+      <tag>cmake</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>AI编译器论文阅读-01</title>
     <link href="/2023/11/13/AI%E7%BC%96%E8%AF%91%E5%99%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-01/"/>
     <url>/2023/11/13/AI%E7%BC%96%E8%AF%91%E5%99%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-01/</url>
