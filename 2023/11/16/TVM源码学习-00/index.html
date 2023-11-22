@@ -16,26 +16,28 @@
   <meta name="author" content="Zhang Yix">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一个项目的源码到手后，要想学习或使用，必须先编译安装。记录一下通用源码项目的编译安装流程">
+    <meta name="description" content="TVM v0.8 源码学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="源码项目编译安装">
-<meta property="og:url" content="http://example.com/2023/11/16/%E6%BA%90%E7%A0%81%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="TVM源码学习-00">
+<meta property="og:url" content="http://example.com/2023/11/16/TVM%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-00/index.html">
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
-<meta property="og:description" content="一个项目的源码到手后，要想学习或使用，必须先编译安装。记录一下通用源码项目的编译安装流程">
+<meta property="og:description" content="TVM v0.8 源码学习">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/16/TVM%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-00/image.png">
 <meta property="article:published_time" content="2023-11-16T13:49:21.000Z">
-<meta property="article:modified_time" content="2023-11-22T04:57:28.980Z">
+<meta property="article:modified_time" content="2023-11-22T16:22:08.736Z">
 <meta property="article:author" content="Zhang Yix">
-<meta property="article:tag" content="常识">
+<meta property="article:tag" content="TVM">
 <meta property="article:tag" content="编译">
 <meta property="article:tag" content="cmake">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/11/16/TVM%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-00/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>源码项目编译安装 - Zhyx&#39;s Blog</title>
+  <title>TVM源码学习-00 - Zhyx&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +193,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="源码项目编译安装"></span>
+            <span id="subtitle" data-typed-text="TVM源码学习-00"></span>
           
         </div>
 
@@ -214,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          885 字
+          2.6k 字
         
       </span>
     
@@ -225,7 +227,7 @@
         
         
         
-          8 分钟
+          22 分钟
         
       </span>
     
@@ -270,12 +272,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">源码项目编译安装</h1>
+            <h1 id="seo-header">TVM源码学习-00</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年11月22日 凌晨
+                    本文最后更新于：2023年11月22日 下午
                   
                 
               </p>
@@ -283,9 +285,13 @@
             
               <div class="markdown-body">
                 
-                <p>一个项目的源码到手后，要想学习或使用，必须先编译安装。记录一下通用源码项目的编译安装流程</p>
+                <p>TVM v0.8 源码学习</p>
 <span id="more"></span>
-<h2 id="GCC">GCC</h2>
+<h2 id="代码拉取">代码拉取</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> --recursive https://github.com/apache/tvm.git<br>git checkout v0.8<br></code></pre></td></tr></table></figure>
+<h2 id="编译安装">编译安装</h2>
+<h3 id="编译常识">编译常识</h3>
+<h4 id="GCC">GCC</h4>
 <p>对于小项目来说，文件数量较少，使用GCC直接进行编译即可</p>
 <ol>
 <li>g++:将源文件编译成.out可执行文件</li>
@@ -293,17 +299,55 @@
 <li>g++ -o:将源文件或者.o文件进行编译+链接或链接，生成.out文件</li>
 <li>对于包含多个源文件的项目，可以将源文件分别gcc -c，再将产生的文件链接到一起，如<code>g++ -o myprogram file1.o file2.o</code></li>
 </ol>
-<h2 id="make-makefile">make &amp; makefile</h2>
+<h4 id="make-makefile">make &amp; makefile</h4>
 <p>然而随着计算机的发展，一个软件工程包含的源文件越来越多，手动逐个编译完全不可行，于是有个make和makefile。</p>
 <p>Make 是一个批处理工具，它根据 Makefile 文件中的规则来构建项目。Make 可以确定哪些文件需要重新编译，哪些文件已经是最新的，从而只编译需要编译的文件。</p>
 <p>Makefile：Makefile 是 Make 的配置文件，它包含了一系列的规则，用于指定如何构建项目。Make 通过读取 Makefile 文件来构建项目。</p>
 <p>在这一阶段，工程师可以手写项目的makefile文件，再使用make指令统一构建整个项目</p>
-<h2 id="Cmake-CMakeLists">Cmake &amp; CMakeLists</h2>
+<h4 id="Cmake-CMakeLists">Cmake &amp; CMakeLists</h4>
 <p>makefile在一些简单的工程下，完全可以人工手写，但是问题又来了，工程非常大的时候，连 makefile 的手写也非常麻烦，这时就需要一个工具可以自动生成 makefile ，这个工具就是cmake。</p>
 <p>CMakeLists 是 Cmake 的配置文件。还是需要手写。</p>
 <p>Cmake 会根据 CMakeLists 自动生成项目的 makefile 文件，然后再使用 make 构建项目。</p>
 <p>Cmake 有不同的生成器，可以生成不同平台下的 makefile 文件，比如 Unix Makefile、Visual Studio、Ninja、Nmake等等，可以生成不同平台下的makefile，生成后再进行make就可以将项目构建在不同的平台下。</p>
 <p>ninja是一种注重速度的生成器，使用ninja生成会产生一个build.ninja文件，然后使用ninja而非make进行构建</p>
+<h3 id="编译TVM">编译TVM</h3>
+<p>首先在 <a target="_blank" rel="noopener" href="https://winlibs.com/">https://winlibs.com/</a> 拿到带 LLVM 库的 GCC 包，安装并加入环境变量，在cmd中可以使用 <code>llvm-config --libdir</code> 验证</p>
+<p>创建build目录并<code>cp cmake/config.cmake build</code>并自定义配置，把USE LLVM打开</p>
+<p>Conda创建tvm的虚拟环境，可以直接 <code>conda env create --file conda/build-environment.yaml</code> 但是使用该环境 git 会莫名奇妙出bug，不如手动创环境下载该文件中提到的依赖包</p>
+<p>安装visual studio，把桌面C++开发组件勾上，安装完成后在cmd中使用<code>cl</code>验证（有没有可能除了装一个vs上述步骤全部不需要，但是不管了，官方文档安装部分相当混乱）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -A x64 -Thost=x64 ..<br><span class="hljs-built_in">cd</span> ..<br>cmake --build build --config Release -- /m<br></code></pre></td></tr></table></figure>
+<h3 id="安装python包">安装python包</h3>
+<p>在import tvm时如果未找到包，vscode会自动在工作区下创建配置帮你把tvm的路径加到 <code>python.analysis.extraPaths</code> 但实测虽然变绿且鼠标可以左键跳转了，但解释器还是找不到，可能需要改全局的python路径啥的</p>
+<p>不如直接安装，环境变量引入包的好处在于源码更改后，引入可以立即感知；而install的包在每次源码更改后要重新install才能生效。但是我使用的v0.8的源码，已经没有更新了，所以直接安装也ok</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> python<br>python setup.py install<br></code></pre></td></tr></table></figure>
+<h2 id="用户手册">用户手册</h2>
+<p>tvm/gallery</p>
+<h3 id="introduction-py"><a target="_blank" rel="noopener" href="http://introduction.py">introduction.py</a></h3>
+<p><img src="image.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p>TVM编译步骤：</p>
+<ol>
+<li>
+<p>从 TensorFlow、PyTorch 或 ONNX 等框架导入模型。在导入阶段中，TVM 可以从其他框架（如 TensorFlow、PyTorch 或 ONNX）中提取模型。 TVM 为前端提供的支持水平会随着我们不断改进这个开源项目而变化。如果在将模型导入 TVM 时遇到问题，可以将其转换为 ONNX。</p>
+</li>
+<li>
+<p>翻译成 TVM 的高级模型语言 Relay。已导入 TVM 的模型在 Relay 中表示。Relay 是神经网络的功能语言和中间表示（IR）。Relay 应用图级优化 pass 来优化模型。</p>
+</li>
+<li>
+<p>降级为张量表达式（TE）表示。降级是指将较高级的表示转换为较低级的表示。应用了高级优化之后，Relay 通过运行 FuseOps pass，把模型划分为许多小的子图，并将子图降级为 TE 表示。张量表达式（TE）是一种用于描述张量计算的领域特定语言。 TE 还提供了几个 schedule 原语来指定底层循环优化，例如循环切分、矢量化、并行化、循环展开和融合。为将 Relay 表示转换为 TE 表示，TVM 包含了一个张量算子清单（TOPI），其中包含常用张量算子的预定义模板（例如，conv2d、transpose）。</p>
+</li>
+<li>
+<p>使用 auto-tuning 模块 AutoTVM 或 AutoScheduler 搜索最佳 schedule。schedule 为 TE 中定义的算子或子图指定底层循环优化。auto-tuning 模块搜索最佳 schedule，并将其与 cost model 和设备上的测量值进行比较。TVM 中有两个 auto-tuning 模块，AutoTVM（有模板）和Ansor（无模板）。</p>
+</li>
+<li>
+<p>为模型编译选择最佳配置。调优后，auto-tuning 模块会生成 JSON 格式的调优记录。此步骤为每个子图选择最佳 schedule。</p>
+</li>
+<li>
+<p>降级为张量中间表示（TIR，TVM 的底层中间表示）。基于调优步骤选择最佳配置后，所有 TE 子图降级为 TIR 并通过底层优化 pass 进行优化。接下来，优化的 TIR 降级为硬件平台的目标编译器。这是生成可部署到生产的优化模型的最终代码生成阶段。</p>
+</li>
+<li>
+<p>编译成机器码。compiler-specific 的生成代码最终可降级为机器码。 TVM 可将模型编译为可链接对象模块，然后轻量级 TVM runtime 可以用 C 语言的 API 来动态加载模型，也可以为 Python 和 Rust 等其他语言提供入口点。或将 runtime 和模型放在同一个 package 里时，TVM 可以对其构建捆绑部署。</p>
+</li>
+</ol>
 
                 
               </div>
@@ -337,7 +381,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B8%B8%E8%AF%86/" class="print-no-link">#常识</a>
+        <a href="/tags/TVM/" class="print-no-link">#TVM</a>
       
         <a href="/tags/%E7%BC%96%E8%AF%91/" class="print-no-link">#编译</a>
       
@@ -353,8 +397,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>源码项目编译安装</div>
-      <div>http://example.com/2023/11/16/源码项目编译安装/</div>
+      <div>TVM源码学习-00</div>
+      <div>http://example.com/2023/11/16/TVM源码学习-00/</div>
     </div>
     <div class="license-meta">
       
