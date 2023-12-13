@@ -168,13 +168,13 @@ img_data = np.expand_dims(norm_img_data, axis=0)
 input_name = "data"
 target = "llvm"
 
-# 定义输入的形状字典
+# 定义输入的形状字典，键是模型固定的输入名称，值是输入形状，用于指定ONNX模型的输入形状
 shape_dict = {input_name: img_data.shape}
 
 # 将ONNX模型转换为Relay中间表示（IR）
 mod, params = relay.frontend.from_onnx(onnx_model, shape_dict)
 
-# 使用优化级别为3的PassContext进行编译
+# 构建和编译模型
 with tvm.transform.PassContext(opt_level=3):
     # 使用Relay构建模型并编译为目标为"llvm"的库
     lib = relay.build(mod, target=target, params=params)
@@ -185,6 +185,15 @@ dev = tvm.device(target, 0)
 # 创建GraphModule并加载编译好的模块
 module = graph_executor.GraphModule(lib["default"](dev))
 ```
+`relay.frontend.from_onnx`接受一个ONNX模型和一个形状字典作为输入，返回一个Relay模块（mod）和一个参数字典（params）
+
+mod是整个模型的计算图，params是模型的参数字典，包含了模型的权重和偏置等参数
+
+`tvm.transform.PassContext`是TVM控制优化过程的上下文，`opt_level=3`代表启用所有推荐优化
+lib是编译后生成的模块库，包含模型计算图、参数和编译后的函数，它将可以被加载到一个GraphModule中，并在指定设备上执行
+
+`dev = tvm.device(target, 0)`和`module = graph_executor.GraphModule(lib["default"](dev))` 分别创建了一个device对象和一个GraphModule对象（图执行模块）
+可以在上面运行上面编译好的lib库
 
 #### 使用模型进行推理
 
@@ -308,7 +317,7 @@ for i, task in enumerate(tasks):
 
     # create tuner
     if tuner == "xgb":
-        tuner_obj = XGBTuner(task, loss_type="reg")
+        tuner_obj = XGBTuner(task, loss_type="reg")333
     elif tuner == "xgb_knob":
         tuner_obj = XGBTuner(task, loss_type="reg", feature_type="knob")
     elif tuner == "xgb_itervar":
