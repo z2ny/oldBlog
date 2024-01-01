@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Git cheat sheet</title>
+    <link href="/2023/12/31/Git-cheat-sheet/"/>
+    <url>/2023/12/31/Git-cheat-sheet/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://git-scm.com/book/zh/v2">Pro Git Book</a></p><h2 id="起步">起步</h2><h3 id="Git特色">Git特色</h3><p><strong>直接记录快照，而非差异比较</strong><br>与其他版本控制系统基于差异的版本控制不同，Git直接记录文件快照，每次提交或保存都会基于当前的全部文件创建一个快照并保存这个快照的索引。为了高效，如果文件没有变化，Git不会再次保存，而是只保留一个链接指向之前存储的文件。</p><p><strong>近乎所有操作都在本地执行</strong></p><p><strong>保证完整性</strong><br>Git中所有数据在存储前都会计算校验和（SHA-1），并以校验和的哈希值作为引用和索引。</p><p><strong>只添加数据</strong><br>几乎所有操作都只是添加，几乎没有导致文件不可恢复的操作。</p><p><strong>三种状态</strong></p><ul><li>modified：已修改，文件在工作区被修改，但还未保存到数据库中</li><li>staged：已暂存，修改的文件已经被做了标记，将被包含在下次提交中</li><li>commited：已提交，已经安全的保存在本地数据库中</li></ul><h3 id="运行前配置-git-config">运行前配置 git config</h3><p>配置文件优先级由低到高</p><ul><li>–system:针对该系统上所有用户的所有仓库的通用配置，一般在Git安装目录</li><li>–global:当前用户的所有仓库，一般在用户目录</li><li>–local:当前仓库，一般在当前仓库目录</li></ul><blockquote><p>git config --global <a href="http://user.name">user.name</a> “John Doe”<br>git config --global user.email <a href="mailto:johndoe@example.com">johndoe@example.com</a><br>git config --list  # 可能会有重复，因为Git会依次读取系统、全局、当前仓库的config，后面的会覆盖前面的同名配置</p></blockquote><h2 id="Cheat-Sheet">Cheat Sheet</h2><h3 id="Remote">Remote</h3><p>查看所有分支：<code>branch</code> -r远程，-a所有，-v附带详细信息</p><p>将本地的分支推送至远程仓库：<code>push &lt;remote&gt; &lt;local_branch&gt;:&lt;remote_branch&gt;</code></p><p>删除某远程分支：<code>push &lt;remote&gt; --delete &lt;branch_name&gt;</code></p><h3 id="Local">Local</h3><p>查看提交记录：<code>log</code> --pretty=oneline指定以一行的形式显示</p><p>比较差异：<code>diff &lt;hash1&gt; &lt;hash2&gt;</code></p><p>增删分支：<code>branch &lt;branch_name&gt;</code> -d删除 -t追踪远程分支</p><p>获取远程仓库数据：<code>fetch</code> 从远程仓库下载数据，但不会自动合并，后续需要merge或pull</p><p>撤销提交：<code>reset</code> --soft仅仅撤销提交，–mixed撤销提交并取消暂存区，–hard撤销提交并取消暂存区和工作区 HEAD~n表示前n个版本</p><h3 id="Index-Stage">Index/Stage</h3><p>提交到本地仓库：<code>commit</code> -a自动将所有已跟踪文件暂存起来并提交，相当于先执行add -u ，-m指定提交信息，–amend修改最后一次提交</p><p>比较当前index与某次提交的差异：<code>diff --cached &lt;hash&gt;</code></p><h3 id="Workspace">Workspace</h3><p>检查状态：<code>status</code> -s简洁</p><p>克隆远程仓库：<code>clone</code> 创建一个全新副本</p><p>从远程仓库拉取最新文件：<code>pull</code> 相当于fetch+merge</p><p>添加文件至Index：<code>add</code> -u更新已跟踪文件（即不包括新增文件），-A更新所有改动（包括新增文件），.当前目录所有文件</p><p>签出某个分支或提交或文件：<code>checkout</code> -b创建并签出新分支。如果签出的是一个特定提交，会处于&quot;detached HEAD&quot;状态，可以随意修改并提交，但这个提交不属于任何分支（但仍然存在，只要记得提交的哈希值），可以通过创建分支来保存</p><p>将某一分支的所有更改合并到当前分支：<code>merge &lt;branch_name&gt;</code>，Git默认使用Fast forward模式，即如果被合并分支是当前分支的直接后继，Git会将当前分支指向被合并分支的最新提交并不产生新提交；这时用–no-ff禁用Fast forward模式，仍然会产生一次新提交。如果并非直接前后继关系，Git会创建一个新的合并提交，该提交有两个父提交，即两个分支的最新提交。</p><p>变基：<code>rebase</code> 一般不用。</p><p>将其他分支的某个提交应用到当前分支：<code>cherry-pick &lt;hash&gt;</code>，会产生一个新的提交，提交内容（记得git是保存修改后文件的快照）与原提交相同。</p><p>回滚某提交：<code>revert &lt;hash&gt;</code>，会产生一个新的提交，提交内容与原提交相反。</p><p>清理未被跟踪的文件：<code>clean</code> -n列出将要被清理的文件，-f清理文件，-d清理文件夹，-x清理忽略的文件，-X清理忽略的文件夹</p><p>临时保存工作区和暂存区，将这些改动进栈：<code>stash</code> -u保存未被跟踪的文件，-a保存所有改动，-p交互式保存，-k不保存暂存区的改动</p><p>恢复工作区和暂存区：<code>stash pop</code> 恢复并删除栈顶的stash，<code>stash apply</code> 恢复但不删除栈顶的stash</p><h3 id="Stash">Stash</h3><p>显示栈：<code>stash list</code></p><p>入栈：<code>stash push</code> 默认入栈顶</p><p>显示栈的细节：<code>stash show</code> 默认栈顶</p><p>删除当个栈：<code>stash drop</code> 默认栈顶</p><p>清空整个stash：<code>stash clear</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>work</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git</tag>
+      
+      <tag>cheat sheet</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>TVM源码学习-01</title>
     <link href="/2023/12/07/TVM%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-01/"/>
     <url>/2023/12/07/TVM%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-01/</url>
