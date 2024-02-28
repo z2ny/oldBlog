@@ -88,6 +88,7 @@ python setup.py install
 tvm/gallery
 
 ### introduction.py
+
 ![Alt text](image.png)
 
 TVM编译步骤：
@@ -290,7 +291,7 @@ runner = autotvm.LocalRunner(
 tuning_option = {
     "tuner": "xgb",
     # 试验次数，CPU上推荐1500，GPU推荐3000-4000，此处仅作展示用
-    "trials": 20,
+    "trials": 10,
     # 使搜索提前停止的实验最小值
     "early_stopping": 100,
 
@@ -303,52 +304,13 @@ tuning_option = {
 }
 ```
 
-在 `extract_from_program` 时卡了很久，还未发现原因
 ``` python
 # 首先从 onnx 模型中提取任务
 tasks = autotvm.task.extract_from_program(mod["main"], target=target, params=params)
 
-# 按顺序调优提取的任务
 for i, task in enumerate(tasks):
     prefix = "[Task %2d/%2d] " % (i + 1, len(tasks))
-
-    # choose tuner
-    tuner = "xgb"
-
-    # create tuner
-    if tuner == "xgb":
-        tuner_obj = XGBTuner(task, loss_type="reg")333
-    elif tuner == "xgb_knob":
-        tuner_obj = XGBTuner(task, loss_type="reg", feature_type="knob")
-    elif tuner == "xgb_itervar":
-        tuner_obj = XGBTuner(task, loss_type="reg", feature_type="itervar")
-    elif tuner == "xgb_curve":
-        tuner_obj = XGBTuner(task, loss_type="reg", feature_type="curve")
-    elif tuner == "xgb_rank":
-        tuner_obj = XGBTuner(task, loss_type="rank")
-    elif tuner == "xgb_rank_knob":
-        tuner_obj = XGBTuner(task, loss_type="rank", feature_type="knob")
-    elif tuner == "xgb_rank_itervar":
-        tuner_obj = XGBTuner(task, loss_type="rank", feature_type="itervar")
-    elif tuner == "xgb_rank_curve":
-        tuner_obj = XGBTuner(task, loss_type="rank", feature_type="curve")
-    elif tuner == "xgb_rank_binary":
-        tuner_obj = XGBTuner(task, loss_type="rank-binary")
-    elif tuner == "xgb_rank_binary_knob":
-        tuner_obj = XGBTuner(task, loss_type="rank-binary", feature_type="knob")
-    elif tuner == "xgb_rank_binary_itervar":
-        tuner_obj = XGBTuner(task, loss_type="rank-binary", feature_type="itervar")
-    elif tuner == "xgb_rank_binary_curve":
-        tuner_obj = XGBTuner(task, loss_type="rank-binary", feature_type="curve")
-    elif tuner == "ga":
-        tuner_obj = GATuner(task, pop_size=50)
-    elif tuner == "random":
-        tuner_obj = RandomTuner(task)
-    elif tuner == "gridsearch":
-        tuner_obj = GridSearchTuner(task)
-    else:
-        raise ValueError("Invalid tuner: " + tuner)
-
+    tuner_obj = XGBTuner(task, loss_type="rank")
     tuner_obj.tune(
         n_trial=min(tuning_option["trials"], len(task.config_space)),
         early_stopping=tuning_option["early_stopping"],

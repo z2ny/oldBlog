@@ -10,6 +10,8 @@ tags:
 
 [Pro Git Book](https://git-scm.com/book/zh/v2)
 
+<!--more-->
+
 ## 起步
 
 ### Git特色
