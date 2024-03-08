@@ -1,5 +1,5 @@
 ---
-title: TVM源码学习-00
+title: TVM源码-00
 date: 2023-11-16 13:49:21
 categories:
 - work

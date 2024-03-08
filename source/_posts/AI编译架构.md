@@ -1,5 +1,5 @@
 ---
-title: AI编译器相关
+title: AI编译架构
 date: 2023-10-16 15:40:54
 categories:
   - work
@@ -73,6 +73,10 @@ TVM 想要解决的问题：模型部署的可移植性问题、特定平台的�
 ### 编译流程
 
 ![Alt text](image1.png)
+
+1. TVM前端将如ONNX、Pytorch下的模型引入到IRModule中
+2. IRModule经过第一次转化，即Relay Passes，主要是与硬件无关的转换（常量折叠、死码消除），通常来说，IRModule中每一个高级模型都会被转换成一个relay.Function，可以将relay.Function视为额外支持控制流、递归和复杂数据结构的计算图
+3. 
 
 Relay IR：如 relay.Function，TVM 为了兼容上层的机器学习框架而引入的中间表达，一种高阶的图结构，包含了计算图和控制流的信息，这样的设计使得 TVM 可以对模型进行更加全面的优化。Relax 是下一代 Relay（Relay Next）
 
