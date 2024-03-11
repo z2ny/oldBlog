@@ -16,31 +16,25 @@
   <meta name="author" content="Zhang Yix">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DianNao: A Small-Footprint High-Throughput Accelerator for Ubiquitous Machine-Learning 概述 DianNao：一个用于普遍机器学习的小规模高通量加速器。寒武纪开山之作 现阶段（2014）机器学习工作中（CNN、神经网络）CPU性能不够，GPU、FPGA等功耗过高。 当前的绝大多数acc的关注点都在于算法计算部分（">
+    <meta name="description" content="Linux 系统启动过程 内核引导 当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。操作系统接管硬件以后，首先读入 &#x2F;boot 目录下的内核文件。 init nit 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。init 程序首先是需要读取配置文件 &#x2F;etc&#x2F;inittab 运行级别 许多程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DianNao系列论文阅读">
-<meta property="og:url" content="http://example.com/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.html">
+<meta property="og:title" content="linux &amp;&amp; docker杂记">
+<meta property="og:url" content="http://example.com/2024/02/29/linux-&&-docker%E6%9D%82%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
-<meta property="og:description" content="DianNao: A Small-Footprint High-Throughput Accelerator for Ubiquitous Machine-Learning 概述 DianNao：一个用于普遍机器学习的小规模高通量加速器。寒武纪开山之作 现阶段（2014）机器学习工作中（CNN、神经网络）CPU性能不够，GPU、FPGA等功耗过高。 当前的绝大多数acc的关注点都在于算法计算部分（">
+<meta property="og:description" content="Linux 系统启动过程 内核引导 当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。操作系统接管硬件以后，首先读入 &#x2F;boot 目录下的内核文件。 init nit 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。init 程序首先是需要读取配置文件 &#x2F;etc&#x2F;inittab 运行级别 许多程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image.png">
-<meta property="og:image" content="http://example.com/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-1.png">
-<meta property="og:image" content="http://example.com/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-2.png">
-<meta property="og:image" content="http://example.com/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image-3.png">
-<meta property="article:published_time" content="2023-09-14T16:59:24.000Z">
-<meta property="article:modified_time" content="2024-03-08T12:12:14.301Z">
+<meta property="og:image" content="http://example.com/2024/02/29/linux-&&-docker%E6%9D%82%E8%AE%B0/image.png">
+<meta property="article:published_time" content="2024-02-29T02:51:55.000Z">
+<meta property="article:modified_time" content="2024-03-11T05:54:10.331Z">
 <meta property="article:author" content="Zhang Yix">
-<meta property="article:tag" content="DianNao">
-<meta property="article:tag" content="论文笔记">
-<meta property="article:tag" content="TBC">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/09/14/DianNao%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/image.png">
+<meta name="twitter:image" content="http://example.com/2024/02/29/linux-&&-docker%E6%9D%82%E8%AE%B0/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>DianNao系列论文阅读 - Zhyx&#39;s Blog</title>
+  <title>linux &amp;&amp; docker杂记 - Zhyx&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DianNao系列论文阅读"></span>
+            <span id="subtitle" data-typed-text="linux &amp;&amp; docker杂记"></span>
           
         </div>
 
@@ -207,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-14 16:59" pubdate>
-          2023年9月14日 下午
+        <time datetime="2024-02-29 02:51" pubdate>
+          2024年2月29日 凌晨
         </time>
       </span>
     
@@ -219,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          3.2k 字
         
       </span>
     
@@ -230,7 +224,7 @@
         
         
         
-          22 分钟
+          27 分钟
         
       </span>
     
@@ -275,12 +269,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">DianNao系列论文阅读</h1>
+            <h1 id="seo-header">linux &amp;&amp; docker杂记</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月8日 中午
+                    本文最后更新于：2024年3月11日 凌晨
                   
                 
               </p>
@@ -288,104 +282,153 @@
             
               <div class="markdown-body">
                 
-                <h2 id="DianNao-A-Small-Footprint-High-Throughput-Accelerator-for-Ubiquitous-Machine-Learning">DianNao: A Small-Footprint High-Throughput Accelerator for Ubiquitous Machine-Learning</h2>
-<h3 id="概述">概述</h3>
-<p>DianNao：一个用于普遍机器学习的小规模高通量加速器。寒武纪开山之作</p>
-<p>现阶段（2014）机器学习工作中（CNN、神经网络）CPU性能不够，GPU、FPGA等功耗过高。</p>
-<p>当前的绝大多数acc的关注点都在于算法计算部分（efficiently implementing the computational part of the algorithms），然而CNN和DNN的特点是大尺寸、大计算量。在这种情况下，DMA的效果不太好。因此我们针对这一特性，设计了一个专门对访存做特别优化的加速器</p>
-<p>对比常规SIMD处理器速度快117倍，能耗比提高21倍</p>
-<h3 id="Intro">Intro</h3>
-<p>加速器设计的权衡：灵活性和高性能。而由于当时机器学习的SOTA就是CNN和DNN，种类有限，所以可以这类计算设计出有针对性的加速器</p>
-<p>当前针对CNN或MLP的加速器都专注于神经网络中计算原语如卷积的有效实现，如矩阵乘法、向量计算方面的优化。但是忽略了对性能影响同样巨大的访存部分</p>
-<p>由于阿姆达尔定律，即使计算原件做大量优化，整体性能依旧会受制于内存传输部分，并且在机器学习领域，为了实现更高的精度和功能，有一个必然的趋势就是提高神经网络的规模，而这也证明了访存优化对于设计加速卡的重要性</p>
-<p>主要贡献：高吞吐、高能耗比、侧重内存性能的加速卡设计</p>
-<h3 id="最新机器学习技术入门">最新机器学习技术入门</h3>
-<p>当前的市场来说，我们的加速器应该聚焦于网络的前馈而非反馈。这是由于在许多业务场景下离线学习都是主流，网路可以周期性的进行离线学习，而拿到客户手中只需要高效的前向推理。并且由于反向传播和正向路径原理类似，我们在之后也会针对反向传播做出优化工作</p>
-<h3 id="基于处理器的（大型）神经网络实现">基于处理器的（大型）神经网络实现</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><img src="image.png" srcset="/img/loading.gif" lazyload alt=" "></th>
-<th style="text-align:center"><img src="image-1.png" srcset="/img/loading.gif" lazyload alt=" "></th>
-<th style="text-align:center"><img src="image-2.png" srcset="/img/loading.gif" lazyload alt=" "></th>
-</tr>
-</thead>
-</table>
-<ol>
-<li>
-<p>classifier层</p>
+                 <span id="more"></span>
+<h2 id="Linux">Linux</h2>
+<h3 id="系统启动过程">系统启动过程</h3>
+<h4 id="内核引导">内核引导</h4>
+<p>当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。</p>
+<h4 id="init">init</h4>
+<p>nit 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。init 程序首先是需要读取配置文件 /etc/inittab</p>
+<p><strong>运行级别</strong><br>
+许多程序需要开机启动。它们在Windows叫做&quot;服务&quot;（service），在Linux就叫做&quot;守护进程&quot;（daemon）。</p>
+<p>init进程的一大任务，就是去运行这些开机启动的程序。</p>
+<p>但是，不同的场合需要启动不同的程序，比如用作服务器时，需要启动Apache，用作桌面就不需要。</p>
+<p>Linux允许为不同的场合，分配不同的开机启动程序，这就叫做&quot;运行级别&quot;（runlevel）。也就是说，启动时根据&quot;运行级别&quot;，确定要运行哪些程序。</p>
+<p>Linux系统有7个运行级别(runlevel)：</p>
 <ul>
-<li>就是全连接层，在一般的理解中，每一个output相当于所有input的加权求和在Sigmoid出的概率值，如图所示，synapses矩阵对于每个output来说该input的权重</li>
-<li>首先展示的是针对全连接层的优化，一般比较符合直观思维的模式是逐行运算，每次输出一个output。这种方式在遇到大规模神经网络（i/o神经元数量大）时有一个问题：对带宽要求高，内存运输总数= inputs loaded + synapses loaded + outputs written = Ni x Nn + Ni x Nn + Nn</li>
-<li>改进方式：将输入神经元进行tile loop，在L1缓存不够大的情况下，平铺再分块，类似卷积层，这样做的好处是对input神经元的数据做了复用，大大降低了输入神经元的内存带宽需求，略微增加了输出带宽需求（因为不再是一次出结果，需要written多次）</li>
-<li>同时如果将synapses矩阵存入L2缓存（对于当时的神经网络来说，权重总数在百万数量级，仍在L2的范围内），可以进一步减少所需带宽</li>
+<li>0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动</li>
+<li>1：单用户工作状态，root权限，用于系统维护，禁止远程登录</li>
+<li>2：多用户状态(没有NFS)</li>
+<li>3：完全的多用户状态(有NFS)，登录后进入控制台命令行模式</li>
+<li>4：系统未使用，保留</li>
+<li>5：X11控制台，登录后进入图形GUI模式</li>
+<li>6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</li>
 </ul>
-</li>
-<li>
-<p>卷积层</p>
+<h4 id="系统初始化">系统初始化</h4>
+<p>在init的配置文件中有这么一行： si::sysinit:/etc/rc.d/rc.sysinit　它调用执行了/etc/rc.d/rc.sysinit。</p>
+<p>rc.sysinit是一个bash shell的脚本，它主要是完成一些系统初始化的工作，是每一个运行级别都要首先运行的重要脚本。</p>
+<p>它主要完成的工作有：激活交换分区，检查磁盘，加载硬件模块以及其它一些需要优先执行任务。</p>
+<p>如在/etc/inittab可能会看到某条目<code>l5:5:wait:/etc/rc.d/rc 5</code> 这个条目的格式是 id:runlevels:action:process，代表在运行级别 5 下，init 应该运行 /etc/rc.d/rc 5 脚本（该脚本意思是启动运行级别5下的所有守护进程），并等待它结束</p>
+<h4 id="建立终端">建立终端</h4>
+<p>在init执行完inittab中启动守护进程的条目后，接下来是打开终端以方便用户交互<br>
+如<code>1:2345:respawn:/sbin/mingetty tty1</code> 表示运行级别2、3、4、5下，init应该运行/sbin/mingetty tty1，而且当它结束时，init应该重新运行它</p>
+<h3 id="目录结构">目录结构</h3>
 <ul>
-<li>有两种数据复用可能：滑动窗口（就是卷积核权重，滑动过程中卷积核不变）以及跨通道的输出复用</li>
-<li>简单来说就是每次不再都整个input feature map，而是在map上截取一片Tx*Ty，每次不同的卷积核在上面卷积运算之后送给output，再最后加权求和</li>
-<li>无非是由于缓存空间限制而对feture maps、Input channel、output channel做出截取，让运算时数据都在缓存中，降低内存带宽</li>
-<li>针对卷积核权值共享做了优化，文章倾向于共享卷积核</li>
-</ul>
+<li>
+<p>/bin：<br>
+bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p>
 </li>
 <li>
-<p>池化层:</p>
-<ul>
-<li>重用机会少，对于增加Tx，Ty效果不显著</li>
-</ul>
+<p>/boot：<br>
+这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
 </li>
-</ol>
-<h3 id="小型神经网络加速器">小型神经网络加速器</h3>
-<ul>
-<li>对于小型网络，可假设所有神经元和突触都由硬件实现，内存仅用于I/O</li>
-<li>对于小型神经网络可以大幅提高能耗，但随神经元数量增多面积、能量和延迟呈二次方增长</li>
-</ul>
-<h3 id="大型神经网络加速器">大型神经网络加速器</h3>
-<p><img src="image-3.png" srcset="/img/loading.gif" lazyload alt=" "></p>
-<p>总共三大部件：</p>
-<ul>
-<li>运算部分：NFU</li>
-<li>存储部分：输入缓存NBin、输出缓存NBout、突触权重SB</li>
-<li>控制逻辑：CP</li>
-</ul>
-<p>NFU：</p>
-<ul>
-<li>按照第三节，将每一层分解为Ti和Tn的计算块</li>
-<li>流水线：layer都可以分为若干个规范计算单元的组合，将整个计算规范化，流程化
-<ol>
-<li>NFU-1：乘法单元</li>
-<li>NFU-2：加法树</li>
-<li>NFU-3：激活单元</li>
-</ol>
+<li>
+<p>/dev ：<br>
+dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p>
+</li>
+<li>
+<p>/etc：<br>
+etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
+</li>
+<li>
+<p>/home：<br>
+用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的，如上图中的 alice、bob 和 eve。</p>
+</li>
+<li>
+<p>/lib：<br>
+lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p>
+</li>
+<li>
+<p>/lost+found：<br>
+这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+</li>
+<li>
+<p>/media：<br>
+linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p>
+</li>
+<li>
+<p>/mnt：<br>
+系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 /mnt/ 上，然后进入该目录就可以查看光驱里的内容了。</p>
+</li>
+<li>
+<p>/opt：<br>
+opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
+</li>
+<li>
+<p>/proc：<br>
+proc 是 Processes(进程) 的缩写，/proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。<br>
+这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：<br>
+echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</p>
+</li>
+<li>
+<p>/root：<br>
+该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+</li>
+<li>
+<p>/sbin：<br>
+s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件) 的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
+</li>
+<li>
+<p>/selinux：<br>
+这个目录是 Redhat/CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
+</li>
+<li>
+<p>/srv：<br>
+该目录存放一些服务启动之后需要提取的数据。</p>
+</li>
+<li>
+<p>/sys：<br>
+这是 Linux2.6 内核的一个很大的变化。该目录下安装了 2.6 内核中新出现的一个文件系统 sysfs 。</p>
 </li>
 </ul>
-<p>全连接层：突出*输入；乘积求和；激活函数sigmoid；<br>
-卷积层：计算阶段相同，只是激活函数可能不同；<br>
-池化层：没有乘积的操作，可以是求最大池化和平均池化</p>
-<h2 id="DaDianNao-A-Machine-Learning-Supercomputer">DaDianNao: A Machine-Learning Supercomputer</h2>
-<h3 id="概述-2">概述</h3>
-<p>在多核芯片中，由于CNNs和DNNs所需内存并未超过其片上存储空间，结合CNN/DNN算法自身特点，会导致高内部带宽和低外部通信这一情况，从而能在合理的区域成本下实现高并发。</p>
-<h3 id="Intro-2">Intro</h3>
-<p>前人工作缺陷：加速芯片要么有神经网络大小限制，要么对于大型网络，神经元和突触必须存储在内存中</p>
-<p>神经网络性能瓶颈：内存访问</p>
-<h3 id="The-GPU-Option-The-Accelerator-Option">The GPU Option/ The Accelerator Option</h3>
-<p>CPU与GPU与DianNao的一些比较；DianNao的介绍，现有DianNao的不足</p>
-<p>主要的限制来源于两种重要层的内存带宽需求：私有内核的卷积层(用于dnn)和全连接层</p>
-<h3 id="A-Machine-Learning-Supercomputer">A Machine-Learning Supercomputer</h3>
-<p>权重存储在将使用它们的神经元附近，最大限度地降低数据移动，节省时间和能量;架构是完全分布式的，没有主存</p>
-<p>非对称的体系结构，其中每个节点占用的空间大量偏向于存储而不是计算</p>
-<p>传递神经元值而不是权重，因为在两个典型层中，神经元值比权重数量级小，需要相对较少的外部(跨芯片)带宽</p>
-<p>通过将本地存储分解成许多块来实现高的内部带宽</p>
-<p>将SRAM更换为eDRAM，缩小面积，但需要周期性刷新、延迟高</p>
-<p>NFU无法简单扩大规模：数据布线面积占用过多，可扩展性差</p>
-<p>对NFU进行分片</p>
-<h2 id="Cambricon-An-Instruction-Set-Architecture-for-Neural-Networks">Cambricon: An Instruction Set Architecture for Neural Networks</h2>
-<h3 id="概述-3">概述</h3>
-<p>传统神经网络往往在CPU、GPGPU这样的的通用平台执行，通常来说不够节能，因为这种平台主要是为了灵活支持各类型工作</p>
-<p>最近的一些硬件加速器，这类加速器通常采用高级指令直接控制高级功能块。但是，当需要灵活支持各种不同的NN时，这种直接控制块的方式就不太行</p>
-<p>思路 a. 分解大块的操作成一个个小的指令，获得更大的灵活性。用户可以用低层次的操作组合成高层次的功能。b. 简单的短指令可以大幅降低设计验证的复查度和解码器的功耗和面积。</p>
+<p>sysfs 文件系统集成了下面3种文件系统的信息：针对进程信息的 proc 文件系统、针对设备的 devfs 文件系统以及针对伪终端的 devpts 文件系统。</p>
+<p>该文件系统是内核设备树的一个直观反映。</p>
+<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
+<ul>
+<li>
+<p>/tmp：<br>
+tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p>
+</li>
+<li>
+<p>/usr：<br>
+usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p>
+</li>
+<li>
+<p>/usr/bin：<br>
+用户使用的应用程序。</p>
+</li>
+<li>
+<p>/usr/sbin：<br>
+超级用户使用的比较高级的管理程序和系统守护程序。</p>
+</li>
+<li>
+<p>/usr/src：<br>
+内核源代码默认的放置目录。</p>
+</li>
+<li>
+<p>/var：<br>
+var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+</li>
+<li>
+<p>/run：<br>
+是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 /var/run 目录，应该让它指向 run。</p>
+</li>
+</ul>
+<h3 id="文件基本属性">文件基本属性</h3>
+<p>chown 修改所属用户及用户组 chmod修改文件权限<br>
+<img src="image.png" srcset="/img/loading.gif" lazyload alt="alt text"><br>
+把每一组rwx看作二进制计数，即chmod 777代表了文件所有者、文件所有者同组用户、其他用户都有rwx权限</p>
+<h2 id="Docker">Docker</h2>
+<p>Docker依赖于已存在并运行的Linux内核环境，因此windows上的Docker需要在虚拟机中运行</p>
+<p>docker run：用于从一个 Docker 镜像创建并启动一个新的容器<br>
+<code>docker run -it ubuntu:latest /bin/bash</code><br>
+-i代表容器的标准输入保持开启，即可以向容器发送输入<br>
+-t代表为容器分配一个伪终端，可以看到命令行</p>
+<p>start：启动一个已经存在的容器</p>
+<p>exec：对一个正在运行的容器执行一个命令<br>
+<code>docker exec -it my_container /bin/bash</code><br>
+在exec之前容器就已经有一个或多个进程，因此exec的命令会在容器中启动一个新的进程，此时exit容器由于还有别的进程所以并不会直接停止</p>
+<p>attach：为正在运行的容器启动一个shell，同样退出时不会停止容器</p>
 
                 
               </div>
@@ -394,38 +437,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/work/" class="category-chain-item">work</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/DianNao/" class="print-no-link">#DianNao</a>
-      
-        <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="print-no-link">#论文笔记</a>
-      
-        <a href="/tags/TBC/" class="print-no-link">#TBC</a>
-      
-    </div>
   
 </div>
 
@@ -435,8 +446,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DianNao系列论文阅读</div>
-      <div>http://example.com/2023/09/14/DianNao系列论文阅读/</div>
+      <div>linux &amp;&amp; docker杂记</div>
+      <div>http://example.com/2024/02/29/linux-&amp;&amp;-docker杂记/</div>
     </div>
     <div class="license-meta">
       
@@ -448,13 +459,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月14日</div>
+          <div>2024年2月29日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月8日</div>
+          <div>2024年3月11日</div>
         </div>
       
       
@@ -497,18 +508,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/14/GPGPA%E9%98%85%E8%AF%BB/" title="GPGPA阅读">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GPGPA阅读</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/" title="00：个人网站部署">
-                        <span class="hidden-mobile">00：个人网站部署</span>
+                      <a href="/2023/12/31/Git-cheat-sheet/" title="Git cheat sheet">
+                        <span class="hidden-mobile">Git cheat sheet</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

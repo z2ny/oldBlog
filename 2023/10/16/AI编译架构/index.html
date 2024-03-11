@@ -16,31 +16,32 @@
   <meta name="author" content="Zhang Yix">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考: TVM学习仓库 B站-zomi酱">
+    <meta name="description" content="参考: TVM学习仓库 B站-zomi酱 MLIR入门理解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AI编译器相关">
-<meta property="og:url" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:title" content="AI编译架构">
+<meta property="og:url" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
-<meta property="og:description" content="参考: TVM学习仓库 B站-zomi酱">
+<meta property="og:description" content="参考: TVM学习仓库 B站-zomi酱 MLIR入门理解">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3/image.png">
-<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3/image1.png">
-<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3/image2.png">
+<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E6%9E%B6%E6%9E%84/image.png">
+<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E6%9E%B6%E6%9E%84/image0.png">
+<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E6%9E%B6%E6%9E%84/image1.png">
+<meta property="og:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E6%9E%B6%E6%9E%84/image2.png">
 <meta property="article:published_time" content="2023-10-16T15:40:54.000Z">
-<meta property="article:modified_time" content="2024-03-08T12:12:14.297Z">
+<meta property="article:modified_time" content="2024-03-11T05:54:10.327Z">
 <meta property="article:author" content="Zhang Yix">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="LLVM">
 <meta property="article:tag" content="MLIR">
 <meta property="article:tag" content="TVM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E5%99%A8%E7%9B%B8%E5%85%B3/image.png">
+<meta name="twitter:image" content="http://example.com/2023/10/16/AI%E7%BC%96%E8%AF%91%E6%9E%B6%E6%9E%84/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>AI编译器相关 - Zhyx&#39;s Blog</title>
+  <title>AI编译架构 - Zhyx&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AI编译器相关"></span>
+            <span id="subtitle" data-typed-text="AI编译架构"></span>
           
         </div>
 
@@ -219,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          4.8k 字
         
       </span>
     
@@ -230,7 +231,7 @@
         
         
         
-          34 分钟
+          40 分钟
         
       </span>
     
@@ -275,12 +276,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">AI编译器相关</h1>
+            <h1 id="seo-header">AI编译架构</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月8日 中午
+                    本文最后更新于：2024年3月11日 凌晨
                   
                 
               </p>
@@ -291,6 +292,7 @@
                 <p>参考:</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/BBuf/tvm_mlir_learn">TVM学习仓库</a></p>
 <p><a target="_blank" rel="noopener" href="https://space.bilibili.com/517221395/channel/collectiondetail?sid=857162">B站-zomi酱</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/450022851">MLIR入门理解</a></p>
 <span id="more"></span>
 <h2 id="1-编译器相关">1. 编译器相关</h2>
 <p>编译器（Compiler）和解释器（Interpreter）：</p>
@@ -311,6 +313,9 @@
 <li>链接：将程序运行所需要的目标文件、依赖库文件等统一打包链接成一个可执行文件</li>
 </ol>
 <p>LLVM 在 GCC 的基础上发展而来，早期苹果使用 GCC ，后来由于 GCC 证书以及苹果的商用需要，只能放弃 GCC 而单独发展出 LLVM，LLVM 本质算一个编译器的框架系统，使用模块化的方式，将编译器的前端、优化器、后端等模块分开，可以根据需要进行组合，比如目前主流的 Clang 就是 LLVM 的前端，而 LLVM 的后端可以生成多种平台的机器码，LLVM 的优化器也可以单独使用，这样就可以根据需要进行组合，而不是像 GCC 那样，前端、优化器、后端都是一体的，不可分割。</p>
+<blockquote>
+<p><em>LLVM is a sort of abstracted assembly language that compiler developers can target as a backend, and then LLVM itself comes packaged with a host of optimizations and “real” backend targets that can be compiled to. If you’re, say, the Rust programming language and you want to compile to x86, ARM, and WebAssembly without having to do all that work, you can just output LLVM code and then run LLVM’s compilation suite.</em></p>
+</blockquote>
 <p>PASS：编译器对源代码进行完整的扫描，进行优化和分析的步骤<br>
 IR：Intermediate Representation 中间表达</p>
 <p>编译器基本结构（主要是 LLVM，GCC 分的没有这么明确）</p>
@@ -336,10 +341,24 @@ IR：Intermediate Representation 中间表达</p>
 <p>为什么使用 TVM：在模型部署时，众多的机器学习框架（Pytorch、TF、ONNX）与众多的平台（x86、arm、GPU）产生了众多不同的部署场景，而同一个模型在这些不同的场景之间是无法无缝切换的。TVM 的目标就是将这些不同的框架与平台进行统一，使得模型部署更加简单。</p>
 <p>TVM 想要解决的问题：模型部署的可移植性问题、特定平台的硬件优化问题、软件栈的支持问题</p>
 <h3 id="编译流程">编译流程</h3>
+<p><img src="image0.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <p><img src="image1.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<ol>
+<li>TVM前端将如ONNX、Pytorch下的模型引入到IRModule中，将其翻译为relay（此时IRModule由一种高级表示relay.Function组成，一个relay.Function通常对应一个端到端的模型，可将其视为额外支持控制流、递归和复杂数据结构的计算图）</li>
+<li>Relay经过第一次转换，即Relay Passes，主要是与硬件无关的转换（常量折叠、死码消除等）</li>
+<li>在Relay优化的后期，TVM会运行一系列pass，以FuseOps（融合操作）开始，加上设备注解、布局重写、存储重写、图到函数转换等，将relay逐步转成te</li>
+</ol>
+<blockquote>
+<p><em>重要的是，张量表达式te本身并不是一个可以存储到 IRModule 中的自包含函数（self-contained function）。相反，它是 IR 的一个片段，可以拼接起来构建一个 IRModule。</em></p>
+</blockquote>
+<ol start="4">
+<li>将te转为tir，使用autoTVM</li>
+<li>tir经过一系列的tirPasses</li>
+<li>IRMoudle转换成对应设备的runtime.Module由PackedFunc组成</li>
+</ol>
 <p>Relay IR：如 relay.Function，TVM 为了兼容上层的机器学习框架而引入的中间表达，一种高阶的图结构，包含了计算图和控制流的信息，这样的设计使得 TVM 可以对模型进行更加全面的优化。Relax 是下一代 Relay（Relay Next）</p>
 <p>Tensor IR：如 tir.PrinFunc，TVM 为了兼容不同的硬件而引入的中间表达，一种低阶的图结构，包含了数据张量和算子的信息，这样的设计使得 TVM 可以对硬件进行更加全面的优化。</p>
-<p>IRModule：是TVM堆栈中的主要数据结构，它是TVM编译的最小完整单元。在 Relay Pass 后包含一组 relay.Function。一个 RelayFunc 通常对应一个端到端的模型（可见MLC）。在经过 TIR Pass 后一个 RelayFunc 可降级为多个 tir.PrinFunc 即元张量函数，这些函数可以被 TVM 优化器进行优化，最后转化为机器码。</p>
+<p>IRModule：是TVM堆栈中的主要数据结构，也是TVM编译的最小完整单元，在上层一般由一个或多个relay.Function组成。一个 RelayFunc 通常对应一个端到端的模型（可见MLC）。经过 TIR Pass 后一个 RelayFunc 可降级为多个 tir.PrimFunc 即元张量函数，这些函数可以被 TVM 优化器进行优化，最后转化为机器码。</p>
 <h4 id="Pass-转换">Pass 转换</h4>
 <p>TVM转换流程的目的：优化（如常量折叠、死码消除，针对特定张量的布局转换、scale因子折叠），以及降级（将代码逐渐转化成更接近硬件的低级表示。</p>
 <p>在 relay/transform 流程的后期，FuseOps 将端到端的函数（即 relay.Function）转化为一个个的算子（即 tir.PrinFunc），这个过程帮助将原始的编译问题分为了两个子问题：</p>
@@ -372,7 +391,6 @@ IR：Intermediate Representation 中间表达</p>
 <p>主要的结论是 runtime.Module 和 runtime.PackedFunc 可以封装算子级别的程序（例如 addone），以及端到端模型。</p>
 <h3 id="逻辑架构组件">逻辑架构组件</h3>
 <p><img src="image2.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
-<p>先告一段落，看看自动调优方向</p>
 <h2 id="3-MLIR">3. MLIR</h2>
 <p>参考<br>
 <a target="_blank" rel="noopener" href="https://www.lei.chat/zh/posts/compilers-and-irs-llvm-ir-spirv-and-mlir/">某大佬博客</a></p>
@@ -427,8 +445,8 @@ IR：Intermediate Representation 中间表达</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AI编译器相关</div>
-      <div>http://example.com/2023/10/16/AI编译器相关/</div>
+      <div>AI编译架构</div>
+      <div>http://example.com/2023/10/16/AI编译架构/</div>
     </div>
     <div class="license-meta">
       
@@ -446,7 +464,7 @@ IR：Intermediate Representation 中间表达</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月8日</div>
+          <div>2024年3月11日</div>
         </div>
       
       
@@ -489,9 +507,9 @@ IR：Intermediate Representation 中间表达</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/31/AI%E7%BC%96%E8%AF%91%E5%99%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-00/" title="AI编译器论文阅读-00">
+                      <a href="/2023/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%99%A8%E7%BB%BC%E8%BF%B0%E9%98%85%E8%AF%BB/" title="深度学习编译器综述阅读">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">AI编译器论文阅读-00</span>
+                        <span class="hidden-mobile">深度学习编译器综述阅读</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
