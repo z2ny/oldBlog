@@ -1,12 +1,10 @@
 ---
-title: GPGPA阅读
+title: GPGPA
 date: 2023-09-14 19:46:53
 categories:
 - work
 tags:
-- GPGPA
-- 论文笔记
-- TBC
+- 论文阅读
 ---
 
 # General-Purpose Graphics Processor Architectures
