@@ -16,25 +16,25 @@
   <meta name="author" content="Zhang Yix">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pro Git Book">
+    <meta name="description" content="基础 内存分区  代码区：函数体的二进制代码 全局区：全局变量、静态变量、常量 栈区：函数调用、局部变量 堆区：程序员动态分配内存，如new和delete  枚举 enum enum_name&amp;#123;a,b,c..&amp;#125; var_name; 枚举标识符可赋值，默认从0开始+1 const 常类型的变量或对象的值无法被更新 修饰变量 必须赋初始值，且赋值之后无法修改 与#define相比">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git cheat sheet">
-<meta property="og:url" content="http://example.com/2023/12/31/Git-cheat-sheet/index.html">
+<meta property="og:title" content="C++ 杂记">
+<meta property="og:url" content="http://example.com/2024/03/11/C-%E6%9D%82%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
-<meta property="og:description" content="Pro Git Book">
+<meta property="og:description" content="基础 内存分区  代码区：函数体的二进制代码 全局区：全局变量、静态变量、常量 栈区：函数调用、局部变量 堆区：程序员动态分配内存，如new和delete  枚举 enum enum_name&amp;#123;a,b,c..&amp;#125; var_name; 枚举标识符可赋值，默认从0开始+1 const 常类型的变量或对象的值无法被更新 修饰变量 必须赋初始值，且赋值之后无法修改 与#define相比">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-31T15:32:59.000Z">
-<meta property="article:modified_time" content="2024-04-01T07:51:49.688Z">
+<meta property="article:published_time" content="2024-03-11T15:28:51.000Z">
+<meta property="article:modified_time" content="2024-04-01T07:51:49.684Z">
 <meta property="article:author" content="Zhang Yix">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="cheat sheet">
+<meta property="article:tag" content="interview">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Git cheat sheet - Zhyx&#39;s Blog</title>
+  <title>C++ 杂记 - Zhyx&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Git cheat sheet"></span>
+            <span id="subtitle" data-typed-text="C++ 杂记"></span>
           
         </div>
 
@@ -201,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-31 15:32" pubdate>
-          2023年12月31日 下午
+        <time datetime="2024-03-11 15:28" pubdate>
+          2024年3月11日 下午
         </time>
       </span>
     
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.9k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          17 分钟
+          25 分钟
         
       </span>
     
@@ -269,7 +269,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Git cheat sheet</h1>
+            <h1 id="seo-header">C++ 杂记</h1>
             
               <p class="note note-info">
                 
@@ -282,68 +282,108 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git Book</a></p>
-<span id="more"></span>
-<h2 id="起步">起步</h2>
-<h3 id="Git特色">Git特色</h3>
-<p><strong>直接记录快照，而非差异比较</strong><br>
-与其他版本控制系统基于差异的版本控制不同，Git直接记录文件快照，每次提交或保存都会基于当前的全部文件创建一个快照并保存这个快照的索引。为了高效，如果文件没有变化，Git不会再次保存，而是只保留一个链接指向之前存储的文件。</p>
-<p><strong>近乎所有操作都在本地执行</strong></p>
-<p><strong>保证完整性</strong><br>
-Git中所有数据在存储前都会计算校验和（SHA-1），并以校验和的哈希值作为引用和索引。</p>
-<p><strong>只添加数据</strong><br>
-几乎所有操作都只是添加，几乎没有导致文件不可恢复的操作。</p>
-<p><strong>三种状态</strong></p>
-<ul>
-<li>modified：已修改，文件在工作区被修改，但还未保存到数据库中</li>
-<li>staged：已暂存，修改的文件已经被做了标记，将被包含在下次提交中</li>
-<li>commited：已提交，已经安全的保存在本地数据库中</li>
-</ul>
-<h3 id="运行前配置-git-config">运行前配置 git config</h3>
-<p>配置文件优先级由低到高</p>
-<ul>
-<li>–system:针对该系统上所有用户的所有仓库的通用配置，一般在Git安装目录</li>
-<li>–global:当前用户的所有仓库，一般在用户目录</li>
-<li>–local:当前仓库，一般在当前仓库目录</li>
-</ul>
+                <span id="more"></span>
+<h2 id="基础">基础</h2>
+<h3 id="内存分区">内存分区</h3>
+<ol>
+<li>代码区：函数体的二进制代码</li>
+<li>全局区：全局变量、静态变量、常量</li>
+<li>栈区：函数调用、局部变量</li>
+<li>堆区：程序员动态分配内存，如new和delete</li>
+</ol>
+<h3 id="枚举">枚举</h3>
+<p><code>enum enum_name&#123;a,b,c..&#125; var_name;</code><br>
+枚举标识符可赋值，默认从0开始+1</p>
+<h3 id="const">const</h3>
+<p>常类型的变量或对象的值无法被更新</p>
+<h4 id="修饰变量">修饰变量</h4>
+<p>必须赋初始值，且赋值之后无法修改</p>
+<p>与#define相比，const定义的常量有数据类型，编译器可以进行类型安全检查，而#define只是单纯的字符串替换</p>
+<p>可以防止修改，提高代码健壮性；同时节省空间</p>
+<p>const变量默认为文件作用域，如果想在其他文件中使用，需要加extern</p>
+<h4 id="修饰指针">修饰指针</h4>
+<p><code>int const *p;</code> 或 <code>const int *p;</code>: const在*左边，无法通过指针修改这个变量的值<strong>指向常量的指针</strong></p>
 <blockquote>
-<p>git config --global <a target="_blank" rel="noopener" href="http://user.name">user.name</a> “John Doe”<br>
-git config --global user.email <a href="mailto:johndoe@example.com">johndoe@example.com</a><br>
-git config --list  # 可能会有重复，因为Git会依次读取系统、全局、当前仓库的config，后面的会覆盖前面的同名配置</p>
+<p>无法通过这个指针修改，但仍然可以通过变量名、引用，或者其他指针修改</p>
 </blockquote>
-<h2 id="Cheat-Sheet">Cheat Sheet</h2>
-<h3 id="Remote">Remote</h3>
-<p>查看所有分支：<code>branch</code> -r远程，-a所有，-v附带详细信息</p>
-<p>将本地的分支推送至远程仓库：<code>push &lt;remote&gt; &lt;local_branch&gt;:&lt;remote_branch&gt;</code></p>
-<p>删除某远程分支：<code>push &lt;remote&gt; --delete &lt;branch_name&gt;</code></p>
-<h3 id="Local">Local</h3>
-<p>查看提交记录：<code>log</code> --pretty=oneline指定以一行的形式显示</p>
-<p>比较差异：<code>diff &lt;hash1&gt; &lt;hash2&gt;</code></p>
-<p>增删分支：<code>branch &lt;branch_name&gt;</code> -d删除 -t追踪远程分支</p>
-<p>获取远程仓库数据：<code>fetch</code> 从远程仓库下载数据，但不会自动合并，后续需要merge或pull</p>
-<p>撤销提交：<code>reset</code> --soft仅仅撤销提交，–mixed撤销提交并取消暂存区，–hard撤销提交并取消暂存区和工作区 HEAD~n表示前n个版本</p>
-<h3 id="Index-Stage">Index/Stage</h3>
-<p>提交到本地仓库：<code>commit</code> -a自动将所有已跟踪文件暂存起来并提交，相当于先执行add -u ，-m指定提交信息，–amend修改最后一次提交</p>
-<p>比较当前index与某次提交的差异：<code>diff --cached &lt;hash&gt;</code></p>
-<h3 id="Workspace">Workspace</h3>
-<p>检查状态：<code>status</code> -s简洁</p>
-<p>克隆远程仓库：<code>clone</code> 创建一个全新副本</p>
-<p>从远程仓库拉取最新文件：<code>pull</code> 相当于fetch+merge</p>
-<p>添加文件至Index：<code>add</code> -u更新已跟踪文件（即不包括新增文件），-A更新所有改动（包括新增文件），.当前目录所有文件</p>
-<p>签出某个分支或提交或文件：<code>checkout</code> -b创建并签出新分支。如果签出的是一个特定提交，会处于&quot;detached HEAD&quot;状态，可以随意修改并提交，但这个提交不属于任何分支（但仍然存在，只要记得提交的哈希值），可以通过创建分支来保存</p>
-<p>将某一分支的所有更改合并到当前分支：<code>merge &lt;branch_name&gt;</code>，Git默认使用Fast forward模式，即如果被合并分支是当前分支的直接后继，Git会将当前分支指向被合并分支的最新提交并不产生新提交；这时用–no-ff禁用Fast forward模式，仍然会产生一次新提交。如果并非直接前后继关系，Git会创建一个新的合并提交，该提交有两个父提交，即两个分支的最新提交。</p>
-<p>变基：<code>rebase</code> 一般不用。</p>
-<p>将其他分支的某个提交应用到当前分支：<code>cherry-pick &lt;hash&gt;</code>，会产生一个新的提交，提交内容（记得git是保存修改后文件的快照）与原提交相同。</p>
-<p>回滚某提交：<code>revert &lt;hash&gt;</code>，会产生一个新的提交，提交内容与原提交相反。</p>
-<p>清理未被跟踪的文件：<code>clean</code> -n列出将要被清理的文件，-f清理文件，-d清理文件夹，-x清理忽略的文件，-X清理忽略的文件夹</p>
-<p>临时保存工作区和暂存区，将这些改动进栈：<code>stash</code> -u保存未被跟踪的文件，-a保存所有改动，-p交互式保存，-k不保存暂存区的改动</p>
-<p>恢复工作区和暂存区：<code>stash pop</code> 恢复并删除栈顶的stash，<code>stash apply</code> 恢复但不删除栈顶的stash</p>
-<h3 id="Stash">Stash</h3>
-<p>显示栈：<code>stash list</code></p>
-<p>入栈：<code>stash push</code> 默认入栈顶</p>
-<p>显示栈的细节：<code>stash show</code> 默认栈顶</p>
-<p>删除当个栈：<code>stash drop</code> 默认栈顶</p>
-<p>清空整个stash：<code>stash clear</code></p>
+<p><code>int * const p</code>: const在*右边，指针指向的地址不能被修改 <strong>常指针</strong></p>
+<blockquote>
+<p>定义时必须初始化，常指针无法修改指向的地址，即使两个变量指向同一块地址</p>
+</blockquote>
+<h4 id="修饰引用">修饰引用</h4>
+<p>同理，不能通过引用修改值，但仍可以通过变量名修改</p>
+<h4 id="修饰函数返回类型">修饰函数返回类型</h4>
+<p>函数返回值时，加const无意义，因为本身返回的值也会赋给其他变量，该值就可以通过其他变量修改</p>
+<p>返回指针时同上</p>
+<p><strong>修饰函数形参同上</strong></p>
+<h4 id="修饰类、对象、成员函数">修饰类、对象、成员函数</h4>
+<p>const对象只能访问const成员函数，const成员函数可以访问所有成员变量和其他const成员函数，但无法修改</p>
+<h3 id="static">static</h3>
+<p>为什么引入static：函数内部定义的变量，程序执行到时才分配内存到栈区，函数运行结束即释放。但有时候想要保存该变量的值到下一次调用，同时又不想改变该变量的访问范围</p>
+<h4 id="修饰成员变量">修饰成员变量</h4>
+<p>在程序启动时就被创建，不依赖类的对象，可以使用类名来直接调用</p>
+<h4 id="修饰成员函数">修饰成员函数</h4>
+<p>同样不依赖于类的对象，无法使用this指针，只能访问静态成员变量/函数</p>
+<h3 id="struct和class">struct和class</h3>
+<p>区别：struct的默认访问和继承权限是public，而class的默认访问和继承权限是private</p>
+<h2 id="面向对象">面向对象</h2>
+<h3 id="构造函数">构造函数</h3>
+<p>编译器默认为每个对象提供空的构造函数和析构函数，以提供对象初始化和清理功能，也可以自定义</p>
+<p><code>class_name()&#123;&#125;</code> 可以有参数，可以重载，程序调用对象前自动执行</p>
+<p>编译器默认会给一个类添加三个函数：默认构造函数、拷贝构造函数、析构函数</p>
+<p>如果定义了有参构造，编译器不再提供默认构造，需要手动定义；同理，如果要自定义拷贝构造函数，编译器也不会再自动生成其他构造函数</p>
+<h3 id="析构函数">析构函数</h3>
+<p><code>~class_name()&#123;&#125;</code> 不能有参数，无返回值，程序结束时自动调用</p>
+<h3 id="深拷贝和浅拷贝">深拷贝和浅拷贝</h3>
+<p>浅拷贝：只是简单的拷贝，指针指向的地址相同，两个对象指向同一块内存，释放一个对象的内存会导致另一个对象的内存无效</p>
+<p>深拷贝：重新在堆区分配一块内存，将原对象的值拷贝到新的内存中，两个对象指向不同的内存</p>
+<p>对于拷贝构造来说，如果类中有属性是在堆区开辟的（比如说被拷贝的对象中有指针，指针指向堆区new出来的一块内存），那么在拷贝时也需要重新在堆区开辟内存，并将原对象中的值拷贝到新的内存中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">Person</span>() &#123;&#125;<br>	<br>    <span class="hljs-built_in">Person</span>(<span class="hljs-type">int</span> age ,<span class="hljs-type">int</span> height) &#123;<br>		m_age = age;<br>		m_height = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(height);<br>	&#125;<br><br>	<span class="hljs-built_in">Person</span>(<span class="hljs-type">const</span> Person&amp; p) &#123;<br>		<span class="hljs-comment">//如果不利用深拷贝在堆区创建新内存，会导致浅拷贝带来的重复释放堆区问题</span><br>		m_age = p.m_age;<br>		m_height = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(*p.m_height);<br>	&#125;<br><br>	~<span class="hljs-built_in">Person</span>() &#123;<br>		<span class="hljs-keyword">if</span> (m_height != <span class="hljs-literal">NULL</span>)&#123;<span class="hljs-keyword">delete</span> m_height;&#125;<br>	&#125;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-type">int</span> m_age;<br>	<span class="hljs-type">int</span>* m_height;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>如上，m_height本身是指针，构造时在堆区创建一块内存并指向该内存。如果在拷贝时仅仅做m_height = p.m_height，会导致两个对象指向同一块内存，释放一个对象的内存会导致另一个对象的内存无效</p>
+<h3 id="构造与析构顺序">构造与析构顺序</h3>
+<h4 id="继承">继承</h4>
+<p>基类构造-&gt;派生类构造-&gt;派生类析构-&gt;基类析构</p>
+<h4 id="成员对象">成员对象</h4>
+<p>成员对象构造-&gt;外层对象构造-&gt;外层对象析构-&gt;成员对象析构</p>
+<h3 id="this指针">this指针</h3>
+<p>类的每个成员函数只会诞生一份函数实例放入代码区，多个同类型的对象会共用这份代码<br>
+在调用成员函数时，C++内置this指针，用于指向调用该函数的对象</p>
+<h3 id="友元friend">友元friend</h3>
+<h4 id="修饰全局函数">修饰全局函数</h4>
+<p>将全局函数在类中声明为友元，就可以访问该类的私有成员</p>
+<h4 id="修饰类">修饰类</h4>
+<p>将类A在类B中声明为友元，A就可以访问B的私有成员</p>
+<h4 id="修饰成员函数-2">修饰成员函数</h4>
+<p>将类A的成员函数在类B中声明为友元，A的成员函数就可以访问B的私有成员</p>
+<h3 id="继承-2">继承</h3>
+<p>无论怎么继承，都无法访问从父类继承的私有成员。<br>
+私有成员还是会继承，但只是被隐藏了</p>
+<h4 id="公共继承-class-A-public-B">公共继承 class A : public B</h4>
+<p>父类中的公共和保护成员类型不变</p>
+<h4 id="保护继承-class-A-protected-B">保护继承 class A : protected B</h4>
+<p>父类中的公共和保护成员变为保护成员</p>
+<h4 id="私有继承-class-A-private-B">私有继承 class A : private B</h4>
+<p>父类中的公共和保护成员变为私有成员</p>
+<h3 id="多态">多态</h3>
+<p>如果有多个派生类且需要给他们分别实现一个同名的行为，比如说一个动物类，有狗、猫、猪等派生类，都有一个叫的行为，但是叫的实现不同，这时候就可以使用多态</p>
+<p>多态的必须条件：父类指针指向子类对象，其实就是该指针将这个子类对象当作一个其父类，因此可以调用父类中的虚函数，同时由于指向的是子类对象，所以调用的是子类中重写的函数</p>
+<h4 id="虚函数-virtual">虚函数 virtual</h4>
+<p>在基类中，将需要多态的函数以virtual关键字声明，并在派生类中重写该函数。此后，若是<strong>父类指针指向子类对象</strong>时，并使用该指针调用多态函数，就会调用子类的函数</p>
+<p>virtual的意思类似“这个函数可能会被子类重写”，告诉编译器先不急着确定函数地址，编译器会根据指针指向的对象来动态调用对应的函数</p>
+<h4 id="纯虚函数">纯虚函数</h4>
+<p>在需要使用多态的场景中，往往基类中的虚函数只是为了让派生类重写，并无实际意义，此时可将虚函数改为纯虚函数</p>
+<p><code>virtual void func() = 0</code>，纯虚函数没有函数体，只是一个接口，派生类必须重写该函数</p>
+<p>有纯虚函数以为着这个类仅仅用来声明派生类的接口，称为抽象类，无法被实例化</p>
+<h4 id="虚析构">虚析构</h4>
+<p>在父类指针指向子类对象时，如果释放该指针，只会调用父类的析构函数。这是因为在编译时，编译器只知道指针的<br>
+类型是父类，而不知道指针指向的是子类对象。</p>
+<p>因此，如果想要调用子类的析构函数，需要将父类的析构函数声明为虚析构<code>virtual ~类名()&#123;&#125;</code></p>
+<p>同理纯虚析构<code>virtual ~类名() = 0</code> 和纯虚函数一样，纯虚析构意味着该类是抽象类，除此之外和虚析构没啥区别</p>
+<h3 id="模板-template-class-typename-T">模板 template&lt;class/typename T&gt;</h3>
+<p>在下面的函数或者类中定义一种通用数据类型，在调用时可以指定具体的数据类型，提高代码复用</p>
+<h3 id="STL：标准模板库">STL：标准模板库</h3>
+<p>三大组件：容器、算法、迭代器<br>
+容器和算法之间通过迭代器无缝衔接</p>
 
                 
               </div>
@@ -377,9 +417,9 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/" class="print-no-link">#git</a>
+        <a href="/tags/interview/" class="print-no-link">#interview</a>
       
-        <a href="/tags/cheat-sheet/" class="print-no-link">#cheat sheet</a>
+        <a href="/tags/C/" class="print-no-link">#C++</a>
       
     </div>
   
@@ -391,8 +431,8 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Git cheat sheet</div>
-      <div>http://example.com/2023/12/31/Git-cheat-sheet/</div>
+      <div>C++ 杂记</div>
+      <div>http://example.com/2024/03/11/C-杂记/</div>
     </div>
     <div class="license-meta">
       
@@ -404,7 +444,7 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月31日</div>
+          <div>2024年3月11日</div>
         </div>
       
       
@@ -453,18 +493,12 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/29/linux-&amp;&amp;-docker%E6%9D%82%E8%AE%B0/" title="linux &amp;&amp; docker杂记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">linux &amp;&amp; docker杂记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/TVM%E6%BA%90%E7%A0%81-00/" title="TVM源码-00">
-                        <span class="hidden-mobile">TVM源码-00</span>
+                      <a href="/2024/02/29/linux-&amp;&amp;-docker%E6%9D%82%E8%AE%B0/" title="linux &amp;&amp; docker杂记">
+                        <span class="hidden-mobile">linux &amp;&amp; docker杂记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
