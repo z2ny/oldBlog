@@ -12,8 +12,10 @@ tags:
 <!-- more -->
 
 参考：
-- [《动手学深度学习》](https://zh.d2l.ai/index.html)
-- [跟李沐学AI](https://space.bilibili.com/1567748478/channel/seriesdetail?sid=358497&ctype=0)
+
+[《动手学深度学习》](https://zh.d2l.ai/index.html)
+
+[Bilibili_跟李沐学AI](https://space.bilibili.com/1567748478/channel/seriesdetail?sid=358497&ctype=0)
 
 ![全书结构](image.png)
 
