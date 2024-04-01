@@ -1,5 +1,5 @@
 ---
-title: 深度学习编译器综述阅读
+title: The Deep Learning Compiler: A Comprehensive Survey
 date: 2023-10-31 11:39:13
 categories:
 - work

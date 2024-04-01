@@ -1,10 +1,11 @@
 ---
-title: GPGPA
+title: General-Purpose Graphics Processor Architectures
 date: 2023-09-14 19:46:53
 categories:
 - work
 tags:
 - 论文阅读
+- GPGPA
 ---
 
 # General-Purpose Graphics Processor Architectures
