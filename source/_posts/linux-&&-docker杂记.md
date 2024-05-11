@@ -2,7 +2,10 @@
 title: linux && docker杂记
 date: 2024-02-29 02:51:55
 categories:
+- work
 tags:
+- linux
+- docker
 ---
 
  <!--more-->

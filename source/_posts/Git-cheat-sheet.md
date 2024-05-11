@@ -5,7 +5,6 @@ categories:
 - work
 tags:
 - git
-- cheat sheet
 ---
 
 [Pro Git Book](https://git-scm.com/book/zh/v2)
