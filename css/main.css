@@ -782,7 +782,7 @@ html {
 html,
 body {
   height: 100%;
-  font-family: Cascadia Code,微软雅黑;
+  font-family: Fira Code Medium,微软雅黑;
   overflow-wrap: break-word;
 }
 body {
@@ -1424,7 +1424,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: Cascadia Code,微软雅黑;
+  font-family: Fira Code Medium,微软雅黑;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }
