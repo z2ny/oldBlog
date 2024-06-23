@@ -793,7 +793,7 @@ valine:
   pageSize: 10
   lang: "zh-CN"
   highlight: false
-  recordIP: true
+  recordIP: false
   serverURLs: ""
   emojiCDN:
   emojiMaps:
