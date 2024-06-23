@@ -24,7 +24,7 @@
 <meta property="og:description" content="花了两三天时间搭了一个用于笔记的个人博客，部署在了 github 上，这里记录一下部署的过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-13T20:39:20.000Z">
-<meta property="article:modified_time" content="2024-06-06T14:07:53.361Z">
+<meta property="article:modified_time" content="2024-06-23T16:49:55.258Z">
 <meta property="article:author" content="Zhang Yix">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="记录">
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.2k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          10 分钟
+          11 分钟
         
       </span>
     
@@ -274,7 +274,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年6月6日 下午
+                    本文最后更新于：2024年6月23日 下午
                   
                 
               </p>
@@ -301,8 +301,11 @@
 <p>源代码放到 <a target="_blank" rel="noopener" href="http://user.github.io">user.github.io</a> 仓库中后（仓库名只能设为这个，否则生成网页会变成 <a target="_blank" rel="noopener" href="http://user.github.io">user.github.io</a> 的子页），CNAME 放在 source 中，然后在 .github/workflws 中定义 gh actions 的详细配置</p>
 <p>采用的hexo官方文档中的配置，最后一步使用 peaceiris/actions-gh-pages@v3 咱也不太懂，参考知乎上的其他配置，大概相当于安装 hexo 完了在将 main 分支的源码 deploy 到 gh-pages 分支上，之后在设置时选择这个分支即可</p>
 <p>主要问题在于每次 push 都要重新 build，推测后期内容增多后网站更新会十分不及时，可能需要看看别人的追加更新是咋弄的</p>
-<h3 id="CDN加速、">CDN加速、</h3>
+<h3 id="CDN加速">CDN加速</h3>
 <p>更换 Cloudflare 的 DNS，注意 SSL/TLS 加密模式设为严格</p>
+<h3 id="增加评论区">增加评论区</h3>
+<p>一直拖着没弄（本来也没指望有人会评论hhh）朋友推荐选择valine，基本上属于开箱即用了<br>
+参考： <a target="_blank" rel="noopener" href="https://valine.js.org/quickstart.html">https://valine.js.org/quickstart.html</a></p>
 <h2 id="Summary">Summary</h2>
 <p>属于我的第0篇博客，大概，能在网站上正常显示，证明基本功能已经ok</p>
 <h2 id="TODO">TODO</h2>
@@ -372,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年6月6日</div>
+          <div>2024年6月23日</div>
         </div>
       
       
@@ -431,6 +434,37 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"8xk2t3uTLFeKLsI2P2znQa5G-gzGzoHsz","appKey":"ECVg3w6koW7bZ0d5L1S0H1pH","path":"window.location.pathname","placeholder":"随便讲两句...","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
