@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zhang Yix">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="参考 某课程笔记 课程翻译 操作系统接口 进程和内存  当我们在shell中运行某个指令时，shell通常会创建一个新的进程来执行，即fork一个子进程，然后在子进程中调用exec来执行指令  fork调用 进程可以使用fork复制创建一个新进程，其内存内容与父进程完全一致（严格来说，父进程只是C程序被编译之后存在内存中的指令，因此是可以被100%复制的） fork函数在父进程中返回子进程的PI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT 6.S081 复习">
+<meta property="og:url" content="http://example.com/2024/06/25/MIT-6-S081-%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Zhyx&#39;s Blog">
+<meta property="og:description" content="参考 某课程笔记 课程翻译 操作系统接口 进程和内存  当我们在shell中运行某个指令时，shell通常会创建一个新的进程来执行，即fork一个子进程，然后在子进程中调用exec来执行指令  fork调用 进程可以使用fork复制创建一个新进程，其内存内容与父进程完全一致（严格来说，父进程只是C程序被编译之后存在内存中的指令，因此是可以被100%复制的） fork函数在父进程中返回子进程的PI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/06/25/MIT-6-S081-%E5%A4%8D%E4%B9%A0/image1.png">
+<meta property="og:image" content="http://example.com/2024/06/25/MIT-6-S081-%E5%A4%8D%E4%B9%A0/image2.png">
+<meta property="article:published_time" content="2024-06-25T19:40:55.000Z">
+<meta property="article:modified_time" content="2024-07-07T16:20:01.699Z">
+<meta property="article:author" content="Zhang Yix">
+<meta property="article:tag" content="interview">
+<meta property="article:tag" content="课程笔记">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/06/25/MIT-6-S081-%E5%A4%8D%E4%B9%A0/image1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>MIT 6.S081 复习 - Zhyx&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zhyx&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/index.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MIT 6.S081 复习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-25 19:40" pubdate>
+          2024年6月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MIT 6.S081 复习</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年7月7日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<p>参考<br>
+<a target="_blank" rel="noopener" href="http://xv6.dgs.zone/">某课程笔记</a><br>
+<a target="_blank" rel="noopener" href="https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081">课程翻译</a></p>
+<h2 id="操作系统接口">操作系统接口</h2>
+<h3 id="进程和内存">进程和内存</h3>
+<blockquote>
+<p>当我们在shell中运行某个指令时，shell通常会创建一个新的进程来执行，即fork一个子进程，然后在子进程中调用<code>exec</code>来执行指令</p>
+</blockquote>
+<h4 id="fork调用">fork调用</h4>
+<p>进程可以使用<code>fork</code>复制创建一个新进程，其内存内容与父进程完全一致（严格来说，父进程只是C程序被编译之后存在内存中的指令，因此是可以被100%复制的）<br>
+fork函数在父进程中返回子进程的PID，在子进程中返回0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> pid = fork();<br><span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent: child=%d\n&quot;</span>, pid);<br>    <span class="hljs-comment">// 等待直到任一子进程结束，返回pid</span><br>    pid = wait((<span class="hljs-type">int</span> *) <span class="hljs-number">0</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child %d is done\n&quot;</span>, pid);<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child: exiting\n&quot;</span>);<br>    <span class="hljs-comment">// 退出，并返回状态码0 （一般0表正常，1表异常）</span><br>    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fork error\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在fork函数执行时，父子进程的内存内容完全相同，但由于身份的不同后续可能执行不同的代码</p>
+<h4 id="exec调用">exec调用</h4>
+<p>使用<code>exec</code>从文件系统中找到指定的可执行文件，将当前进程的内存内容替换为新的可执行文件的内容<br>
+<code>exec</code>通常不会返回，毕竟<code>exec</code>会完全替换当前进程的内存，除非执行错误（比如找不到该文件）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span>* argv[<span class="hljs-number">3</span>];<br>argv[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;echo&quot;</span>;<br>argv[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;hello&quot;</span>;<br>argv[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-comment">// exec认为第一个参数是程序名并忽略，所以此处的输出只有hello</span><br><span class="hljs-comment">// argv[2] = 0 标志了数组的结尾。值为0的指针对C来说表示结束</span><br>exec(<span class="hljs-string">&quot;/bin/echo&quot;</span>, argv);<br><span class="hljs-comment">// 因此这里可以直接print error，因为exec成功的话就不会再执行后面代码</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;exec error\n&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="I-O和文件描述符">I/O和文件描述符</h3>
+<p>文件描述符（file descriptor）是一个小整数，用于表示进程可以读或写的对象，如文件、目录、设备、管道等。这种方式将文件、管道、设备之间的差异抽象出来，使他们看起来都像字节流</p>
+<p>xv6内核使用文件描述符作为每个进程表的索引。每个进程都有一个从0开始的文件描述符表，每个表项指向一个“文件”，按照惯例，进程的文件描述符0，1，2分别指向标准输入、标准输出和标准错误</p>
+<p>下面是一个进程使用系统调用<code>read</code>和<code>write</code>将数据从标准输入复制到标准输出的过程，如果失败，将错误信息写到标准错误：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> buf[<span class="hljs-number">512</span>];<br><span class="hljs-type">int</span> n;<br><span class="hljs-keyword">for</span> (;;) &#123;<br>    <span class="hljs-comment">// read 从fd0（标准输入）读取数据到buf中，并返回读取的字节数</span><br>    n = read(<span class="hljs-number">0</span>, buf, <span class="hljs-keyword">sizeof</span> buf);<br>    <span class="hljs-comment">// read从fd0中读数据，每个文件会自带一个文件偏移量，记录上次读取的位置，并从该位置往下读</span><br>    <span class="hljs-comment">// 也就是说，如果标准输入只给了512字节，那从第二个循环开始，n将为0，代表读取完成</span><br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 在fd2（标准错误）中输出错误信息</span><br>        <span class="hljs-built_in">fprintf</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;read error\n&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-comment">// write 将buf中长度为n的数据写入文fd1（标准输出），并返回写入的字节数</span><br>    <span class="hljs-keyword">if</span> (write(<span class="hljs-number">1</span>, buf, n) != n) &#123;<br>        <span class="hljs-built_in">fprintf</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;write error\n&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这其实也是一个简单的cat程序，从标准输入读取数据，然后写到标准输出</p>
+<p>系统调用<code>close</code>会释放一个fd，使其可被重用。在新分配fd时，总会分配当前进程中标号最小的未使用描述符</p>
+<p><code>fork</code>恢复至父进程的文件描述符表和内存，因此父子进程在开始拥有完全相同的打开文件。下面时利用fork进行I/O重定向的例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span>* argv[<span class="hljs-number">2</span>];<br>argv[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;cat&quot;</span>;<br>argv[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">if</span> (fork() == <span class="hljs-number">0</span>) &#123;<br>    close(<span class="hljs-number">0</span>);<br>    <span class="hljs-comment">// 子进程关闭fd0之后，open保证新打开的input.txt分配最小的可用fd，也就是0</span><br>    <span class="hljs-comment">// 即子进程将input.txt重定向为其标准输入</span><br>    open(<span class="hljs-string">&quot;input.txt&quot;</span>, O_RDONLY);<br>    <span class="hljs-comment">// cat会读取fd0的内容并输出到fd1，即读input.txt的内容并输出到标准输出</span><br>    exec(<span class="hljs-string">&quot;cat&quot;</span>, argv);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>需要注意的是，<code>fork</code>虽然会复制文件描述符表，并且这个表在之后不会共享，但是每个基础文件偏移量是共享的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (fork() == <span class="hljs-number">0</span>) &#123;<br>    write(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;hello &quot;</span>, <span class="hljs-number">6</span>);<br>    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    wait(<span class="hljs-number">0</span>);<br>    write(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;world\n&quot;</span>, <span class="hljs-number">6</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这段代码会输出<code>hello world</code>，因为子进程和父进程共享文件偏移量，所以子进程写完<code>hello</code>之后，标准输出（视为基础文件）的文件偏移量也会被移动到<code>hello</code>之后，所以父进程接着写<code>world</code>，而不是从头开始写</p>
+<blockquote>
+<p>文件偏移量与文件描述符绑定，而不是文件本身</p>
+</blockquote>
+<p><code>dup</code> 系统调用会复制一个现有的文件描述符，返回一个新的文件描述符，指向同一个文件。和<code>fork</code>一样，<code>dup</code>出来的fd也和原来的fd共享偏移量（可以理解成引用）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">fd = dup(<span class="hljs-number">1</span>);<br>write(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;hello &quot;</span>, <span class="hljs-number">6</span>);<br>write(fd, <span class="hljs-string">&quot;world\n&quot;</span>, <span class="hljs-number">6</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="管道">管道</h3>
+<p>管道是一对用于读和写的缓冲区，用于进程间通信。</p>
+<p>如果没有可用数据，对于管道读操作会进入等待，直到有新数据写入，或者所有指向管道写的fd都被关闭</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> p[<span class="hljs-number">2</span>];<br><span class="hljs-type">char</span> *argv[<span class="hljs-number">2</span>];<br>argv[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;wc&quot;</span>;<br>argv[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-comment">// 创建管道，p[0]记录从管道读fd，p[1]记录从管道写fd</span><br>pipe(p);<br><span class="hljs-keyword">if</span> (fork() == <span class="hljs-number">0</span>) &#123;<br>    close(<span class="hljs-number">0</span>);<br>    dup(p[<span class="hljs-number">0</span>]);<br>    close(p[<span class="hljs-number">0</span>]);<br>    close(p[<span class="hljs-number">1</span>]);<br>    <span class="hljs-comment">// 子进程将fd0指向管道读取端，并执行wc</span><br>    exec(<span class="hljs-string">&quot;/bin/wc&quot;</span>, argv);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    close(p[<span class="hljs-number">0</span>]);<br>    <span class="hljs-comment">// 父进程将数据写入管道写入端</span><br>    write(p[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;hello world\n&quot;</span>, <span class="hljs-number">12</span>);<br>    <span class="hljs-comment">// 这里关闭管道写入端，否则子进程的wc会一直等待</span><br>    close(p[<span class="hljs-number">1</span>]);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="操作系统架构——xv6">操作系统架构——xv6</h2>
+<p>操作系统必须满足的是三个要求：多路复用、隔离、交互</p>
+<h3 id="抽象系统资源">抽象系统资源</h3>
+<p>操作系统需要协调多个应用程序的运行，比起每个应用程序直接操作硬件的同时还需要互相协调硬件使用时间，操作系统提供了一种抽象的硬件接口，将资源抽象为服务，实现不同应用之间的隔离</p>
+<h3 id="系统权限分层">系统权限分层</h3>
+<p>RISC-V为CPU提供了三种CPU执行指令的模式：机器模式、管理模式（管态）、用户模式（目态）</p>
+<p>CPU在机器模式下启动，执行少量代码完成初始化配置，然后切换管态，将控制权交给操作系统。操作系统在管态下运行，可以访问所有硬件资源，包括内存、I/O设备、时钟等。用户程序在目态下运行，只能访问有限的硬件资源，不能直接访问内存、I/O设备等，必须通过系统调用来访问</p>
+<h3 id="内核组织">内核组织</h3>
+<p>一个关键问题是判断操作系统的哪些部分需要在管态运行，哪些部分需要在目态运行。</p>
+<p>宏内核：整个操作系统都驻留在内核，所有系统调用的实现都以管态运行<br>
+缺点在于，OS不同部分的接口通常很复杂，内核难以维护，同时出错可能性较大</p>
+<p>微内核：只有少量的核心功能驻留在内核，其他功能以用户态进程的形式运行。<br>
+比如说，微内核的文件系统作为用户级进程运行（被称为server），进程通过消息传递内核转发来调用文件系统服务。这样做的好处是，内核的代码量减少，内核更加稳定，同时用户态进程的代码可以更容易地被替换、升级，但坏处是一次交互可能需要多次目态/管态的跳转，影响性能；同时，将os的功能隔离开将更难实现内存共享</p>
+<p>和大多数类Unix一样，xv6使用宏内核设计，尽管他的内核比很多微内核还要小</p>
+<h3 id="xv6进程概述">xv6进程概述</h3>
+<p>xv6以进程为单位做隔离。这种抽象可以防止进程破坏或监视其他进程，或者破坏内核。</p>
+<p>xv6使用由硬件实现的页表来为每个进程提供自己的地址空间，这样每个进程都有自己的专用空间。虚拟地址将每个进程所使用的空间与其他进程隔离开来。</p>
+<h2 id="页表">页表</h2>
+<p>页表是OS为每个进程提供私有地址空间和内存的机制。</p>
+<h3 id="分页硬件">分页硬件</h3>
+<p>将虚拟地址映射到物理地址的硬件。每个进程都有一个自己的页表，并存储在物理内存中，这个页表的物理地址由内核保存。</p>
+<p>当某个进程上CPU后，某个名为SATP的寄存器会装入该进程页表的物理地址。随后内存管理单元（MMU）根据地址找到该进程的页表，开始该进程虚拟内存到物理内存的映射</p>
+<p>xv6基于Sv39 RISC-V，只是用64位虚拟地址中的低39位。页表硬件利用这39位找到一个56位的物理地址<br>
+<img src="image1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>页表在逻辑上是一个由 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">27</span></span></span></span></span></span></span></span></span></span></span></span> 个页表条目（Page Table Entries）组成的数组，每个页表条目对应一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>12</mn></msup></mrow><annotation encoding="application/x-tex">2^{12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span></span></span></span></span></span></span></span> 大小的页框，每个PTE包含一个44位的物理页号（Physical Page Number）和一些标志位，如可读、可写、可执行等</p>
+<blockquote>
+<p>在上述系统中，虚拟内存空间大小为39位，而物理内存空间大小为56位，但并不是说物理内存空间一定会大于虚拟内存空间</p>
+</blockquote>
+<p>分页硬件利用虚拟地址中的27位索引PTE，找到物理页框号，在结合虚拟地址的低12位偏移量，找到最终的物理地址</p>
+<p>对于多级页表来说，仅仅是将PTE的物理页号替换为下一级页表的逻辑页号，然后再次索引，直到找到最终的物理页号而已，具体的原理和标志位含义等不再赘述</p>
+<h3 id="内核地址空间">内核地址空间</h3>
+<p>xv6为每个进程维护一个页表，用来描述每个进程的用户地址空间，此外，还需要维护一个单独描述内核地址空间的页表</p>
+<p>内核配置其地址空间的布局，以允许自己用虚拟地址访问物理内存和各种硬件资源<br>
+<img src="image2.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>这一部分结构大多由硬件设计者决定，当主板上电之后，主板做的第一件事就是运行存储在0x1000，即boot ROM中的代码，随后会从地址0x8000000000开始运行，启动操作系统。设计者规定，当完成了虚拟到物理地址的映射后，得到的地址如果大于0x8000000000，那么这个地址就是内核地址，走向物理内存；如果小于，就走向不同的I/O设备</p>
+<p>进入系统后，首先需要配置内核使用的虚拟地址空间，也就是左图的地址分布，为了尽可能简单易懂，xv6的内核地址空间大部分与物理地址相等。</p>
+<p>注意上图中有一部分page在虚拟内存的位置很靠后，如kernel stack，此外，两个Kstack后面都跟随了一个未被映射到物理内存的Guard Page。为了防止栈溢出，Guard Page的PTE中，其flags中的valid标志位会保持为空，这样当发生栈溢出时，MMU在访问溢出地址的PTE时会发现其valid位为空，从而触发异常，内核可以处理这个异常，而不是让程序继续执行。这样设置的同时还节省了物理内存</p>
+<p>尽管kernel stack在Kernel data中被重复映射了一次，在实际使用Kstack时还是使用上面的这部分地址，因为由Guard page更加安全</p>
+<p>实验还没看，先笼统回顾一遍吧</p>
+<h2 id="陷阱和系统调用">陷阱和系统调用</h2>
+<p>有三类事件会导致CPU搁置当前普通指令的执行，并将控制权转移给处理该事件的特殊代码：</p>
+<ol>
+<li>系统调用：用户程序执行<code>ecall</code>来要求内核执行某行动时</li>
+<li>异常：指令（用户或内核都可能）做了一些非法的事情</li>
+<li>设备中断：某设备向系统发出某种信号，表明它需要被处理</li>
+</ol>
+<p>这三类被统称为trap，通常情况下，我们希望trap是透明的，正在cpu的代码只需要稍后恢复，而意识不到发生了任何特殊的事情，一般来说，处理顺序为：<br>
+trap强制将cpu控制权转移到内核–&gt;内核保存寄存器和其他状态，以便稍后恢复–&gt;内核执行适当的trap处理程序–&gt;内核之前保存的状态</p>
+<h2 id="中断和设备驱动">中断和设备驱动</h2>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/work/" class="category-chain-item">work</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/interview/" class="print-no-link">#interview</a>
+      
+        <a href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" class="print-no-link">#课程笔记</a>
+      
+        <a href="/tags/OS/" class="print-no-link">#OS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MIT 6.S081 复习</div>
+      <div>http://example.com/2024/06/25/MIT-6-S081-复习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zhang Yix</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/12/2024%E7%A7%8B%E6%8B%9B%E5%87%86%E5%A4%87/" title="2024秋招准备">
+                        <span class="hidden-mobile">2024秋招准备</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"8xk2t3uTLFeKLsI2P2znQa5G-gzGzoHsz","appKey":"ECVg3w6koW7bZ0d5L1S0H1pH","path":"window.location.pathname","placeholder":"随便讲两句...","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/page.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
