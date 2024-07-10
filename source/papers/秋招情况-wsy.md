@@ -361,7 +361,7 @@ private:
     DLinkedNode* tail;
     int size;
     int capacity;
-    
+
 public:
     LRUCache(int _capacity): capacity(_capacity), size(0) {
         head = new DLinkedNode();
@@ -369,7 +369,7 @@ public:
         head->next = tail;
         tail->prev = head;
     }
-    
+
     int get(int key) {
         if (!cache.count(key)) {
             return -1;
@@ -378,7 +378,7 @@ public:
         moveToHead(node);
         return node->value;
     }
-    
+
     void put(int key, int value) {
         if (cache.count(key)) {
             DLinkedNode* node = cache[key];
@@ -392,30 +392,30 @@ public:
             if (size > capacity) {
                 DLinkedNode* removed = removeTail();
                 cache.erase(removed->key);
-                
+
                 delete removed;
                 --size;
             }
         }
     }
-    
+
     void moveToHead(DLinkedNode* node) {
         removeNode(node);
         addToHead(node);
     }
-    
+
     void removeNode(DLinkedNode* node) {
         node->prev->next = node->next;
         node->next->prev = node->prev;
     }
-    
+
     void addToHead(DLinkedNode* node) {
         node->next = head->next;
         node->prev = head;
         head->next->prev = node;
         head->next = node;
     }
-    
+
     DLinkedNode* removeTail() {
         DLinkedNode* node = tail->prev;
         removeNode(node);
@@ -501,10 +501,10 @@ LRUCache* LRUCache::initance() {
 ```c++
 struct Node {
     int cnt, time, key, value;
-    
+
     Node(int _cnt, int _time, int _key, int _value)
         :cnt(_cnt), time(_time), key(_key), value(_value){}
-    
+
     // 我们需要实现一个 Node 类的比较函数
     // 将 cnt（使用频率）作为第一关键字，time（最近一次使用的时间）作为第二关键字
     bool operator < (const Node& tmp) const {
@@ -518,10 +518,10 @@ private:
     int capacity, time;
     unordered_map<int, Node> map;
     set<Node> s;
-    
+
 public:
     LFUCache(int _capacity): capacity(_capacity), time(0) {}
-    
+
     int get(int key) {
         auto it = map.find(key);
         if (it == map.end()) {
@@ -539,7 +539,7 @@ public:
         it->second = node;
         return node.value;
     }
-    
+
     void put(int key, int value) {
         auto it = map.find(key);
         if (it == map.end()) {
@@ -693,7 +693,7 @@ public:
 >
 > 面试官对项目问的不是特别多，但对之江的经历特别感兴趣，详细了解了我与国产GPU公司的沟通过程，他认为这段实习是我比较大的一个亮点
 >
-> 写了个简单的二维数组寻找元素的题，我用暴力解决，正在想进一步优化面试官直接过了 
+> 写了个简单的二维数组寻找元素的题，我用暴力解决，正在想进一步优化面试官直接过了
 >
 > 问了他这边的工作，他们c++部分主要分为两块——搜索引擎与机器学习平台，搜索引擎就是ES那套，但是c++版的，机器学习平台以前他们使用阿里云的Paas平台，现在在追求自建，可能刚启动没有多久，各方面缺口都挺大。机器学习平台分为两块，一块是做阿里那套电商预估，一块是做百度那套社区体系，这是得物的特点——电商+社区。不过他们平台这边对传统深度学习算法需求更大一些，对CUDA需求小一些，可能还没到需要考虑性能的程度。
 
@@ -1393,7 +1393,7 @@ public:
 > - 培训完后汇总排名，再考核分配部门（次年1月）
 > - 双休，一天8小时，适当加班，可以调休或者支付加班费（没有提具体多少，肯定不高）
 > - 签约要验本科学历学位，四六级证书，没确定是线上签还是线下签，没有提压双证的事
-> 
+>
 > 待遇：
 >
 > - 年目标工资——12.5w，每个月实际到手 12.5/12 * 80%（20%左右是其他个人需缴纳的部分）
@@ -1426,7 +1426,7 @@ public:
 >
 > - 3年免费宿舍，两人间（没有听说有租房补贴！）
 >
-> 
+>
 >
 >   - 总包大概16-20w（大概率就是16w）
 >
@@ -1541,13 +1541,13 @@ public:
   > 每个时钟周期，每个Tensor Core可完成一个4×4矩阵乘累加（MACC，Matrix multiply and Accumulation）计算。WMMA API暴露给Tensor Core的tile大小（16×16）显然比Tensor Core每次操作的矩阵大小（4×4）更大。因此，每个wmma.mma操作需要**64**个Tensor Core操作才能完成。
   >
 
-  
+
 
   > L1 cache本质上跟共享内存是共享空间的，L2可以跨SM共享
   >
   > 当前的GPU架构允许通过编译选项来控制是否启用一级缓存。当一级缓存被禁用时，对全局内存的加载请求将直接进入二级缓存；如果二级缓存未命中，将由DRAM完成请求。核函数从全局内存DRAM中读取数据有两种粒度， 使用一级缓存时，每次按照128字节进行缓存；不使用一级缓存时，每次按照32字节进行缓存。
   >
-  > 
+  >
   >
   > CUDA在Global Memory上访问粒度是32B，而每32B组成一个sector，一个cacheline则对应4个sector，总共大小为128B。
   >
@@ -1555,16 +1555,16 @@ public:
 
 - 使用Nsight System与Compute做性能检测，分析kernel的资源占用情况，发现性能瓶颈在寄存器限制上，使用launch_bounds将部分寄存器数据移动到local memory上，增加一个SM上驻留的block数量，提高SM利用率
 
-  >编译器首先得计算得到kernel可以使用的寄存器数量上限 L	
+  >编译器首先得计算得到kernel可以使用的寄存器数量上限 L
   >
   >如果初始寄存器使用量高于 L，编译器会进一步减少它，直到它变得小于或等于 L，通常以更多的本地内存使用和更多的指令为代价；
   >
   >如果初始寄存器使用量小于L，编译器可能会将寄存器使用率提高到 L，以减少指令的数量并更好地隐藏单线程指令延迟。
   >
   >
-  
+
   >local memory本质上是一段显存，在片外，是线程私有，但它总是被L2 cache缓存
-  
+
   >Nsight System我一般用来观察函数或者kernel的实际执行情况，看GPU利用率是否最大化，隐藏数据传输是否成功等等。
   >
   >Nsight Compute一般观察什么参数？
@@ -1703,17 +1703,17 @@ Gemm<<<grid, block>>>(A, B, C, 16, 16, 16, 2048);
 __global__ void Gemm(float* __restrict__ A,
                      float* __restrict__ B,
                      float* __restrict__ C,
-                     const int M, 
-                     const int N, 
+                     const int M,
+                     const int N,
                      const int K,
                      const int Width
                     ) {
     	__shared__ float shared_A[M][K];
     	__shared__ float shared_B[K][N];
-    
+
     	int bx = blockIdx.x;int by = blockIdx.y;
     	int tx = threadIdx.x;int ty = threadIdx.y;
-    
+
     	int row = by*M + ty;
     	int col = by*N + tx;
     	int value = 0;
@@ -1721,7 +1721,7 @@ __global__ void Gemm(float* __restrict__ A,
             shared_A[ty][tx] = A[row * Width + i * K + tx];
             shared_B[ty][tx] = B[(i * K + ty) * Width + col];
             __syncthreads();
-            
+
             for (int j = 0; j < K; ++j) {
                 value += shared_A[ty][j] * shared_B[j][tx];
             }
@@ -1739,16 +1739,16 @@ __global__ void Gemm(float* __restrict__ A,
 __global__ void Reduction(const float* input, const float* output, const int n) {
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
     int total_thread_num = gridDim.x * blockDim.x;
-    
+
     float sum = 0.0f;
     for (int i = tid; i < n; i += total_thread_num) {
         sum += input[i];
     }
-    
+
     extern __shared__ float shm[];
     shm[threadIdx.x] = sum;
     __syncthread();
-    
+
     for (int i = blockDim.x / 2; i >= 1; i /= 2) {
         if (threadIdx.x < i) {
             shm[threadIdx.x] += shm[threadIdx.x + i];
@@ -1793,23 +1793,23 @@ double pi(int n) {
 __global__ void pi(const double* output, int n) {
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
     int total_thread_num = blockDim.x * gridDim.x;
-    
+
     double res = 0.0;
     int flag = -1;
     for (int i = tid; i < n; i += total_thread_num) {
         res += flag * (1.0 / (2 * i + 1));
         flag *= -1;
     }
-    
+
     extern __shared__ shm[];
     shm[threadIdx.x] = res;
     __syncthreads();
-    
+
     /*
     	srand(time(0));
     	double x = double(1.0*rand()/RAND_MAX);
     	double y = double(1.0*rand()/RAND_MAX);
-    	
+
     	extern __shared__ shm[];
     	if (x*x+y*y <= 1) {
     		shm[threadIdx.x] = 1;
@@ -1819,7 +1819,7 @@ __global__ void pi(const double* output, int n) {
     	__syncthreads();
     	...后面代码一样
     */
-    
+
     for (int i = blockDim.x / 2; i >= 1; i /= 2) {
         if (threadIdx.x < i) {
             shm[threadIdx.x] += shm[i + threadIdx.x];
@@ -1856,7 +1856,7 @@ __global__ void cuda_transpose(int *matrix,int *tr_matrix,int m,int n) {
 
 
 
-#### 手撕快排	
+#### 手撕快排
 
 ```c++
 // CPU版本
@@ -1883,7 +1883,7 @@ int main() {
     quickSort<<<1, 1>>>(nums, start, end);
 }
 __global__ void quickSort(vector<int>& nums, int start, int end /*, int depth*/) {
-    /* 
+    /*
     当递归的深度大于设定的MAX_DEPTH或者待排序的数组长度小于设定的阈值，直接调用简单选择排序
     我感觉真实面试的时候可以先不写这玩意，如果面试官要求了再说
     if (depth >= MAX_DEPTH || right - left <= INSERTION_SORT) {
@@ -1891,7 +1891,7 @@ __global__ void quickSort(vector<int>& nums, int start, int end /*, int depth*/)
         return;
     }
     */
-    
+
     int l = start, r = end;
     int key = nums[l];
     while (l < r) {
@@ -1901,7 +1901,7 @@ __global__ void quickSort(vector<int>& nums, int start, int end /*, int depth*/)
         if (l < r) nums[r] = nums[l];
     }
     nums[l] = key;
-    
+
     cudaStream_t l_stream, r_stream;
     cudaStreamCreateWithFlags(&l_stream, cudaStreamNonBlocking);
     cudaStreamCreateWithFlags(&r_stream, cudaStreamNonBlocking);
@@ -1934,7 +1934,7 @@ class my_shared_ptr {
 private:
     T* _ptr;
     int* _count;
-    
+
 public:
     my_shared_ptr(T* ptr = nullptr) :_ptr(ptr) {
         if (_ptr) {
@@ -1943,7 +1943,7 @@ public:
             _count = new int(0);
         }
     }
-    
+
     ~my_shared_ptr() {
         if (this->_ptr) {
             if (--(*this->count) == 0) {
@@ -1954,16 +1954,16 @@ public:
             delete this->count;
         }
     }
-    
+
     my_shared_ptr(const my_shared_ptr& ptr) {
         if (this != &ptr) {
             this->_ptr = ptr._ptr;
             this->_count = ptr._count;
-            
+
             ++(*this->_count);
         }
     }
-    
+
     // 如果当前指针count为1，那么在把指针指向新的对象前必须把当前对象的空间释放掉
     // 这是拷贝赋值，不是移动赋值，移动需要传右值引用&&
     my_shared_ptr& operator = (const my_shared_ptr& ptr) {
@@ -1981,11 +1981,11 @@ public:
         ++(*this->_count);
         return *this;
     }
-    
+
     T& operator * () {
         if (this->_ptr) return *(this->_ptr);
     }
-    
+
     T* operator -> () {
         if (this->_ptr) return this->_ptr;
     }
