@@ -23,12 +23,16 @@
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
 <meta property="og:description" content="博弈论的基础建立在理性人假设之上：玩家是理性且自利的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/09/25/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B%E5%AD%A6%E4%B9%A0/image1.png">
+<meta property="og:image" content="http://example.com/2023/09/25/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B%E5%AD%A6%E4%B9%A0/image2.png">
+<meta property="og:image" content="http://example.com/2023/09/25/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B%E5%AD%A6%E4%B9%A0/image3.png">
 <meta property="article:published_time" content="2023-09-25T14:45:19.000Z">
-<meta property="article:modified_time" content="2024-07-10T13:53:35.269Z">
+<meta property="article:modified_time" content="2024-07-17T14:31:10.634Z">
 <meta property="article:author" content="Zhang Yix">
 <meta property="article:tag" content="德扑">
 <meta property="article:tag" content="博弈论">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/09/25/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B%E5%AD%A6%E4%B9%A0/image1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -213,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          3.1k 字
         
       </span>
     
@@ -224,7 +228,7 @@
         
         
         
-          16 分钟
+          27 分钟
         
       </span>
     
@@ -274,7 +278,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年7月10日 下午
+                    本文最后更新于：2024年7月17日 下午
                   
                 
               </p>
@@ -286,7 +290,12 @@
 <p><em>博弈论的基础建立在理性人假设之上：玩家是理性且自利的</em></p>
 </blockquote>
 <span id="more"></span>
-<h2 id="概率">概率</h2>
+<p>参考</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://space.bilibili.com/2143447">千算</a></li>
+<li><a target="_blank" rel="noopener" href="https://space.bilibili.com/3493289139374850">肉泥</a></li>
+</ul>
+<h2 id="基础">基础</h2>
 <blockquote>
 <p>VScode的Markdown preview enhanced（MPE）插件支持 Mathjax 和 Katex，可以实时预览Latex公式，完全没必要花两个小时装Texlive</p>
 </blockquote>
@@ -348,11 +357,8 @@
 在Desmos中可以看出，当N在10以内时，四二法则的误差在 +1.6% 以内</p>
 <p>Turn后成牌概率为：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>N</mi><mn>46</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{N}{46}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">46</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><br>
 当N在10以内时，误差在 -1.7% 以内</p>
-<h3 id="起手牌胜率">起手牌胜率</h3>
-<h4 id="同花面">同花面</h4>
-<p>翻后同花概率</p>
-<h4 id="同花面没有那么强">同花面没有那么强</h4>
-<p>对于同花牌，翻后成花的概率 0.2%，翻后听花概率</p>
+<h3 id="位置">位置</h3>
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <h3 id="翻后策略求解">翻后策略求解</h3>
 <p><a target="_blank" rel="noopener" href="https://github.com/bupticybee/TexasSolver">TexasSolver</a></p>
 <h3 id="期望价值">期望价值</h3>
@@ -390,12 +396,32 @@
 </tbody>
 </table>
 <h2 id="策略">策略</h2>
-<p>参考</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://space.bilibili.com/2143447">https://space.bilibili.com/2143447</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/@ronniepoker">https://www.youtube.com/@ronniepoker</a></li>
-</ul>
-<h2 id="GTO">GTO</h2>
+<h3 id="GTO和剥削">GTO和剥削</h3>
+<blockquote>
+<p>纳什均衡：在一个多人游戏中，各方在考虑到其他参与者的策略后，选择的最优策略组合。即，当所有参与者都无法通过单方面改变自己的策略来获得更好的结果时，这个策略组合就是一个纳什均衡。</p>
+</blockquote>
+<p>一个很简单的例子，A与B各有一枚硬币，并可以决定自己每次出示硬币的正反。假如AB同正，B-&gt;A 3元，AB同反，B-&gt;A 1元，AB不同，A-&gt;B 2元，则该游戏公平吗</p>
+<p>假设A出正的概率为p，B出正的概率为q，则A的总收益为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>V</mi><mo>=</mo><mn>3</mn><mi>p</mi><mi>q</mi><mo>+</mo><mn>1</mn><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mo>−</mo><mn>2</mn><mi>p</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mo>−</mo><mn>2</mn><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo><mi>q</mi><mo>=</mo><mn>8</mn><mi>p</mi><mi>q</mi><mo>−</mo><mn>3</mn><mi>p</mi><mo>−</mo><mn>3</mn><mi>q</mi><mo>+</mo><mn>1</mn><mo>=</mo><mo stretchy="false">(</mo><mn>8</mn><mi>p</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mi>q</mi><mo>−</mo><mn>3</mn><mi>p</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">EV = 3pq + 1(1-p)(1-q) - 2p(1-q) - 2(1-p)q = 8pq -3p -3q + 1 = (8p-3)q -3p +1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.03588em;">pq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">8</span><span class="mord mathnormal" style="margin-right:0.03588em;">pq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">8</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></p>
+<p>显然，当A将自己出正的概率调整为3/8时，他可以完全无视B的出法策略，达到-1/8的最大收益</p>
+<p>同理，B的最大收益为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>V</mi><mo>=</mo><mn>2</mn><mi>p</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo><mi>q</mi><mo>−</mo><mn>3</mn><mi>p</mi><mi>q</mi><mo>−</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mi>p</mi><mo>−</mo><mn>8</mn><mi>p</mi><mi>q</mi><mo>+</mo><mn>3</mn><mi>q</mi><mo>−</mo><mn>1</mn><mo>=</mo><mo stretchy="false">(</mo><mn>3</mn><mo>−</mo><mn>8</mn><mi>q</mi><mo stretchy="false">)</mo><mi>p</mi><mo>+</mo><mn>3</mn><mi>q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">EV = 2p(1-q)+2(1-p)q-3pq-(1-p)(1-q) = 3p - 8pq + 3q - 1 =(3-8q)p + 3q - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.03588em;">pq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">8</span><span class="mord mathnormal" style="margin-right:0.03588em;">pq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">8</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> ，当B将自己出正的概率调整为3/8时，他可以完全无视A的出法策略，达到1/8的最大收益</p>
+<p>显然当达到纳什均衡时，双方的期望收益并不为0，游戏并不公平</p>
+<p>纳什均衡只是一个无限趋近的理想状态，在实际游戏中，玩家并不能做到完全理性。</p>
+<p><strong>剥削</strong>：有时你朝着远离纳什均衡的方向改变策略，可能在理想纳什均衡状态下你的收益会降低，但在实际情况中，由于对手往往不会及时根据你的策略调整他自己的，所以短期内他很可能会因此受损，而你反而获益</p>
+<blockquote>
+<p><em>有一种两条线螺旋式逼近某个点的感觉。参考双人石头剪刀布，游戏初期双方只是随机出拳，但随着时间偏移，你可以根据对方出拳的频率来调整自己的频率，比如对方出石头多你就出布多，从而增加自己的收益。对方如果及时察觉到你的改变，他也应该改变自己的策略——降低石头，多出剪刀。最后达到的纳什均衡点就是双方都按1/3的概率出拳。但假若对方未能及时察觉，你的这种多出布的策略就成功的剥削了他</em></p>
+</blockquote>
+<p>在实际扑克游戏中，每一场牌都远未达到纳什均衡，根据对方决策及时改变自己的决策，从而剥削对方，是极其必要的</p>
+<h3 id="玩家分类">玩家分类</h3>
+<p>VPIP：Voluntarily Put in Pot，翻前主动入池率，包括raise、call、limp，（即使后面raise导致你弃牌，只要你主动下注过，就算入VPIP），代表玩家的松紧程度<br>
+PFR：Preflop Raise，翻前加注率，代表玩家的凶弱程度</p>
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="image3.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>大数据显示VPIP在15-35，同时FPR与VPIP差距在15以内时，处于能盈利的范围</p>
+<h4 id="鲸鱼玩家——VPIP-40">鲸鱼玩家——VPIP&gt;40</h4>
+<p>打法极松，容易被剥削</p>
+<p>此类玩家一般翻前加注范围无明显差距，但翻前跟住范围极广（这根本就是我），一般是将A小、小连张或者很垃圾的同花纳入了跟注范围</p>
+<p>成排率低，听牌率高，经常把注压在后续会中牌上，适合打满价值注，小成牌下小注，大成牌下重注</p>
+<h4 id="岩石玩家——VPIP-PFR-15">岩石玩家——VPIP/PFR&lt;15</h4>
 
                 
               </div>
@@ -462,7 +488,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月10日</div>
+          <div>2024年7月17日</div>
         </div>
       
       
