@@ -90,7 +90,7 @@ TVM 想要解决的问题：模型部署的可移植性问题、特定平台的�
 
 Relay IR：如 relay.Function，TVM 为了兼容上层的机器学习框架而引入的中间表达，一种高阶的图结构，包含了计算图和控制流的信息，这样的设计使得 TVM 可以对模型进行更加全面的优化。Relax 是下一代 Relay（Relay Next）
 
-Tensor IR：如 tir.PrinFunc，TVM 为了兼容不同的硬件而引入的中间表达，一种低阶的图结构，包含了数据张量和算子的信息，这样的设计使得 TVM 可以对硬件进行更加全面的优化。
+Tensor IR：如 tir.PrimFunc，TVM 为了兼容不同的硬件而引入的中间表达，一种低阶的图结构，包含了数据张量和算子的信息，这样的设计使得 TVM 可以对硬件进行更加全面的优化。
 
 IRModule：是TVM堆栈中的主要数据结构，也是TVM编译的最小完整单元，在上层一般由一个或多个relay.Function组成。一个 RelayFunc 通常对应一个端到端的模型（可见MLC）。经过 TIR Pass 后一个 RelayFunc 可降级为多个 tir.PrimFunc 即元张量函数，这些函数可以被 TVM 优化器进行优化，最后转化为机器码。
 
@@ -99,7 +99,7 @@ IRModule：是TVM堆栈中的主要数据结构，也是TVM编译的最小完整
 
 TVM转换流程的目的：优化（如常量折叠、死码消除，针对特定张量的布局转换、scale因子折叠），以及降级（将代码逐渐转化成更接近硬件的低级表示。
 
-在 relay/transform 流程的后期，FuseOps 将端到端的函数（即 relay.Function）转化为一个个的算子（即 tir.PrinFunc），这个过程帮助将原始的编译问题分为了两个子问题：
+在 relay/transform 流程的后期，FuseOps 将端到端的函数（即 relay.Function）转化为一个个的算子（即 tir.PrimFunc），这个过程帮助将原始的编译问题分为了两个子问题：
 1. 算子的编译和优化
 2. 整体的执行流程：对生成的算子进行的调用
 
@@ -115,7 +115,7 @@ AutoTVM和AutoScheduler是TVM中的两个自动调度器，AutoTVM是基于遗�
 
 > *使用基于搜索的优化来处理初始 tir 函数生成问题。*
 
-AutoTVM是在tirPass之前进行的，经过AutoTVM后生成优化的PrinFunc，可以理解成到tirPass之后就不再进行高层优化了，只是针对硬件做一些特殊处理？
+AutoTVM是在tirPass之前进行的，经过AutoTVM后生成优化的PrimFunc，可以理解成到tirPass之后就不再进行高层优化了，只是针对硬件做一些特殊处理？
 
 #### Target 转换
 
