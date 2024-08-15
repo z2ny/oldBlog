@@ -424,8 +424,11 @@ footer:
   # HTML of the first line of the footer, it is recommended to keep the Fluid link to promote this theme to more people
   content: '
     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+    &amp;&amp;
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
     <i class="iconfont icon-love"></i>
-    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>RuiXin</span></a>'
+    <a href="https://www.bilibili.com/video/BV1GJ411x7h7" target="_blank" rel="nofollow noopener"><span>RuiXin</span></a>
+    '
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
   statistics:
@@ -723,7 +726,6 @@ post:
     # The specified plugin needs to set the necessary parameters at the same time
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus | discuss
     type: valine
-
 
 #---------------------------
 # 评论插件
