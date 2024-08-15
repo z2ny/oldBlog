@@ -24,7 +24,7 @@
 <meta property="og:description" content="基础 内存分区  代码区：函数体的二进制代码 全局区：全局变量、静态变量、常量 栈区：函数调用、局部变量，编译器自动分配 堆区：程序员动态分配内存，如new和delete  枚举 enum enum_name&amp;#123;a,b,c..&amp;#125; var_name; 枚举标识符可赋值，默认从0开始+1 const 常类型的变量或对象的值无法被更新 修饰变量 必须赋初始值，且赋值之后无法修改 与#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-11T15:28:51.000Z">
-<meta property="article:modified_time" content="2024-07-31T11:25:46.696Z">
+<meta property="article:modified_time" content="2024-08-15T14:12:05.096Z">
 <meta property="article:author" content="Zhang Yix">
 <meta property="article:tag" content="interview">
 <meta property="article:tag" content="C++">
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k 字
+          4.6k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          30 分钟
+          39 分钟
         
       </span>
     
@@ -274,7 +274,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年7月31日 上午
+                    本文最后更新于：2024年8月15日 下午
                   
                 
               </p>
@@ -377,27 +377,17 @@
 <p>virtual的意思类似“这个函数可能会被子类重写”，告诉编译器先不急着确定函数地址，编译器会根据指针指向的对象来动态调用对应的函数</p>
 <h4 id="纯虚函数">纯虚函数</h4>
 <p>在需要使用多态的场景中，往往基类中的虚函数只是为了让派生类重写，并无实际意义，此时可将虚函数改为纯虚函数</p>
-<p><code>virtual void func() = 0</code>，纯虚函数没有函数体，只是一个接口，派生类必须重写该函数</p>
-<p>有纯虚函数意味着这个类仅仅用来声明派生类的接口，称为抽象类，无法被实例化</p>
-<h4 id="虚析构">虚析构</h4>
-<p>在父类指针指向子类对象时，如果释放该指针，只会调用父类的析构函数。这是因为在编译时，编译器只知道指针的<br>
-类型是父类，而不知道指针指向的是子类对象。</p>
-<p>因此，如果想要调用子类的析构函数，需要将父类的析构函数声明为虚析构<code>virtual ~类名()&#123;&#125;</code></p>
-<p>同理纯虚析构<code>virtual ~类名() = 0</code> 和纯虚函数一样，纯虚析构意味着该类是抽象类，除此之外和虚析构没啥区别</p>
-<h3 id="构造-析构能否设置为虚函数">构造/析构能否设置为虚函数</h3>
-<p>构造函数不能：虚函数的原意是只知道接口不用知道对象完整信息的情况下完成某个工作，构造函数在创建对象时显然需要对象的完整信息，因此不应该定义成虚函数</p>
-<p>析构函数需要：在派生类对象中有额外的内存在析构时需要回收时，如果析构函数不是虚函数，就不会触发动态绑定，派生类析构只会调用基类析构，造成内存泄漏</p>
-<h3 id="智能指针">智能指针</h3>
-<p>智能指针是一种用于自动管理内存的工具，在原先的new分配内存时，由于指针并没有自动回收内存的功能，会存在因为忘记delete或者多次delete造成内存泄漏的隐患</p>
-<p>而智能指针是一个模板类，在他的生命周期结束时会调用本身的析构函数，自动进行空间回收</p>
-<p>std::unique_ptr：独占管理分配的对象，确保只有一个指针拥有指定的内存资源<br>
-std::shared_ptr：共享指针，内部会使用一个引用计数器来跟踪对象被共享的次数，只有在计数为0的时候才释放内存<br>
-std::weak_ptr：弱引用指针，不增加引用计数器，必须配合共享指针使用</p>
-<h3 id="模板-template-class-typename-T">模板 template&lt;class/typename T&gt;</h3>
-<p>在下面的函数或者类中定义一种通用数据类型，在调用时可以指定具体的数据类型，提高代码复用</p>
-<h3 id="STL：标准模板库">STL：标准模板库</h3>
-<p>三大组件：容器、算法、迭代器<br>
-容器和算法之间通过迭代器无缝衔接</p>
+<figure class="highlight plaintext"><figcaption><span>void func() </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs virtual"><br>有纯虚函数意味着这个类仅仅用来声明派生类的接口，称为抽象类，无法被实例化<br><br>#### 虚析构<br>在父类指针指向子类对象时，如果释放该指针，只会调用父类的析构函数。这是因为在编译时，编译器只知道指针的<br>类型是父类，而不知道指针指向的是子类对象。<br><br>因此，如果想要调用子类的析构函数，需要将父类的析构函数声明为虚析构```virtual ~类名()&#123;&#125;```<br><br>同理纯虚析构```virtual ~类名() = 0``` 和纯虚函数一样，纯虚析构意味着该类是抽象类，除此之外和虚析构没啥区别<br><br>### 构造/析构能否设置为虚函数<br>构造函数不能：虚函数的原意是只知道接口不用知道对象完整信息的情况下完成某个工作，构造函数在创建对象时显然需要对象的完整信息，因此不应该定义成虚函数<br><br>析构函数需要：在派生类对象中有额外的内存在析构时需要回收时，如果析构函数不是虚函数，就不会触发动态绑定，派生类析构只会调用基类析构，造成内存泄漏<br><br>### 智能指针<br>智能指针是一种用于自动管理内存的工具，在原先的new分配内存时，由于指针并没有自动回收内存的功能，会存在因为忘记delete或者多次delete造成内存泄漏的隐患<br><br>而智能指针是一个模板类，在他的生命周期结束时会调用本身的析构函数，自动进行空间回收<br><br>std::unique_ptr：独占管理分配的对象，确保只有一个指针拥有指定的内存资源<br>std::shared_ptr：共享指针，内部会使用一个引用计数器来跟踪对象被共享的次数，只有在计数为0的时候才释放内存<br>std::weak_ptr：弱引用指针，不增加引用计数器，必须配合共享指针使用<br><br>### 模板 template&lt;class/typename T&gt;<br>在下面的函数或者类中定义一种通用数据类型，在调用时可以指定具体的数据类型，提高代码复用<br><br>### STL：标准模板库<br>三大组件：容器、算法、迭代器<br>容器和算法之间通过迭代器无缝衔接<br><br>#### 列表<br>```C++<br>vector&lt;int&gt; nums = &#123;1, 2, 3, 4, 5&#125;;<br>nums.push_back(6); //在末尾添加元素<br>nums.pop_back(); //删除末尾元素<br>nums.insert(nums.begin() + 1, 10); //在指定位置插入元素<br>nums.erase(nums.begin() + 1); //删除指定位置元素<br>nums.clear(); //清空<br></code></pre></td></tr></table></figure>
+<h4 id="数组">数组</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++">array&lt;<span class="hljs-type">int</span>, 5&gt; arr = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br>arr.<span class="hljs-built_in">at</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//获取指定位置元素</span><br>arr.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">//获取首元素</span><br>arr.<span class="hljs-built_in">back</span>(); <span class="hljs-comment">//获取尾元素</span><br>arr.<span class="hljs-built_in">fill</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">//填充</span><br></code></pre></td></tr></table></figure>
+<h4 id="栈">栈</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++">stack&lt;<span class="hljs-type">int</span>&gt; s;<br>s.<span class="hljs-built_in">push</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//入栈</span><br>s.<span class="hljs-built_in">pop</span>(); <span class="hljs-comment">//出栈</span><br>s.<span class="hljs-built_in">top</span>(); <span class="hljs-comment">//获取栈顶元素</span><br>s.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">//判断是否为空</span><br>s.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//获取栈大小</span><br></code></pre></td></tr></table></figure>
+<h4 id="队列">队列</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C++">queue&lt;<span class="hljs-type">int</span>&gt; q;<br>q.<span class="hljs-built_in">push</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//入队</span><br>q.<span class="hljs-built_in">pop</span>(); <span class="hljs-comment">//出队</span><br>q.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">//获取队首元素</span><br>q.<span class="hljs-built_in">back</span>(); <span class="hljs-comment">//获取队尾元素</span><br>q.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">//判断是否为空</span><br>q.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//获取队列大小</span><br></code></pre></td></tr></table></figure>
+<h4 id="双向队列">双向队列</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++">deque&lt;<span class="hljs-type">int</span>&gt; dq;<br>dq.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//尾部入队</span><br>dq.<span class="hljs-built_in">pop_back</span>(); <span class="hljs-comment">//尾部出队</span><br>dq.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">//头部入队</span><br>dq.<span class="hljs-built_in">pop_front</span>(); <span class="hljs-comment">//头部出队</span><br>dq.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">//获取队首元素</span><br>dq.<span class="hljs-built_in">back</span>(); <span class="hljs-comment">//获取队尾元素</span><br>dq.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">//判断是否为空</span><br>dq.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//获取队列大小</span><br></code></pre></td></tr></table></figure>
+<h4 id="哈希表">哈希表</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C++">unordered_map&lt;<span class="hljs-type">int</span>, string&gt; m;<br>m[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;one&quot;</span>; <span class="hljs-comment">//插入</span><br>m[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;two&quot;</span>;<br>m[<span class="hljs-number">3</span>] = <span class="hljs-string">&quot;three&quot;</span>;<br>m.<span class="hljs-built_in">erase</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">//删除</span><br>m.<span class="hljs-built_in">find</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//查找</span><br>m.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//获取大小</span><br>m.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">//判断是否为空</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -464,7 +454,7 @@ std::weak_ptr：弱引用指针，不增加引用计数器，必须配合共享�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月31日</div>
+          <div>2024年8月15日</div>
         </div>
       
       
@@ -657,7 +647,7 @@ std::weak_ptr：弱引用指针，不增加引用计数器，必须配合共享�
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>RuiXin</span></a>
     </div>
   
   
