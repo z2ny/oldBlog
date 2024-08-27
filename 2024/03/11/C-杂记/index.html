@@ -24,7 +24,7 @@
 <meta property="og:description" content="基础 内存分区  代码区：函数体的二进制代码 全局区：全局变量、静态变量、常量 栈区：函数调用、局部变量，编译器自动分配 堆区：程序员动态分配内存，如new和delete  枚举 enum enum_name&amp;#123;a,b,c..&amp;#125; var_name; 枚举标识符可赋值，默认从0开始+1 const 常类型的变量或对象的值无法被更新 修饰变量 必须赋初始值，且赋值之后无法修改 与#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-11T15:28:51.000Z">
-<meta property="article:modified_time" content="2024-08-15T14:42:55.891Z">
+<meta property="article:modified_time" content="2024-08-27T07:50:18.885Z">
 <meta property="article:author" content="Zhang Yix">
 <meta property="article:tag" content="interview">
 <meta property="article:tag" content="C++">
@@ -274,7 +274,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年8月15日 下午
+                    本文最后更新于：2024年8月27日 早上
                   
                 
               </p>
@@ -388,6 +388,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++">deque&lt;<span class="hljs-type">int</span>&gt; dq;<br>dq.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//尾部入队</span><br>dq.<span class="hljs-built_in">pop_back</span>(); <span class="hljs-comment">//尾部出队</span><br>dq.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">//头部入队</span><br>dq.<span class="hljs-built_in">pop_front</span>(); <span class="hljs-comment">//头部出队</span><br>dq.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">//获取队首元素</span><br>dq.<span class="hljs-built_in">back</span>(); <span class="hljs-comment">//获取队尾元素</span><br>dq.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">//判断是否为空</span><br>dq.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//获取队列大小</span><br></code></pre></td></tr></table></figure>
 <h4 id="哈希表">哈希表</h4>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C++">unordered_map&lt;<span class="hljs-type">int</span>, string&gt; m;<br>m[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;one&quot;</span>; <span class="hljs-comment">//插入</span><br>m[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;two&quot;</span>;<br>m[<span class="hljs-number">3</span>] = <span class="hljs-string">&quot;three&quot;</span>;<br>m.<span class="hljs-built_in">erase</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">//删除</span><br>m.<span class="hljs-built_in">find</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//查找</span><br>m.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//获取大小</span><br>m.<span class="hljs-built_in">empty</span>(); <span class="hljs-comment">//判断是否为空</span><br></code></pre></td></tr></table></figure>
+<h4 id="树">树</h4>
 
                 
               </div>
@@ -454,7 +455,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月15日</div>
+          <div>2024年8月27日</div>
         </div>
       
       
