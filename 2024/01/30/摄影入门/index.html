@@ -16,24 +16,25 @@
   <meta name="author" content="Zhang Yix">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pro Git Book">
+    <meta name="description" content="摄影笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git cheat sheet">
-<meta property="og:url" content="http://example.com/2023/12/31/Git-cheat-sheet/index.html">
+<meta property="og:title" content="摄影入门">
+<meta property="og:url" content="http://example.com/2024/01/30/%E6%91%84%E5%BD%B1%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
-<meta property="og:description" content="Pro Git Book">
+<meta property="og:description" content="摄影笔记">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-31T15:32:59.000Z">
-<meta property="article:modified_time" content="2024-10-23T15:52:19.163Z">
+<meta property="article:published_time" content="2024-01-30T00:09:42.000Z">
+<meta property="article:modified_time" content="2024-10-23T15:52:19.215Z">
 <meta property="article:author" content="Zhang Yix">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="摄影">
+<meta property="article:tag" content="interest">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Git cheat sheet - Zhyx&#39;s Blog</title>
+  <title>摄影入门 - Zhyx&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Git cheat sheet"></span>
+            <span id="subtitle" data-typed-text="摄影入门"></span>
           
         </div>
 
@@ -200,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-31 15:32" pubdate>
-          2023年12月31日 下午
+        <time datetime="2024-01-30 00:09" pubdate>
+          2024年1月30日 凌晨
         </time>
       </span>
     
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          658 字
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          17 分钟
+          6 分钟
         
       </span>
     
@@ -268,7 +269,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Git cheat sheet</h1>
+            <h1 id="seo-header">摄影入门</h1>
             
               <p class="note note-info">
                 
@@ -281,68 +282,67 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git Book</a></p>
+                <p><a target="_blank" rel="noopener" href="https://weread.qq.com/web/bookDetail/3d4322207265c45f3d40a55">摄影笔记</a></p>
 <span id="more"></span>
-<h2 id="起步">起步</h2>
-<h3 id="Git特色">Git特色</h3>
-<p><strong>直接记录快照，而非差异比较</strong><br>
-与其他版本控制系统基于差异的版本控制不同，Git直接记录文件快照，每次提交或保存都会基于当前的全部文件创建一个快照并保存这个快照的索引。为了高效，如果文件没有变化，Git不会再次保存，而是只保留一个链接指向之前存储的文件。</p>
-<p><strong>近乎所有操作都在本地执行</strong></p>
-<p><strong>保证完整性</strong><br>
-Git中所有数据在存储前都会计算校验和（SHA-1），并以校验和的哈希值作为引用和索引。</p>
-<p><strong>只添加数据</strong><br>
-几乎所有操作都只是添加，几乎没有导致文件不可恢复的操作。</p>
-<p><strong>三种状态</strong></p>
+<p><strong>四个方面：取景、曝光、虚实、构图</strong></p>
+<h2 id="取景">取景</h2>
+<h3 id="焦距">焦距</h3>
+<p><strong>焦距决定视角</strong></p>
+<p>一般而言，人眼在对焦时的清晰视角范围与50mm焦距最接近，因此50mm也称标准镜头。此外镜头焦距范围可划分为：</p>
 <ul>
-<li>modified：已修改，文件在工作区被修改，但还未保存到数据库中</li>
-<li>staged：已暂存，修改的文件已经被做了标记，将被包含在下次提交中</li>
-<li>commited：已提交，已经安全的保存在本地数据库中</li>
+<li>广角类：&lt;35mm称广角镜头，&lt;24mm为超广角镜头</li>
+<li>标准类：35~50mm</li>
+<li>长焦类：&gt;85mm为长焦镜头，&gt;300mm为长焦镜头</li>
 </ul>
-<h3 id="运行前配置-git-config">运行前配置 git config</h3>
-<p>配置文件优先级由低到高</p>
-<ul>
-<li>–system:针对该系统上所有用户的所有仓库的通用配置，一般在Git安装目录</li>
-<li>–global:当前用户的所有仓库，一般在用户目录</li>
-<li>–local:当前仓库，一般在当前仓库目录</li>
-</ul>
-<blockquote>
-<p>git config --global <a target="_blank" rel="noopener" href="http://user.name">user.name</a> “John Doe”<br>
-git config --global user.email <a href="mailto:johndoe@example.com">johndoe@example.com</a><br>
-git config --list  # 可能会有重复，因为Git会依次读取系统、全局、当前仓库的config，后面的会覆盖前面的同名配置</p>
-</blockquote>
-<h2 id="Cheat-Sheet">Cheat Sheet</h2>
-<h3 id="Remote">Remote</h3>
-<p>查看所有分支：<code>branch</code> -r远程，-a所有，-v附带详细信息</p>
-<p>将本地的分支推送至远程仓库：<code>push &lt;remote&gt; &lt;local_branch&gt;:&lt;remote_branch&gt;</code></p>
-<p>删除某远程分支：<code>push &lt;remote&gt; --delete &lt;branch_name&gt;</code></p>
-<h3 id="Local">Local</h3>
-<p>查看提交记录：<code>log</code> --pretty=oneline指定以一行的形式显示</p>
-<p>比较差异：<code>diff &lt;hash1&gt; &lt;hash2&gt;</code></p>
-<p>增删分支：<code>branch &lt;branch_name&gt;</code> -d删除 -t追踪远程分支</p>
-<p>获取远程仓库数据：<code>fetch</code> 从远程仓库下载数据，但不会自动合并，后续需要merge或pull</p>
-<p>撤销提交：<code>reset</code> --soft仅仅撤销提交，–mixed撤销提交并取消暂存区，–hard撤销提交并取消暂存区和工作区 HEAD~n表示前n个版本</p>
-<h3 id="Index-Stage">Index/Stage</h3>
-<p>提交到本地仓库：<code>commit</code> -a自动将所有已跟踪文件暂存起来并提交，相当于先执行add -u ，-m指定提交信息，–amend修改最后一次提交</p>
-<p>比较当前index与某次提交的差异：<code>diff --cached &lt;hash&gt;</code></p>
-<h3 id="Workspace">Workspace</h3>
-<p>检查状态：<code>status</code> -s简洁</p>
-<p>克隆远程仓库：<code>clone</code> 创建一个全新副本</p>
-<p>从远程仓库拉取最新文件：<code>pull</code> 相当于fetch+merge</p>
-<p>添加文件至Index：<code>add</code> -u更新已跟踪文件（即不包括新增文件），-A更新所有改动（包括新增文件），.当前目录所有文件</p>
-<p>签出某个分支或提交或文件：<code>checkout</code> -b创建并签出新分支。如果签出的是一个特定提交，会处于&quot;detached HEAD&quot;状态，可以随意修改并提交，但这个提交不属于任何分支（但仍然存在，只要记得提交的哈希值），可以通过创建分支来保存</p>
-<p>将某一分支的所有更改合并到当前分支：<code>merge &lt;branch_name&gt;</code>，Git默认使用Fast forward模式，即如果被合并分支是当前分支的直接后继，Git会将当前分支指向被合并分支的最新提交并不产生新提交；这时用–no-ff禁用Fast forward模式，仍然会产生一次新提交。如果并非直接前后继关系，Git会创建一个新的合并提交，该提交有两个父提交，即两个分支的最新提交。</p>
-<p>变基：<code>rebase</code> 一般不用。</p>
-<p>将其他分支的某个提交应用到当前分支：<code>cherry-pick &lt;hash&gt;</code>，会产生一个新的提交，提交内容（记得git是保存修改后文件的快照）与原提交相同。</p>
-<p>回滚某提交：<code>revert &lt;hash&gt;</code>，会产生一个新的提交，提交内容与原提交相反。</p>
-<p>清理未被跟踪的文件：<code>clean</code> -n列出将要被清理的文件，-f清理文件，-d清理文件夹，-x清理忽略的文件，-X清理忽略的文件夹</p>
-<p>临时保存工作区和暂存区，将这些改动进栈：<code>stash</code> -u保存未被跟踪的文件，-a保存所有改动，-p交互式保存，-k不保存暂存区的改动</p>
-<p>恢复工作区和暂存区：<code>stash pop</code> 恢复并删除栈顶的stash，<code>stash apply</code> 恢复但不删除栈顶的stash</p>
-<h3 id="Stash">Stash</h3>
-<p>显示栈：<code>stash list</code></p>
-<p>入栈：<code>stash push</code> 默认入栈顶</p>
-<p>显示栈的细节：<code>stash show</code> 默认栈顶</p>
-<p>删除当个栈：<code>stash drop</code> 默认栈顶</p>
-<p>清空整个stash：<code>stash clear</code></p>
+<p>焦距都以全画幅为标准，当画幅变化时，相当于在原有画面上截取或扩大了一部分，相当于改变了取景范围。因此对于不同的画幅，可以用等效焦距统一表示他们的视角，统一以全画幅的焦距取景范围为标准</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">画幅</th>
+<th style="text-align:center">尺寸</th>
+<th style="text-align:center">等效需要乘以倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">全画幅</td>
+<td style="text-align:center">36mm x 24mm</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">尼康索尼等ASP-C</td>
+<td style="text-align:center">23.5mm x 15.6mm</td>
+<td style="text-align:center">1.5</td>
+</tr>
+<tr>
+<td style="text-align:center">佳能ASP-C</td>
+<td style="text-align:center">22.3mm x 14.9mm</td>
+<td style="text-align:center">1.6</td>
+</tr>
+<tr>
+<td style="text-align:center">M43</td>
+<td style="text-align:center">17.3mm x 13mm</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">1英寸</td>
+<td style="text-align:center">13.2mm x 8.8mm</td>
+<td style="text-align:center">2.7</td>
+</tr>
+</tbody>
+</table>
+<h3 id="透视">透视</h3>
+<p>近处的物体显得更大，远处的物体显得更小</p>
+<p>在使用广角镜头时，往往离主摄物体很近，同时取景范围包括了更多背景里较远的物体，近大远小的透视效果更明显（更立体）；而使用长焦镜头时，离主摄物体较远，取景范围更窄，主摄物体与背景物体的远近尺度相对镜头较不明显，近大远小的透视效果减弱（更扁平）</p>
+<h2 id="曝光">曝光</h2>
+<h3 id="影调">影调</h3>
+<p><strong>照片的明暗程度</strong></p>
+<p>保证照片处于中间调——18%灰。据统计现实生活中物品的反射率大概是18%。相机在测光时会默认朝这一影调靠拢</p>
+<h3 id="曝光补偿">曝光补偿</h3>
+<p>“白加黑减”：相机不知道具体的场景是亮或暗，而只会尽量使得场景接近18%灰，当拍摄雪地等白色场景时，相机默认会降低亮度，需要手动调节正ev；拍摄昏暗场景时同理。</p>
+<h3 id="光圈">光圈</h3>
+<p>光圈越大 越容易虚化</p>
+<h3 id=""></h3>
 
                 
               </div>
@@ -361,7 +361,7 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
     
       <span class="category-chain">
         
-  <a href="/categories/work/" class="category-chain-item">work</a>
+  <a href="/categories/life/" class="category-chain-item">life</a>
   
   
 
@@ -376,7 +376,9 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/" class="print-no-link">#git</a>
+        <a href="/tags/%E6%91%84%E5%BD%B1/" class="print-no-link">#摄影</a>
+      
+        <a href="/tags/interest/" class="print-no-link">#interest</a>
       
     </div>
   
@@ -388,8 +390,8 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Git cheat sheet</div>
-      <div>http://example.com/2023/12/31/Git-cheat-sheet/</div>
+      <div>摄影入门</div>
+      <div>http://example.com/2024/01/30/摄影入门/</div>
     </div>
     <div class="license-meta">
       
@@ -401,7 +403,7 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月31日</div>
+          <div>2024年1月30日</div>
         </div>
       
       
@@ -450,9 +452,9 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/30/%E6%91%84%E5%BD%B1%E5%85%A5%E9%97%A8/" title="摄影入门">
+                      <a href="/2024/02/29/linux-&amp;&amp;-docker-%E6%9D%82%E8%AE%B0/" title="linux &amp;&amp; docker 杂记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">摄影入门</span>
+                        <span class="hidden-mobile">linux &amp;&amp; docker 杂记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -460,8 +462,8 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/TVM%E6%BA%90%E7%A0%81-00/" title="TVM源码-00">
-                        <span class="hidden-mobile">TVM源码-00</span>
+                      <a href="/2023/12/31/Git-cheat-sheet/" title="Git cheat sheet">
+                        <span class="hidden-mobile">Git cheat sheet</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

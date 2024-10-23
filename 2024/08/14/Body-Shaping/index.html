@@ -16,24 +16,30 @@
   <meta name="author" content="Zhang Yix">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pro Git Book">
+    <meta name="description" content="fitness 分化训练：利用肌肉的协同关系 1. 胸 + 肩前中束 + 肱三头 核心动作：各种卧推、飞鸟等 推胸主要包含三种关节动作：  肩关节水平内收：将大臂由身体外侧向躯干前方拉拢，主要用到 胸大肌 + 肩前束 肩关节屈：将大臂从身体后侧拉到前侧的动作，主要用到 肩前束 + 胸肌上束 肘关节伸：肘关节从折叠变为打直的动作，主要用到 肱三头  飞鸟相比推胸，只包含肩关节水平内收的动作，可以作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git cheat sheet">
-<meta property="og:url" content="http://example.com/2023/12/31/Git-cheat-sheet/index.html">
+<meta property="og:title" content="Body Shaping">
+<meta property="og:url" content="http://example.com/2024/08/14/Body-Shaping/index.html">
 <meta property="og:site_name" content="Zhyx&#39;s Blog">
-<meta property="og:description" content="Pro Git Book">
+<meta property="og:description" content="fitness 分化训练：利用肌肉的协同关系 1. 胸 + 肩前中束 + 肱三头 核心动作：各种卧推、飞鸟等 推胸主要包含三种关节动作：  肩关节水平内收：将大臂由身体外侧向躯干前方拉拢，主要用到 胸大肌 + 肩前束 肩关节屈：将大臂从身体后侧拉到前侧的动作，主要用到 肩前束 + 胸肌上束 肘关节伸：肘关节从折叠变为打直的动作，主要用到 肱三头  飞鸟相比推胸，只包含肩关节水平内收的动作，可以作">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-31T15:32:59.000Z">
-<meta property="article:modified_time" content="2024-10-23T15:52:19.163Z">
+<meta property="og:image" content="http://example.com/2024/08/14/Body-Shaping/image1.png">
+<meta property="og:image" content="http://example.com/2024/08/14/Body-Shaping/image2.png">
+<meta property="og:image" content="http://example.com/2024/08/14/Body-Shaping/image3.png">
+<meta property="og:image" content="http://example.com/2024/08/14/Body-Shaping/image4.png">
+<meta property="article:published_time" content="2024-08-14T15:34:15.000Z">
+<meta property="article:modified_time" content="2024-10-23T15:52:19.139Z">
 <meta property="article:author" content="Zhang Yix">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="fitness">
+<meta property="article:tag" content="outfit">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/08/14/Body-Shaping/image1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Git cheat sheet - Zhyx&#39;s Blog</title>
+  <title>Body Shaping - Zhyx&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Git cheat sheet"></span>
+            <span id="subtitle" data-typed-text="Body Shaping"></span>
           
         </div>
 
@@ -200,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-31 15:32" pubdate>
-          2023年12月31日 下午
+        <time datetime="2024-08-14 15:34" pubdate>
+          2024年8月14日 下午
         </time>
       </span>
     
@@ -212,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          785 字
         
       </span>
     
@@ -223,7 +229,7 @@
         
         
         
-          17 分钟
+          7 分钟
         
       </span>
     
@@ -268,7 +274,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Git cheat sheet</h1>
+            <h1 id="seo-header">Body Shaping</h1>
             
               <p class="note note-info">
                 
@@ -281,68 +287,60 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git Book</a></p>
-<span id="more"></span>
-<h2 id="起步">起步</h2>
-<h3 id="Git特色">Git特色</h3>
-<p><strong>直接记录快照，而非差异比较</strong><br>
-与其他版本控制系统基于差异的版本控制不同，Git直接记录文件快照，每次提交或保存都会基于当前的全部文件创建一个快照并保存这个快照的索引。为了高效，如果文件没有变化，Git不会再次保存，而是只保留一个链接指向之前存储的文件。</p>
-<p><strong>近乎所有操作都在本地执行</strong></p>
-<p><strong>保证完整性</strong><br>
-Git中所有数据在存储前都会计算校验和（SHA-1），并以校验和的哈希值作为引用和索引。</p>
-<p><strong>只添加数据</strong><br>
-几乎所有操作都只是添加，几乎没有导致文件不可恢复的操作。</p>
-<p><strong>三种状态</strong></p>
-<ul>
-<li>modified：已修改，文件在工作区被修改，但还未保存到数据库中</li>
-<li>staged：已暂存，修改的文件已经被做了标记，将被包含在下次提交中</li>
-<li>commited：已提交，已经安全的保存在本地数据库中</li>
-</ul>
-<h3 id="运行前配置-git-config">运行前配置 git config</h3>
-<p>配置文件优先级由低到高</p>
-<ul>
-<li>–system:针对该系统上所有用户的所有仓库的通用配置，一般在Git安装目录</li>
-<li>–global:当前用户的所有仓库，一般在用户目录</li>
-<li>–local:当前仓库，一般在当前仓库目录</li>
-</ul>
+                <span id="more"></span>
+<h2 id="fitness">fitness</h2>
+<h3 id="分化训练：利用肌肉的协同关系">分化训练：利用肌肉的协同关系</h3>
+<h4 id="1-胸-肩前中束-肱三头">1. 胸 + 肩前中束 + 肱三头</h4>
+<p>核心动作：各种卧推、飞鸟等</p>
+<p>推胸主要包含三种关节动作：</p>
+<ol>
+<li>肩关节水平内收：将大臂由身体外侧向躯干前方拉拢，主要用到 <strong>胸大肌 + 肩前束</strong></li>
+<li>肩关节屈：将大臂从身体后侧拉到前侧的动作，主要用到 <strong>肩前束 + 胸肌上束</strong></li>
+<li>肘关节伸：肘关节从折叠变为打直的动作，主要用到 <strong>肱三头</strong></li>
+</ol>
+<p>飞鸟相比推胸，只包含肩关节水平内收的动作，可以作为辅助动作</p>
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>实验证明卧推类动作除了胸大肌外，也会刺激到肩前束、肱三头，在胸推类动作结束后附加少量肩前束/肱三头动作即可达到刺激效果</p>
 <blockquote>
-<p>git config --global <a target="_blank" rel="noopener" href="http://user.name">user.name</a> “John Doe”<br>
-git config --global user.email <a href="mailto:johndoe@example.com">johndoe@example.com</a><br>
-git config --list  # 可能会有重复，因为Git会依次读取系统、全局、当前仓库的config，后面的会覆盖前面的同名配置</p>
+<p><em>在更加细分的训练法中，也会将肩部前后束，肱二/三头单独拎出来作为一次训练，即四分，五分法</em></p>
 </blockquote>
-<h2 id="Cheat-Sheet">Cheat Sheet</h2>
-<h3 id="Remote">Remote</h3>
-<p>查看所有分支：<code>branch</code> -r远程，-a所有，-v附带详细信息</p>
-<p>将本地的分支推送至远程仓库：<code>push &lt;remote&gt; &lt;local_branch&gt;:&lt;remote_branch&gt;</code></p>
-<p>删除某远程分支：<code>push &lt;remote&gt; --delete &lt;branch_name&gt;</code></p>
-<h3 id="Local">Local</h3>
-<p>查看提交记录：<code>log</code> --pretty=oneline指定以一行的形式显示</p>
-<p>比较差异：<code>diff &lt;hash1&gt; &lt;hash2&gt;</code></p>
-<p>增删分支：<code>branch &lt;branch_name&gt;</code> -d删除 -t追踪远程分支</p>
-<p>获取远程仓库数据：<code>fetch</code> 从远程仓库下载数据，但不会自动合并，后续需要merge或pull</p>
-<p>撤销提交：<code>reset</code> --soft仅仅撤销提交，–mixed撤销提交并取消暂存区，–hard撤销提交并取消暂存区和工作区 HEAD~n表示前n个版本</p>
-<h3 id="Index-Stage">Index/Stage</h3>
-<p>提交到本地仓库：<code>commit</code> -a自动将所有已跟踪文件暂存起来并提交，相当于先执行add -u ，-m指定提交信息，–amend修改最后一次提交</p>
-<p>比较当前index与某次提交的差异：<code>diff --cached &lt;hash&gt;</code></p>
-<h3 id="Workspace">Workspace</h3>
-<p>检查状态：<code>status</code> -s简洁</p>
-<p>克隆远程仓库：<code>clone</code> 创建一个全新副本</p>
-<p>从远程仓库拉取最新文件：<code>pull</code> 相当于fetch+merge</p>
-<p>添加文件至Index：<code>add</code> -u更新已跟踪文件（即不包括新增文件），-A更新所有改动（包括新增文件），.当前目录所有文件</p>
-<p>签出某个分支或提交或文件：<code>checkout</code> -b创建并签出新分支。如果签出的是一个特定提交，会处于&quot;detached HEAD&quot;状态，可以随意修改并提交，但这个提交不属于任何分支（但仍然存在，只要记得提交的哈希值），可以通过创建分支来保存</p>
-<p>将某一分支的所有更改合并到当前分支：<code>merge &lt;branch_name&gt;</code>，Git默认使用Fast forward模式，即如果被合并分支是当前分支的直接后继，Git会将当前分支指向被合并分支的最新提交并不产生新提交；这时用–no-ff禁用Fast forward模式，仍然会产生一次新提交。如果并非直接前后继关系，Git会创建一个新的合并提交，该提交有两个父提交，即两个分支的最新提交。</p>
-<p>变基：<code>rebase</code> 一般不用。</p>
-<p>将其他分支的某个提交应用到当前分支：<code>cherry-pick &lt;hash&gt;</code>，会产生一个新的提交，提交内容（记得git是保存修改后文件的快照）与原提交相同。</p>
-<p>回滚某提交：<code>revert &lt;hash&gt;</code>，会产生一个新的提交，提交内容与原提交相反。</p>
-<p>清理未被跟踪的文件：<code>clean</code> -n列出将要被清理的文件，-f清理文件，-d清理文件夹，-x清理忽略的文件，-X清理忽略的文件夹</p>
-<p>临时保存工作区和暂存区，将这些改动进栈：<code>stash</code> -u保存未被跟踪的文件，-a保存所有改动，-p交互式保存，-k不保存暂存区的改动</p>
-<p>恢复工作区和暂存区：<code>stash pop</code> 恢复并删除栈顶的stash，<code>stash apply</code> 恢复但不删除栈顶的stash</p>
-<h3 id="Stash">Stash</h3>
-<p>显示栈：<code>stash list</code></p>
-<p>入栈：<code>stash push</code> 默认入栈顶</p>
-<p>显示栈的细节：<code>stash show</code> 默认栈顶</p>
-<p>删除当个栈：<code>stash drop</code> 默认栈顶</p>
-<p>清空整个stash：<code>stash clear</code></p>
+<p>肩前束核心动作：推举，包括：</p>
+<ol>
+<li>肩关节屈：<strong>肩前束 + 胸肌上束</strong></li>
+<li>肩关节外展：<strong>肩中束 + 岗上肌</strong><br>
+针对前束和中束可以做一些辅助动作，如前平举针对前束，侧平举针对中束</li>
+</ol>
+<p>肱三头核心动作：臂屈伸，也就是肘关节伸</p>
+<h4 id="2-背-肩后束-肱二头">2. 背 + 肩后束 + 肱二头</h4>
+<p>核心动作：各种划船、下拉等</p>
+<p>划船主要包含两种关节动作：<br>
+注意：下背划船如窄距机械划船、哑铃划船等，开肘角度较小，不会用到肩关节外展，而上背划船如杠铃俯身划船，开肘较大，会用到肩关节外展</p>
+<ol>
+<li>肩关节伸：将大臂从前侧拉到后侧，主要用到 <strong>背阔肌 + 大圆肌 + 肱三头 + 肩后束</strong></li>
+<li>肩关节水平外展：将大臂从身体内侧向外拉，主要用到 <strong>肩后束 + 冈下肌</strong></li>
+</ol>
+<p>下拉主要涉及肩关节内收，主要用到 <strong>背阔肌 + 大圆肌</strong> 同时，高位下拉时的窄距和宽距动作用到的肌肉也不一样。宽距一般涉及大臂由外向内，即肩关节内收；窄距一般涉及大臂由前往后，即肩关节伸</p>
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>练背会带到一些肱二头，肱二头核心动作：弯举，也就是肘关节屈</p>
+<h4 id="3-腿-腹">3. 腿 + 腹</h4>
+<p>练腿核心动作：</p>
+<ol>
+<li>膝关节伸：膝关节折叠变为打直，主要用到 <strong>股四头</strong></li>
+<li>膝关节屈：膝关节打直变为折叠，主要用到 <strong>腘绳肌</strong></li>
+<li>髋关节伸：大腿从前方往后方运动，主要用到 <strong>腘绳肌 + 臀大肌</strong></li>
+</ol>
+<p>练腹核心动作：卷腹/举腿</p>
+<h4 id="具体动作">具体动作</h4>
+<p><img src="image3.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<h4 id="计划">计划</h4>
+<p><img src="image4.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<h3 id="饮食">饮食</h3>
+<h3 id="Record">Record</h3>
+<p>身高</p>
+<p>体重</p>
+<p>BMI</p>
+<p>体脂率</p>
+<h2 id="outfit">outfit</h2>
 
                 
               </div>
@@ -361,7 +359,7 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
     
       <span class="category-chain">
         
-  <a href="/categories/work/" class="category-chain-item">work</a>
+  <a href="/categories/life/" class="category-chain-item">life</a>
   
   
 
@@ -376,7 +374,9 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/" class="print-no-link">#git</a>
+        <a href="/tags/fitness/" class="print-no-link">#fitness</a>
+      
+        <a href="/tags/outfit/" class="print-no-link">#outfit</a>
       
     </div>
   
@@ -388,8 +388,8 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Git cheat sheet</div>
-      <div>http://example.com/2023/12/31/Git-cheat-sheet/</div>
+      <div>Body Shaping</div>
+      <div>http://example.com/2024/08/14/Body-Shaping/</div>
     </div>
     <div class="license-meta">
       
@@ -401,7 +401,7 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月31日</div>
+          <div>2024年8月14日</div>
         </div>
       
       
@@ -450,18 +450,12 @@ git config --list  # 可能会有重复，因为Git会依次读取系统、全�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/30/%E6%91%84%E5%BD%B1%E5%85%A5%E9%97%A8/" title="摄影入门">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">摄影入门</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/TVM%E6%BA%90%E7%A0%81-00/" title="TVM源码-00">
-                        <span class="hidden-mobile">TVM源码-00</span>
+                      <a href="/2024/07/08/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F/" title="秋招面经">
+                        <span class="hidden-mobile">秋招面经</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
