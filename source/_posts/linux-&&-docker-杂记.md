@@ -131,6 +131,22 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
 - /run：
 是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 /var/run 目录，应该让它指向 run。
 
+### 常见命令
+
+- ls：list
+- cd：change directory
+- pwd：print working directory
+- cat：concatenate
+- less：
+- cp：copy
+- mv：move
+- rm：remove
+- mkdir：make directory
+- rmdir：remove directory
+- man：manual
+- ps：process statussss
+
+
 ### 文件基本属性
 chown 修改所属用户及用户组 chmod修改文件权限
 ![alt text](image.png)
