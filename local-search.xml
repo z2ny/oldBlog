@@ -4,19 +4,6 @@
   
   
   <entry>
-    <title>经济学原理</title>
-    <link href="/2025/01/13/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%8E%9F%E7%90%86/"/>
-    <url>/2025/01/13/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%8E%9F%E7%90%86/</url>
-    
-    <content type="html"><![CDATA[<p>尝试市场交易一直小亏，除了经验理论没啥进步，看看书吧</p><p>曼昆《经济学原理》第七版</p><span id="more"></span><h1>微观</h1><h2 id="CH1-十大原理">CH1. 十大原理</h2><ol><li>人们面临交替关系，我们需要在不同目标间取舍权衡（大炮和黄油、效率和平等、金钱和时间等）</li><li>东西的成本=为了得到它而放弃的东西</li><li>理性人考虑边际量</li><li>人们会对激励做出反应</li><li>贸易可以使每个人受益</li><li>市场通常是组织经济活动的最佳方式</li><li>政府有时可以改善市场结果</li><li>一国的生活水平取决于它生产物品和生产劳务的能力</li></ol>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Body Shaping</title>
     <link href="/2024/08/14/Body-Shaping/"/>
     <url>/2024/08/14/Body-Shaping/</url>
@@ -519,7 +506,7 @@
     <link href="/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/"/>
     <url>/2023/09/13/00%EF%BC%9A%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/</url>
     
-    <content type="html"><![CDATA[<p>花了两三天时间搭了一个用于笔记的个人博客，部署在了 github 上，这里记录一下部署的过程。</p><span id="more"></span><h2 id="选型">选型</h2><p>网站的建立主要是为了搭一个在公司和家里都能访问的博客环境，对工作和学习做一些记录，所以直接放弃传统的带前端后端的动态页面，时间成本太高，整一个可以一键上传 markdown 的静态页面就挺ok。前端框架采用 hexo，UI选择 fluid，代码放在 github 上，并使用 github action 进行持续集成，部署到 github pages 后，后续写作只需要一次 git push 就可以自动将文章更新到目标网站上。</p><h2 id="框架搭建">框架搭建</h2><p><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><h2 id="UI设置">UI设置</h2><p><a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></p><h2 id="部署">部署</h2><h3 id="快速部署">快速部署</h3><p><a href="https://hexo.io/zh-cn/docs/one-command-deployment">https://hexo.io/zh-cn/docs/one-command-deployment</a></p><p>适用于希望源代码保存在本地而不用上传的情况，相当于本地构建完再将构建好的网页直接推给gh page</p><p>需要在 _config.yml 中配置 gh page 的仓库地址和分支，推送后，hexo 会将 public 目录中的文件推送至_config.yml 中指定的分支中，并且完全覆盖该分支下的已有内容。</p><p>这就导致了一个问题，由于是只传 public 目录，域名映射需要的CNAME文件只能放到 public 下，这样每次 hexo clean 后会清空 public，还得再编辑一次CNAME，但是好处在于刨除了云端构建的不稳定性，每次可以本地看看网站效果，再直接放到 gh page 中</p><h3 id="gh-actions-持续集成">gh actions 持续集成</h3><p><a href="https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html">https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html</a></p><p>源代码放到 <a href="http://user.github.io">user.github.io</a> 仓库中后（仓库名只能设为这个，否则生成网页会变成 <a href="http://user.github.io">user.github.io</a> 的子页），CNAME 放在 source 中，然后在 .github/workflws 中定义 gh actions 的详细配置</p><p>采用的hexo官方文档中的配置，最后一步使用 peaceiris/actions-gh-pages@v3 咱也不太懂，参考知乎上的其他配置，大概相当于安装 hexo 完了在将 main 分支的源码 deploy 到 gh-pages 分支上，之后在设置时选择这个分支即可</p><p>主要问题在于每次 push 都要重新 build，推测后期内容增多后网站更新会十分不及时，可能需要看看别人的追加更新是咋弄的</p><h3 id="CDN加速">CDN加速</h3><p>更换 Cloudflare 的 DNS，注意 SSL/TLS 加密模式设为严格</p><h3 id="增加评论区">增加评论区</h3><p>一直拖着没弄（本来也没指望有人会评论hhh）朋友推荐选择valine，基本上属于开箱即用了<br>参考： <a href="https://valine.js.org/quickstart.html">https://valine.js.org/quickstart.html</a></p><h2 id="Summary">Summary</h2><p>属于我的第0篇博客，大概，能在网站上正常显示，证明基本功能已经ok</p><h2 id="TODO">TODO</h2>]]></content>
+    <content type="html"><![CDATA[<p>花了两三天时间搭了一个用于笔记的个人博客，部署在了 github 上，这里记录一下部署的过程。</p><span id="more"></span><h2 id="选型">选型</h2><p>网站的建立主要是为了搭一个在公司和家里都能访问的博客环境，对工作和学习做一些记录，所以直接放弃传统的带前端后端的动态页面，时间成本太高，整一个可以一键上传 markdown 的静态页面就挺ok。前端框架采用 hexo，UI选择 fluid，代码放在 github 上，并使用 github action 进行持续集成，部署到 github pages 后，后续写作只需要一次 git push 就可以自动将文章更新到目标网站上。</p><h2 id="框架搭建">框架搭建</h2><p><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><h2 id="UI设置">UI设置</h2><p><a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></p><h2 id="部署">部署</h2><h3 id="快速部署">快速部署</h3><p><a href="https://hexo.io/zh-cn/docs/one-command-deployment">https://hexo.io/zh-cn/docs/one-command-deployment</a></p><p>适用于希望源代码保存在本地而不用上传的情况，相当于本地构建完再将构建好的网页直接推给gh page</p><p>需要在 _config.yml 中配置 gh page 的仓库地址和分支，推送后，hexo 会将 public 目录中的文件推送至_config.yml 中指定的分支中，并且完全覆盖该分支下的已有内容。</p><p>这就导致了一个问题，由于是只传 public 目录，域名映射需要的CNAME文件只能放到 public 下，这样每次 hexo clean 后会清空 public，还得再编辑一次CNAME，但是好处在于刨除了云端构建的不稳定性，每次可以本地看看网站效果，再直接放到 gh page 中</p><h3 id="gh-actions-持续集成">gh actions 持续集成</h3><p><a href="https://hexo.io/zh-cn/docs/github-pages">https://hexo.io/zh-cn/docs/github-pages</a></p><p>源代码放到 <a href="http://user.github.io">user.github.io</a> 仓库中后（仓库名只能设为这个，否则生成网页会变成 <a href="http://user.github.io">user.github.io</a> 的子页），CNAME 放在 source 中，然后在 .github/workflws 中定义 gh actions 的详细配置</p><p>采用的hexo官方文档中的配置，最后一步使用 peaceiris/actions-gh-pages@v3 咱也不太懂，参考知乎上的其他配置，大概相当于安装 hexo 完了在将 main 分支的源码 deploy 到 gh-pages 分支上，之后在设置时选择这个分支即可</p><p>主要问题在于每次 push 都要重新 build，推测后期内容增多后网站更新会十分不及时，可能需要看看别人的追加更新是咋弄的</p><h3 id="CDN加速">CDN加速</h3><p>更换 Cloudflare 的 DNS，注意 SSL/TLS 加密模式设为严格</p><h3 id="增加评论区">增加评论区</h3><p>一直拖着没弄（本来也没指望有人会评论hhh）朋友推荐选择valine，基本上属于开箱即用了<br>参考： <a href="https://valine.js.org/quickstart.html">https://valine.js.org/quickstart.html</a></p><h2 id="Summary">Summary</h2><p>属于我的第0篇博客，大概，能在网站上正常显示，证明基本功能已经ok</p><h2 id="TODO">TODO</h2>]]></content>
     
     
     <categories>
